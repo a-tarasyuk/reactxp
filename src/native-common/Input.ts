@@ -7,9 +7,8 @@
 * Native implementation of Input interface.
 */
 
-import RN = require('react-native');
-
-import RX = require('../common/Interfaces');
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
 
 export class Input extends RX.Input {
     constructor() {

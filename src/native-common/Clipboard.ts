@@ -7,10 +7,9 @@
 * RN-specific implementation of the cross-platform Clipboard abstraction.
 */
 
-import RN = require('react-native');
-
-import RX = require('../common/Interfaces');
-import SyncTasks = require('synctasks');
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
+import * as SyncTasks from 'synctasks';
 
 export class Clipboard extends RX.Clipboard  {
     public setText(text: string) {

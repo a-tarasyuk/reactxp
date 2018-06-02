@@ -5,8 +5,8 @@
 * Licensed under the MIT license.
 */
 
-import _ = require('../lodashMini');
-import Types = require('../../common/Types');
+import * as Types from '../../common/Types';
+import * as _ from '../lodashMini';
 
 //
 // These helpers promote a SyntheticEvent to their higher level counterparts

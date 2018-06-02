@@ -9,18 +9,18 @@
 * cross-platform library.
 */
 
-import _ = require('./utils/lodashMini');
-import React = require('react');
-import ReactDOM = require('react-dom');
-import PropTypes = require('prop-types');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as _ from './utils/lodashMini';
+import * as Types from '../common/Types';
 
 import AccessibilityAnnouncer from './AccessibilityAnnouncer';
 import Input from './Input';
 import ModalContainer from './ModalContainer';
-import Types = require('../common/Types');
-import FocusManager from './utils/FocusManager';
-import UserInterface from './UserInterface';
 import PopupContainerView from './PopupContainerView';
+import UserInterface from './UserInterface';
+import FocusManager from './utils/FocusManager';
 
 export class PopupDescriptor {
     constructor(public popupId: string, public popupOptions: Types.PopupOptions) {}

@@ -12,11 +12,10 @@
 *    but please make sure that it doesn't leaks first please
 */
 
-import _ = require('./lodashMini');
+import * as _ from './lodashMini';
+import * as Types from '../common/Types';
 
 import AppConfig from './AppConfig';
-
-import Types = require('../common/Types');
 
 export class StyleLeakDetector {
     private _fingerprintRegistry: {[key: string]: string} = {};
@@ -90,5 +89,4 @@ export class StyleLeakDetector {
     }
 }
 
-var instance = new StyleLeakDetector();
-export default instance;
+export default new StyleLeakDetector();

@@ -7,9 +7,8 @@
 * Handles tracking of mouse movements.
 */
 
-import _ = require('./../utils/lodashMini');
-
-import Types = require('../../common/Types');
+import * as _ from './../utils/lodashMini';
+import * as Types from '../../common/Types';
 
 const _compareDOMOrder = (a: Responder, b: Responder) => {
     if (a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_PRECEDING) {

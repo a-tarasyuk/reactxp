@@ -7,11 +7,12 @@
 * Native implementation of App API namespace.
 */
 
-import RN = require('react-native');
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 import { RootView, RootViewUsingProps } from './RootView';
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
+
 import UserInterface from './UserInterface';
 
 const _rnStateToRxState: {[key: string]: Types.AppActivationState} = {

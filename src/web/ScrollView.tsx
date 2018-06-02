@@ -1,4 +1,4 @@
-﻿/**
+/**
 * ScrollView.tsx
 *
 * Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,15 +7,15 @@
 * Web-specific implementation of the cross-platform ScrollView abstraction.
 */
 
-import _ = require('./utils/lodashMini');
-import React = require('react');
-import ReactDOM = require('react-dom');
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as _ from './utils/lodashMini';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 import CustomScrollbar from './CustomScrollbar';
-import RX = require('../common/Interfaces');
-import Styles from './Styles';
 import ScrollViewConfig from './ScrollViewConfig';
-import Types = require('../common/Types');
+import Styles from './Styles';
 import ViewBase from './ViewBase';
 
 let _styles = {

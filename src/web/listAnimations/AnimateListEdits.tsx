@@ -8,12 +8,12 @@
 * and moves that occurred since the previous render.
 */
 
-import React = require('react');
-import ReactDOM = require('react-dom');
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as Types from '../../common/Types';
+import * as MonitorListEdits from './MonitorListEdits';
 
-import MonitorListEdits = require('./MonitorListEdits');
 import executeTransition from '../animated/executeTransition';
-import Types = require('../../common/Types');
 
 export interface AnimateListEditsProps {
     animateChildEnter?: boolean;

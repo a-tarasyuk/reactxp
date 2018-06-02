@@ -7,14 +7,16 @@
 * RN Windows-specific implementation of the cross-platform Button abstraction.
 */
 
-import React = require('react');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as RNW from 'react-native-windows';
+
+import { applyFocusableComponentMixin, FocusManagerFocusableComponent } from '../native-desktop/utils/FocusManager';
 import { Button as ButtonBase, ButtonContext as ButtonContextBase } from '../native-common/Button';
+
 import EventHelpers from '../native-common/utils/EventHelpers';
 import UserInterface from '../native-common/UserInterface';
-import RN = require('react-native');
-import RNW = require('react-native-windows');
-import { applyFocusableComponentMixin, FocusManagerFocusableComponent } from '../native-desktop/utils/FocusManager';
-import PropTypes = require('prop-types');
 
 const KEY_CODE_ENTER = 13;
 const KEY_CODE_SPACE = 32;

@@ -7,20 +7,21 @@
 * Implements animated components for web version of ReactXP.
 */
 
-import _ = require('./utils/lodashMini');
-import React = require('react');
-import ReactDOM = require('react-dom');
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
+import * as _ from './utils/lodashMini';
+
+import { executeTransition, ITransitionSpec } from './animated/executeTransition';
 
 import AppConfig from '../common/AppConfig';
 import Easing from '../common/Easing';
-import { executeTransition, ITransitionSpec } from './animated/executeTransition';
 import RXImage from './Image';
-import RXView from './View';
+import Styles from './Styles';
 import RXText from './Text';
 import RXTextInput from './TextInput';
-import RX = require('../common/Interfaces');
-import Styles from './Styles';
-import Types = require('../common/Types');
+import RXView from './View';
 
 // Animated Css Property Units - check /common/Types for the list of available
 // css animated properties

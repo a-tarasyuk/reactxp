@@ -7,9 +7,9 @@
 * The top-most view that's used for proper layering or modals and popups.
 */
 
-import React = require('react');
-import RN = require('react-native');
-import PropTypes = require('prop-types');
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as PropTypes from 'prop-types';
 
 import { RootView as RootViewBase, RootViewUsingProps as RootViewUsingPropsBase,
     BaseRootViewProps, RootViewPropsWithMainViewType, RootViewState, BaseRootView } from '../native-common/RootView';

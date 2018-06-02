@@ -7,7 +7,7 @@
 * Windows-specific accessibility utils.
 */
 
-import React = require('react');
+import * as React from 'react';
 
 import { AccessibilityPlatformUtil } from '../common/AccessibilityUtil';
 

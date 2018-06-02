@@ -8,7 +8,7 @@
 * notifying when the transition is complete.
 */
 
-import _ = require('./../utils/lodashMini');
+import * as _ from './../utils/lodashMini';
 
 export interface ITransitionSpec {
     property: string;
@@ -96,6 +96,7 @@ export function executeTransition(element: HTMLElement, transitions: ITransition
             finish();
         }
     }, longestDurationPlusDelay + 10);
+
     element.dataset['transitionId'] = timeoutId.toString();
 
     // Set the "to" values.

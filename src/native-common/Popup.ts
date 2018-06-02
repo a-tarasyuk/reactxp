@@ -7,9 +7,10 @@
 * React Native implementation of the cross-platform Popup abstraction.
 */
 
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
+
 import { default as FrontLayerViewManager } from './FrontLayerViewManager';
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
 
 export class Popup extends RX.Popup {
     show(options: Types.PopupOptions, popupId: string, delay?: number): boolean {

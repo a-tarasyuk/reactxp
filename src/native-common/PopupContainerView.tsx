@@ -9,14 +9,15 @@
 * through properties.
 */
 
-import _ = require('./lodashMini');
-import assert = require('assert');
-import React = require('react');
-import RN = require('react-native');
+import * as _ from './lodashMini';
+import * as assert from 'assert';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as Types from '../common/Types';
+
+import { PopupContainerViewBase, PopupContainerViewBaseProps, PopupContainerViewContext } from '../common/PopupContainerViewBase';
 
 import International from './International';
-import Types = require('../common/Types');
-import { PopupContainerViewBase, PopupContainerViewBaseProps, PopupContainerViewContext } from '../common/PopupContainerViewBase';
 
 // Width of the "alley" around popups so they don't get too close to the boundary of the screen boundary.
 const ALLEY_WIDTH = 2;
@@ -394,7 +395,7 @@ export class PopupContainerView extends PopupContainerViewBase<PopupContainerVie
     private _startRepositionPopupTimer() {
         this._respositionPopupTimer = setInterval(() => {
             this._recalcPosition();
-        }, 1000) as any as number;
+        }, 1000);
     }
 
     private _stopRepositionPopupTimer() {

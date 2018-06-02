@@ -8,7 +8,7 @@
 * user presence.
 */
 
-import RX = require('../common/Interfaces');
+import * as RX from '../common/Interfaces';
 
 export class UserPresence extends RX.UserPresence {
     // On native platforms, assume that the user is present

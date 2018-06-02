@@ -7,13 +7,14 @@
 * Implements the behavior for announcing text to screen readers, using aria-live regions.
 */
 
-import React = require('react');
+import * as React from 'react';
+import * as Types from '../common/Types';
+
 import { SubscriptionToken } from 'subscribableevent';
 
 import Accessibility from './Accessibility';
 import AccessibilityUtil from './AccessibilityUtil';
 import Styles from './Styles';
-import Types = require('../common/Types');
 
 export interface AccessibilityAnnouncerState {
     // Screen Reader text to be announced.

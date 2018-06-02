@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Styles.ts
 *
 * Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,11 +7,11 @@
 * Web-specific implementation of style functions.
 */
 
-import _ = require('./utils/lodashMini');
+import * as _ from './utils/lodashMini';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 import AppConfig from '../common/AppConfig';
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
 import StyleLeakDetector from '../common/StyleLeakDetector';
 
 type CssAliasMap = { [prop: string]: string };

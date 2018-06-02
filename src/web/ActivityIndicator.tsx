@@ -7,9 +7,8 @@
 * Control to display an animated activity indicator.
 */
 
-import React = require('react');
-
-import Types = require('../common/Types');
+import * as React from 'react';
+import * as Types from '../common/Types';
 
 const _activityIndicatorCss = `
 .rx-activity {

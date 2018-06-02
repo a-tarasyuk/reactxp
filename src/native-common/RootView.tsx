@@ -7,19 +7,20 @@
 * The top-most view that's used for proper layering or modals and popups.
 */
 
-import React = require('react');
-import RN = require('react-native');
+import * as _ from './lodashMini';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as Types from '../common/Types';
+
 import { SubscriptionToken } from 'subscribableevent';
-import _ = require('./lodashMini');
+import { default as FrontLayerViewManager } from './FrontLayerViewManager';
 
 import Accessibility from './Accessibility';
 import AccessibilityUtil from './AccessibilityUtil';
 import App from './App';
 import AppConfig from '../common/AppConfig';
-import { default as FrontLayerViewManager } from './FrontLayerViewManager';
 import MainViewStore from './MainViewStore';
 import Styles from './Styles';
-import Types = require('../common/Types');
 
 // Fields should be prefixed with 'reactxp' to help avoid naming collisions.
 // All fields should be removed from this.props before passing downwards.

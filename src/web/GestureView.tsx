@@ -8,13 +8,13 @@
 * It provides support for the scroll wheel, clicks and double clicks.
 */
 
-import _ = require('./utils/lodashMini');
-import React = require('react');
+import * as React from 'react';
+import * as _ from './utils/lodashMini';
+import * as Types from '../common/Types';
 
 import AccessibilityUtil from './AccessibilityUtil';
-import MouseResponder, { MouseResponderSubscription } from './utils/MouseResponder';
 import Styles from './Styles';
-import Types = require('../common/Types');
+import MouseResponder, { MouseResponderSubscription } from './utils/MouseResponder';
 
 const _styles = {
     defaultView: {

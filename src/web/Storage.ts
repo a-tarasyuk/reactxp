@@ -7,9 +7,8 @@
 * Web-specific implementation of the cross-platform database storage abstraction.
 */
 
-import SyncTasks = require('synctasks');
-
-import RX = require('../common/Interfaces');
+import * as SyncTasks from 'synctasks';
+import * as RX from '../common/Interfaces';
 
 export class Storage extends RX.Storage {
     getItem(key: string): SyncTasks.Promise<string|undefined> {

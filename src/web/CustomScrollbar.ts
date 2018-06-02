@@ -7,9 +7,7 @@
 * Custom scrollbar implementation for web.
 */
 
-'use strict';
-
-import React = require('react');
+import * as React from 'react';
 
 var UNIT = 'px';
 var SCROLLER_MIN_SIZE = 15;

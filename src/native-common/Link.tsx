@@ -7,16 +7,17 @@
 * RN-specific implementation of the cross-platform Link abstraction.
 */
 
-import PropTypes = require('prop-types');
-import React = require('react');
-import RN = require('react-native');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
+
+import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 
 import AccessibilityUtil from './AccessibilityUtil';
 import EventHelpers from './utils/EventHelpers';
-import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import Linking from '../native-common/Linking';
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
 
 export interface LinkContext {
     focusArbitrator?: FocusArbitratorProvider;

@@ -7,8 +7,8 @@
 * Web-specific implementation of Platform interface.
 */
 
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 export class Platform extends RX.Platform {
     getType(): Types.PlatformType {

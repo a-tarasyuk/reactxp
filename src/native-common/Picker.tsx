@@ -7,11 +7,10 @@
 * RN-specific implementation of the cross-platform Picker abstraction.
 */
 
-import _ = require('./lodashMini');
-import React = require('react');
-import RN = require('react-native');
-
-import RX = require('../common/Interfaces');
+import * as _ from './lodashMini';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
 
 export class Picker extends RX.Picker {
     render() {

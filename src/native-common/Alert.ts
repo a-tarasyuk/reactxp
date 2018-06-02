@@ -7,10 +7,9 @@
 * Native Alert dialog boxes for ReactXP.
 */
 
-import RN = require('react-native');
-
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 // Native implementation for alert dialog boxes
 export class Alert implements RX.Alert {

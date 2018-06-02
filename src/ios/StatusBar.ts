@@ -7,9 +7,8 @@
 * iOS-specific implementation of StatusBar APIs.
 */
 
-import RN = require('react-native');
-
-import RX = require('../common/Interfaces');
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
 
 export class StatusBar extends RX.StatusBar {
     isOverlay(): boolean {

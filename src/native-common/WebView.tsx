@@ -7,13 +7,13 @@
 * A control that allows the display of an independent web page.
 */
 
-import _ = require('./lodashMini');
-import React = require('react');
-import RN = require('react-native');
+import * as _ from './lodashMini';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
-import RX = require('../common/Interfaces');
 import Styles from './Styles';
-import Types = require('../common/Types');
 
 const _styles = {
     webViewDefault: Styles.createWebViewStyle({

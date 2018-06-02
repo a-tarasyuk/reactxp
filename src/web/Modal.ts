@@ -7,11 +7,11 @@
 * Web-specific implementation of the cross-platform Modal abstraction.
 */
 
-import React = require('react');
+import * as React from 'react';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 import { default as FrontLayerViewManager } from './FrontLayerViewManager';
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
 
 export class Modal extends RX.Modal {
     isDisplayed(modalId?: string): boolean {

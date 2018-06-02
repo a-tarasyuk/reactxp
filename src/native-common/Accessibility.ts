@@ -7,7 +7,7 @@
 * Native wrapper for accessibility helper.
 */
 
-import RN = require('react-native');
+import * as RN from 'react-native';
 
 import { Accessibility as CommonAccessibility } from '../common/Accessibility';
 

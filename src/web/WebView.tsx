@@ -7,12 +7,13 @@
 * A control that allows the display of an independent web page.
 */
 
-import React = require('react');
+import * as React from 'react';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
-import RX = require('../common/Interfaces');
-import Styles from './Styles';
-import Types = require('../common/Types');
 import { View } from './View';
+
+import Styles from './Styles';
 
 let _styles = {
     webViewDefault: Styles.createWebViewStyle({

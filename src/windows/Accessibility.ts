@@ -5,7 +5,8 @@
 * Licensed under the MIT license.
 */
 
-import RN = require('react-native');
+import * as RN from 'react-native';
+
 import { Accessibility as NativeAccessibility, default as parentInstance } from '../native-common/Accessibility';
 
 export class Accessibility extends NativeAccessibility {

@@ -7,7 +7,8 @@
 * iOS-specific implementation for deep linking.
 */
 
-import Types = require('../common/Types');
+import * as Types from '../common/Types';
+
 import { Linking as CommonLinking } from '../native-common/Linking';
 
 export class Linking extends CommonLinking {

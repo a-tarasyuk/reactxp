@@ -7,19 +7,20 @@
 * Windows-specific implementation of View.
 */
 
-import _ = require('../native-common/lodashMini');
-import React = require('react');
-import RN = require('react-native');
-import RNW = require('react-native-windows');
-import Types = require('../common/Types');
-import PropTypes = require('prop-types');
+import * as _ from '../native-common/lodashMini';
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as RNW from 'react-native-windows';
+import * as Types from '../common/Types';
 
-import AppConfig from '../common/AppConfig';
-import { View as ViewCommon, ViewContext as ViewContextCommon } from '../native-common/View';
-import EventHelpers from '../native-common/utils/EventHelpers';
 import { RestrictFocusType } from '../common/utils/FocusManager';
+import { View as ViewCommon, ViewContext as ViewContextCommon } from '../native-common/View';
 import { applyFocusableComponentMixin, FocusManagerFocusableComponent, FocusManager }
     from '../native-desktop/utils/FocusManager';
+
+import AppConfig from '../common/AppConfig';
+import EventHelpers from '../native-common/utils/EventHelpers';
 import PopupContainerView from '../native-common/PopupContainerView';
 import { PopupComponent } from '../common/PopupContainerViewBase';
 

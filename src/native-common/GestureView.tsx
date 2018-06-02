@@ -9,15 +9,15 @@
 * pinch-and-zoom, panning, single tap and double tap gestures.
 */
 
-import assert = require('assert');
-import _ = require('./lodashMini');
-import React = require('react');
-import RN = require('react-native');
+import * as assert from 'assert';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as _ from './lodashMini';
 
 import AccessibilityUtil from './AccessibilityUtil';
 import EventHelpers from './utils/EventHelpers';
 
-import Types = require('../common/Types');
+import * as Types from '../common/Types';
 import UserInterface from './UserInterface';
 import ViewBase from './ViewBase';
 

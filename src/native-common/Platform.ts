@@ -7,10 +7,9 @@
 * Native implementation of Platform interface.
 */
 
-import RN = require('react-native');
-
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 export class Platform extends RX.Platform {
     getType(): Types.PlatformType {

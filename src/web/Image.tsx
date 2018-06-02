@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Image.tsx
 *
 * Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,14 +7,14 @@
 * Web-specific implementation of the cross-platform Image abstraction.
 */
 
-import _ = require('./utils/lodashMini');
-import React = require('react');
-import SyncTasks = require('synctasks');
-import PropTypes = require('prop-types');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as SyncTasks from 'synctasks';
+import * as _ from './utils/lodashMini';
+import * as Types from '../common/Types';
 
-import restyleForInlineText = require('./utils/restyleForInlineText');
 import Styles from './Styles';
-import Types = require('../common/Types');
+import restyleForInlineText from './utils/restyleForInlineText';
 
 const _styles = {
     image: {

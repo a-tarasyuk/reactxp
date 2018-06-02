@@ -7,9 +7,9 @@
 * Common wrapper for accessibility helper exposed from ReactXP.
 */
 
-import SubscribableEvent from 'subscribableevent';
+import * as RX from '../common/Interfaces';
 
-import RX = require('../common/Interfaces');
+import SubscribableEvent from 'subscribableevent';
 
 export abstract class Accessibility extends RX.Accessibility {
     abstract isScreenReaderEnabled(): boolean;

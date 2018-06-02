@@ -9,12 +9,11 @@
 * to animate the edits.
 */
 
-import _ = require('./../utils/lodashMini');
-import assert = require('assert');
-import React = require('react');
-import ReactDOM = require('react-dom');
-
-import Types = require('../../common/Types');
+import * as assert from 'assert';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as _ from './../utils/lodashMini';
+import * as Types from '../../common/Types';
 
 function getPosition(el: HTMLElement): { left: number; top: number; } {
     return {
@@ -30,7 +29,7 @@ function extractChildrenKeys(children: React.ReactNode|undefined): ChildKey[] {
         React.Children.forEach(children, function (child, index) {
             if (child) {
                 let childReactElement = child as React.ReactElement<any>;
-                assert(
+                assert.ok(
                     childReactElement.key !== undefined && childReactElement.key !== null,
                     'Children passed to a `View` with child animations enabled must have a `key`'
                 );
@@ -57,7 +56,7 @@ function createChildrenMap(children: React.ReactNode|undefined): ChildrenMap {
         React.Children.forEach(children, function (child, index) {
             if (child) {
                 let childReactElement = child as React.ReactElement<any>;
-                assert(
+                assert.ok(
                     'key' in childReactElement,
                     'Children passed to a `View` with child animations enabled must have a `key`'
                 );
@@ -172,7 +171,7 @@ export class MonitorListEdits extends React.Component<MonitorListEditsProps, Typ
     }
 
     componentWillUpdate(nextProps: MonitorListEditsProps) {
-        assert(
+        assert.ok(
             this._phase !== ComponentPhaseEnum.animating,
             'componentWillUpdate should never run while the component is animating due to the implementation of shouldComponentUpdate'
         );
@@ -258,7 +257,7 @@ export class MonitorListEdits extends React.Component<MonitorListEditsProps, Typ
     }
 
     componentDidUpdate(prevProps: MonitorListEditsProps) {
-        assert(
+        assert.ok(
             this._phase !== ComponentPhaseEnum.animating,
             'componentDidUpdate should never run while the component is animating due to the implementation of shouldComponentUpdate'
         );
@@ -330,7 +329,7 @@ export class MonitorListEdits extends React.Component<MonitorListEditsProps, Typ
             };
         }
 
-        assert(
+        assert.ok(
             typeof reactElement.ref === 'function' || reactElement.ref === undefined || reactElement.ref === null,
             'Invalid ref: ' + reactElement.ref + '. Only callback refs are supported when using child animations on a `View`'
         );

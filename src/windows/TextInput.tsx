@@ -7,11 +7,10 @@
 * RN Windows-specific implementation of the cross-platform TextInput abstraction.
 */
 
-import React = require('react');
-import RN = require('react-native');
+import * as React from 'react';
+import * as RN from 'react-native';
 
 import { applyFocusableComponentMixin, FocusManagerFocusableComponent } from '../native-desktop/utils/FocusManager';
-
 import { TextInput as TextInputBase } from '../native-common/TextInput';
 
 export class TextInput extends TextInputBase implements FocusManagerFocusableComponent {

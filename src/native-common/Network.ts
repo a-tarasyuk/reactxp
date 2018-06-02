@@ -7,11 +7,10 @@
 * Native implementation of network information APIs.
 */
 
-import RN = require('react-native');
-import SyncTasks = require('synctasks');
-
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
+import * as RN from 'react-native';
+import * as SyncTasks from 'synctasks';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 export class Network extends RX.Network {
     constructor() {

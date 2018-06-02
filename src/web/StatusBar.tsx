@@ -7,7 +7,7 @@
 * Web-specific implementation of the cross-platform status bar.
 */
 
-import RX = require('../common/Interfaces');
+import * as RX from '../common/Interfaces';
 
 export class StatusBar extends RX.StatusBar {
     isOverlay(): boolean {

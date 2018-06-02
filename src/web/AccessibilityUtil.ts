@@ -8,10 +8,10 @@
 * ReactXP framework.
 */
 
-import _ = require('./utils/lodashMini');
+import * as Types from '../common/Types';
+import * as _ from './utils/lodashMini';
 
 import { AccessibilityUtil as CommonAccessibiltiyUtil } from '../common/AccessibilityUtil';
-import Types = require('../common/Types');
 
 // Map of accessibility trait to an aria role attribute.
 // What's a role attribute? https://www.w3.org/wiki/PF/XTech/HTML5/RoleAttribute

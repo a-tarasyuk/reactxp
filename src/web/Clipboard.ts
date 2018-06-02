@@ -7,8 +7,8 @@
 * Web-specific implementation of the cross-platform Clipboard abstraction.
 */
 
-import RX = require('../common/Interfaces');
-import SyncTasks = require('synctasks');
+import * as SyncTasks from 'synctasks';
+import * as RX from '../common/Interfaces';
 
 export class Clipboard extends RX.Clipboard {
     public setText(text: string) {

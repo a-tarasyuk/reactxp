@@ -7,13 +7,12 @@
 * Web implementation of Input interface.
 */
 
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 export class Input extends RX.Input {
     constructor() {
         super();
-
     }
 
     dispatchKeyDown(e: Types.KeyboardEvent) {

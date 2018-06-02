@@ -7,11 +7,10 @@
 * Base class that is used for several RX views.
 */
 
-import _ = require('./lodashMini');
-import RN = require('react-native');
-import RX = require('../common/Interfaces');
-
-import Types = require('../common/Types');
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
+import * as _ from './lodashMini';
 
 export abstract class ViewBase<P extends Types.ViewProps, S> extends RX.ViewBase<P, S> {
     private static _defaultViewStyle: Types.ViewStyleRuleSet|undefined;

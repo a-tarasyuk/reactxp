@@ -7,7 +7,7 @@
 * MacOS-specific implementation of StatusBar APIs.
 */
 
-import RX = require('../common/Interfaces');
+import * as RX from '../common/Interfaces';
 
 export class StatusBar extends RX.StatusBar {
     isOverlay(): boolean {

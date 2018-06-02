@@ -7,10 +7,8 @@
 * Type definitions for ReactXP framework.
 */
 
-import React = require('react');
-
-// Use only for type data
-import RX = require('./Interfaces');
+import * as React from 'react';
+import * as RX from './Interfaces';
 
 export { default as SubscribableEvent, SubscriptionToken } from 'subscribableevent';
 

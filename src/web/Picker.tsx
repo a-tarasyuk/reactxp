@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Picker.tsx
 *
 * Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,12 +7,12 @@
 * Web-specific implementation of the cross-platform Select abstraction.
 */
 
-import _ = require('./utils/lodashMini');
-import React = require('react');
+import * as React from 'react';
+import * as _ from './utils/lodashMini';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
-import RX = require('../common/Interfaces');
 import Styles from './Styles';
-import Types = require('../common/Types');
 
 export class Picker extends RX.Picker {
     render() {

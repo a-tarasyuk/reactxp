@@ -7,11 +7,11 @@
 * RN-specific implementation for deep linking.
 */
 
-import RN = require('react-native');
-import SyncTasks = require('synctasks');
+import * as RN from 'react-native';
+import * as SyncTasks from 'synctasks';
+import * as Types from '../common/Types';
 
 import { Linking as CommonLinking } from '../common/Linking';
-import Types = require('../common/Types');
 
 export class Linking extends CommonLinking {
     constructor() {

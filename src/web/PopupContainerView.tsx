@@ -7,11 +7,11 @@
 * Common parent of all components rendered into a popup, web version.
 */
 
-import _ = require('./utils/lodashMini');
-import React = require('react');
+import * as React from 'react';
+import * as _ from './utils/lodashMini';
+import * as Types from '../common/Types';
 
 import { PopupContainerViewBase, PopupContainerViewBaseProps, PopupContainerViewContext } from '../common/PopupContainerViewBase';
-import Types = require('../common/Types');
 
 export interface PopupContainerViewProps extends PopupContainerViewBaseProps {
     style: React.CSSProperties;

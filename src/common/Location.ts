@@ -7,10 +7,9 @@
 * Methods to fetch the user's location.
 */
 
-import RX = require('../common/Interfaces');
-
-import SyncTasks = require('synctasks');
-import Types = require('../common/Types');
+import * as RX from '../common/Interfaces';
+import * as SyncTasks from 'synctasks';
+import * as Types from '../common/Types';
 
 export class Location extends RX.Location {
     setConfiguration(config: RX.LocationConfiguration) {

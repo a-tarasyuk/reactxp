@@ -7,8 +7,9 @@
 * MacOS-specific implementation of GestureView component.
 */
 
+import * as Types from '../common/Types';
+
 import { GestureView as BaseGestureView } from '../native-common/GestureView';
-import Types = require('../common/Types');
 
 const _preferredPanRatio = 3;
 

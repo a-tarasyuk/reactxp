@@ -7,13 +7,14 @@
 * A base class for the Web-specific implementation of the cross-platform View abstraction.
 */
 
-import _ = require('./utils/lodashMini');
+import * as SyncTasks from 'synctasks';
+import * as _ from './utils/lodashMini';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 import { default as FrontLayerViewManager } from './FrontLayerViewManager';
+
 import AppConfig from '../common/AppConfig';
-import RX = require('../common/Interfaces');
-import SyncTasks = require('synctasks');
-import Types = require('../common/Types');
 
 // We create a periodic timer to detect layout changes that are performed behind
 // our back by the browser's layout engine. We do this more aggressively when

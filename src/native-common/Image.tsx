@@ -7,14 +7,14 @@
 * RN-specific implementation of the cross-platform Image abstraction.
 */
 
-import PropTypes = require('prop-types');
-import React = require('react');
-import RN = require('react-native');
-import SyncTasks = require('synctasks');
-import _ = require('./lodashMini');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as SyncTasks from 'synctasks';
+import * as _ from './lodashMini';
+import * as Types from '../common/Types';
 
 import Styles from './Styles';
-import Types = require('../common/Types');
 
 const _styles = {
     defaultImage: Styles.createImageStyle({

@@ -7,13 +7,14 @@
 * Web-specific implementation of the cross-platform TextInput abstraction.
 */
 
-import React = require('react');
-import PropTypes = require('prop-types');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as Types from '../common/Types';
 
-import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
-import Styles from './Styles';
-import Types = require('../common/Types');
 import { applyFocusableComponentMixin } from './utils/FocusManager';
+import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
+
+import Styles from './Styles';
 
 export interface TextInputState {
     inputValue?: string;

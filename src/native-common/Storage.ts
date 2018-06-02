@@ -7,10 +7,9 @@
 * Native implementation of the cross-platform database storage abstraction.
 */
 
-import RN = require('react-native');
-import SyncTasks = require('synctasks');
-
-import RX = require('../common/Interfaces');
+import * as RN from 'react-native';
+import * as SyncTasks from 'synctasks';
+import * as RX from '../common/Interfaces';
 
 export class Storage extends RX.Storage {
     getItem(key: string): SyncTasks.Promise<string|undefined> {

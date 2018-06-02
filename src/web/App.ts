@@ -7,8 +7,8 @@
 * Implements App interface for ReactXP.
 */
 
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 // Hack to allow inline-require without importing node.d.ts
 declare var require: (path: string) => any;

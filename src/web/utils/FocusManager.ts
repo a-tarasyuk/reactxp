@@ -7,12 +7,12 @@
 * Manages focusable elements for better keyboard navigation (web version)
 */
 
-import ReactDOM = require('react-dom');
+import * as  ReactDOM from 'react-dom';
 
-import { FocusManager as FocusManagerBase,
-    FocusableComponentInternal,
+import { FocusArbitratorProvider, FocusCandidateInternal, FocusCandidateType } from '../../common/utils/AutoFocusHelper';
+import { FocusableComponentInternal,
+    FocusManager as FocusManagerBase,
     StoredFocusableComponent } from '../../common/utils/FocusManager';
-import { FocusArbitratorProvider, FocusCandidateType, FocusCandidateInternal } from '../../common/utils/AutoFocusHelper';
 
 import UserInterface from '../UserInterface';
 

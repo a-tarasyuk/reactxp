@@ -7,11 +7,11 @@
 * RN-specific implementation of the cross-platform ScrollView abstraction.
 */
 
-import React = require('react');
-import RN = require('react-native');
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
 import ViewBase from './ViewBase';
 
 export class ScrollView extends ViewBase<Types.ScrollViewProps, Types.Stateless> implements RX.ScrollView {

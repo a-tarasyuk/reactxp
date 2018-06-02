@@ -7,7 +7,7 @@
 * MacOS implementation of Input interface.
 */
 
-import RX = require('../common/Interfaces');
+import * as RX from '../common/Interfaces';
 
 export class Input extends RX.Input {
     constructor() {

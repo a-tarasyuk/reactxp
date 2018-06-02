@@ -8,14 +8,15 @@
 * UI (layout measurements, etc.).
 */
 
-import React = require('react');
-import ReactDOM = require('react-dom');
-import ScrollViewConfig from './ScrollViewConfig';
-import SyncTasks = require('synctasks');
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as SyncTasks from 'synctasks';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 import { default as FrontLayerViewManager } from './FrontLayerViewManager';
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
+
+import ScrollViewConfig from './ScrollViewConfig';
 
 export class UserInterface extends RX.UserInterface {
     private _isNavigatingWithKeyboard: boolean = false;

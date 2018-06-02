@@ -7,10 +7,9 @@
 * RN-specific implementation of the cross-platform Modal abstraction.
 */
 
-import React = require('react');
-import RN = require('react-native');
-
-import Types= require('../common/Types');
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as Types from '../common/Types';
 
 const _styles = {
     defaultContainer: {

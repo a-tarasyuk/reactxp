@@ -8,12 +8,11 @@
 * file instead of internals.
 */
 
-import React = require('react');
-
-import AnimatedImpl = require('./Animated');
-import RXInterfaces = require('../common/Interfaces');
-import RXModuleInterface = require('../common/ModuleInterface');
-import RXTypes = require('../common/Types');
+import * as React from 'react';
+import * as RXInterfaces from '../common/Interfaces';
+import * as RXModuleInterface from '../common/ModuleInterface';
+import * as RXTypes from '../common/Types';
+import * as AnimatedImpl from './Animated';
 
 // -- STRANGE THINGS GOING ON HERE --
 //
@@ -27,39 +26,40 @@ import RXTypes = require('../common/Types');
 //    a type name. In order to generate the type of 'foo', the actual 'Foo' class needs to be imported. Of course, the same naming problem
 //    exists as (1) so it is imported as 'FooType'. Note: you will see 'FooType' in the generated RX.d.ts ('export var Foo: FooType').
 
-import AccessibilityImpl from './Accessibility';
 import { ActivityIndicator as ActivityIndicatorImpl } from './ActivityIndicator';
+import { GestureView as GestureViewImpl } from './GestureView';
+import { Button as ButtonImpl } from './Button';
+import { Image as ImageImpl } from './Image';
+import { Link as LinkImpl } from './Link';
+import { Picker as PickerImpl } from './Picker';
+import { ScrollView as ScrollViewImpl } from './ScrollView';
+import { Text as TextImpl } from './Text';
+import { TextInput as TextInputImpl } from './TextInput';
+import { ViewBase } from './ViewBase';
+import { WebView as WebViewImpl } from './WebView';
+import { setSortAndFilterFunc } from '../common/utils/AutoFocusHelper';
+
+import LocationImpl from '../common/Location';
+import PopupImpl from '../web/Popup';
+import AccessibilityImpl from './Accessibility';
 import AlertImpl from './Alert';
 import AppImpl from './App';
-import { Button as ButtonImpl } from './Button';
-import { Picker as PickerImpl } from './Picker';
-import { Image as ImageImpl } from './Image';
 import ClipboardImpl from './Clipboard';
-import { GestureView as GestureViewImpl } from './GestureView';
 import InputImpl from './Input';
 import InternationalImpl from './International';
-import { Link as LinkImpl } from './Link';
 import LinkingImpl from './Linking';
-import LocationImpl from '../common/Location';
 import ModalImpl from './Modal';
 import NetworkImpl from './Network';
 import PlatformImpl from './Platform';
-import PopupImpl from '../web/Popup';
-import { ScrollView as ScrollViewImpl } from './ScrollView';
 import StatusBarImpl from './StatusBar';
 import StorageImpl from './Storage';
 import StylesImpl from './Styles';
-import { Text as TextImpl } from './Text';
-import { TextInput as TextInputImpl } from './TextInput';
 import UserInterfaceImpl from './UserInterface';
 import UserPresenceImpl from './UserPresence';
 import ViewImpl from './View';
-import { ViewBase } from './ViewBase';
-import { WebView as WebViewImpl } from './WebView';
+import FocusManager from './utils/FocusManager';
 
 // Initialize AutofocusHelper.
-import FocusManager from './utils/FocusManager';
-import { setSortAndFilterFunc } from '../common/utils/AutoFocusHelper';
 setSortAndFilterFunc(FocusManager.sortAndFilterAutoFocusCandidates);
 
 // -- STRANGE THINGS GOING ON HERE --
@@ -153,7 +153,7 @@ AppImpl.activationStateChangedEvent.subscribe(newState => {
 
 var _rxImplementsRxInterface: typeof RXModuleInterface.ReactXP = ReactXP;
 _rxImplementsRxInterface = _rxImplementsRxInterface;
-export = ReactXP;
+export default ReactXP;
 
 /*
 

@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Text.tsx
 *
 * Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,15 +7,16 @@
 * Web-specific implementation of the cross-platform Text abstraction.
 */
 
-import React = require('react');
-import ReactDOM = require('react-dom');
-import PropTypes = require('prop-types');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as Types from '../common/Types';
+
+import { Text as TextBase } from '../common/Interfaces';
+import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 
 import AccessibilityUtil from './AccessibilityUtil';
-import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import Styles from './Styles';
-import Types = require('../common/Types');
-import { Text as TextBase } from '../common/Interfaces';
 
 // Adding a CSS rule to display non-selectable texts. Those texts
 // will be displayed as pseudo elements to prevent them from being copied

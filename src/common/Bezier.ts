@@ -51,7 +51,7 @@
   return aGuessT;
  }
 
- export function bezier (mX1: number, mY1: number, mX2: number, mY2: number) {
+ function bezier (mX1: number, mY1: number, mX2: number, mY2: number) {
    if (!(0 <= mX1 && mX1 <= 1 && 0 <= mX2 && mX2 <= 1)) { // eslint-disable-line yoda
      throw new Error('bezier x values must be in [0, 1] range');
    }
@@ -102,3 +102,5 @@
      return calcBezier(getTForX(x), mY1, mY2);
    };
  }
+
+ export default bezier;

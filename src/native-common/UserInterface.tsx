@@ -8,14 +8,14 @@
 * UI (layout measurements, etc.).
 */
 
-import assert = require('assert');
-import React = require('react');
-import RN = require('react-native');
-import SyncTasks = require('synctasks');
+import * as assert from 'assert';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as SyncTasks from 'synctasks';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 import MainViewStore from './MainViewStore';
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
 
 export class UserInterface extends RX.UserInterface {
     private _touchLatencyThresholhdMs: number|undefined;

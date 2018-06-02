@@ -6,10 +6,8 @@
 *
 * Common accessibility interface for platform-specific accessibility utilities.
 */
-
-import React = require('react');
-
-import Types = require('../common/Types');
+import * as React from 'react';
+import * as Types from '../common/Types';
 
 export const ImportantForAccessibilityMap = {
     [Types.ImportantForAccessibility.Auto]: 'auto',

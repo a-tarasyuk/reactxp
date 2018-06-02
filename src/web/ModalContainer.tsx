@@ -7,9 +7,8 @@
 * Web-specific implementation of a view that's used to render modals.
 */
 
-import React = require('react');
-
-import Types = require('../common/Types');
+import * as React from 'react';
+import * as Types from '../common/Types';
 
 const _styles = {
     modalContainerStyle: {

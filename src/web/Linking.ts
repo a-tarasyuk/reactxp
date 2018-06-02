@@ -7,9 +7,8 @@
 * Web-specific implementation for deep linking
 */
 
-import SyncTasks = require('synctasks');
-
-import Types = require('../common/Types');
+import * as SyncTasks from 'synctasks';
+import * as Types from '../common/Types';
 
 import { Linking as CommonLinking } from '../common/Linking';
 

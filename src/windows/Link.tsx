@@ -7,13 +7,14 @@
 * RN Desktop-specific implementation of the cross-platform Link abstraction.
 */
 
-import React = require('react');
-import RN = require('react-native');
-import RNW = require('react-native-windows');
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as RNW from 'react-native-windows';
+
 import { applyFocusableComponentMixin, FocusManagerFocusableComponent } from '../native-desktop/utils/FocusManager';
+import { Link as LinkCommon } from '../native-common/Link';
 
 import EventHelpers from '../native-common/utils/EventHelpers';
-import { Link as LinkCommon } from '../native-common/Link';
 
 const KEY_CODE_ENTER = 13;
 const KEY_CODE_SPACE = 32;

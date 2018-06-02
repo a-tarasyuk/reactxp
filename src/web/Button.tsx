@@ -7,18 +7,19 @@
 * Web-specific implementation of the cross-platform Button abstraction.
 */
 
-import React = require('react');
-import ReactDOM = require('react-dom');
-import PropTypes = require('prop-types');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as Types from '../common/Types';
 
-import AccessibilityUtil from './AccessibilityUtil';
-import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
-import AppConfig from '../common/AppConfig';
-import Styles from './Styles';
-import Types = require('../common/Types');
 import { applyFocusableComponentMixin } from './utils/FocusManager';
-import UserInterface from './UserInterface';
+import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import { Button as ButtonBase } from '../common/Interfaces';
+
+import AppConfig from '../common/AppConfig';
+import AccessibilityUtil from './AccessibilityUtil';
+import Styles from './Styles';
+import UserInterface from './UserInterface';
 
 const _styles = {
     defaultButton: {

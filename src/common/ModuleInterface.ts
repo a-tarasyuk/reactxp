@@ -7,11 +7,9 @@
 * Defines a common base module type information set for all platforms to implement.
 */
 
-import React = require('react');
-
-import Interfaces = require('./Interfaces');
-
-import RXTypes = require('../common/Types');
+import * as React from 'react';
+import * as RXTypes from '../common/Types';
+import * as Interfaces from './Interfaces';
 
 export declare module ReactXP {
     export type Accessibility = Interfaces.Accessibility;

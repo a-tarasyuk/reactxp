@@ -10,4 +10,4 @@
 
 import * as ReactXP from './web/ReactXP';
 
-export = ReactXP;
+export default ReactXP;

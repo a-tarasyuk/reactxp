@@ -7,11 +7,9 @@
 * Control to display an animated activity indicator.
 */
 
-import React = require('react');
-/* tslint:disable:no-unused-variable */
-import RN = require('react-native');
-/* tslint:enable:no-unused-variable */
-import Types = require('../common/Types');
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as Types from '../common/Types';
 
 export interface ActivityIndicatorState {
     isVisible?: boolean;

@@ -9,9 +9,10 @@
 * and re-shown. Abstract class to be overriden per platform.
 */
 
-import React = require('react');
-import PropTypes = require('prop-types');
-import Types = require('./Types');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as Types from './Types';
+
 import FocusManagerBase from './utils/FocusManager';
 
 export interface PopupContainerViewBaseProps extends Types.CommonProps {

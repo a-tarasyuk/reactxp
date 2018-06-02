@@ -8,12 +8,11 @@
 * ReactXP framework.
 */
 
-import _ = require('./lodashMini');
-import React = require('react');
+import * as React from 'react';
+import * as Types from '../common/Types';
+import * as _ from './lodashMini';
 
-import { AccessibilityUtil as CommonAccessibilityUtil, AccessibilityPlatformUtil } from '../common/AccessibilityUtil';
-
-import Types = require('../common/Types');
+import { AccessibilityPlatformUtil, AccessibilityUtil as CommonAccessibilityUtil } from '../common/AccessibilityUtil';
 
 const liveRegionMap: { [key: string]: string } = {
     [Types.AccessibilityLiveRegion.None]: 'none',

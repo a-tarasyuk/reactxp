@@ -6,7 +6,7 @@
 *
 * Android-specific implementation of Image component.
 */
-import RN = require('react-native');
+import * as RN from 'react-native';
 
 import { Image as CommonImage } from '../native-common/Image';
 

@@ -7,17 +7,18 @@
 * RN-specific implementation of the cross-platform Animation abstraction.
 */
 
-import React = require('react');
-import RN = require('react-native');
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as Types from '../common/Types';
+import * as RX from '../common/Interfaces';
+
 import { ReactNativeBaseComponent } from 'react-native';
 
 import Easing from '../common/Easing';
-import Types = require('../common/Types');
 import RXImage from './Image';
 import RXView from './View';
 import RXText from './Text';
 import RXTextInput from './TextInput';
-import RX = require('../common/Interfaces');
 
 export interface AnimatedClasses {
     Image: typeof ReactNativeBaseComponent;

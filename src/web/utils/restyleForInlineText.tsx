@@ -13,13 +13,13 @@
 * of its render method to this utility. See RX.View for an example.
 */
 
-import _ = require('./../utils/lodashMini');
-import assert = require('assert');
-import React = require('react');
+import * as assert from 'assert';
+import * as React from 'react';
+import * as _ from './../utils/lodashMini';
 
 function restyleForInlineText(reactElement: React.ReactElement<any>) {
     let style = reactElement.props['style'];
-    assert(
+    assert.ok(
         style &&
         style['width'] !== undefined &&
         style['height'] !== undefined,
@@ -57,4 +57,4 @@ function restyleForInlineText(reactElement: React.ReactElement<any>) {
     });
 }
 
-export = restyleForInlineText;
+export default restyleForInlineText;

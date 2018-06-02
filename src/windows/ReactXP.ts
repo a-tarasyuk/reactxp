@@ -8,13 +8,13 @@
 * file instead of internals.
 */
 
-import React = require('react');
-import RN = require('react-native');
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as RXInterfaces from '../common/Interfaces';
+import * as RXModuleInterface from '../common/ModuleInterface';
+import * as RXTypes from '../common/Types';
 
 import { makeAnimated, CommonAnimatedClasses } from '../native-common/Animated';
-import RXInterfaces = require('../common/Interfaces');
-import RXModuleInterface = require('../common/ModuleInterface');
-import RXTypes = require('../common/Types');
 
 // -- STRANGE THINGS GOING ON HERE --
 // See web/ReactXP.tsx for more details.
@@ -150,7 +150,7 @@ module ReactXP {
 
 var _rxImplementsRxInterface: typeof RXModuleInterface.ReactXP = ReactXP;
 _rxImplementsRxInterface = _rxImplementsRxInterface;
-export = ReactXP;
+export default ReactXP;
 
 /*
 var rx = module.exports;

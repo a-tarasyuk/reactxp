@@ -7,9 +7,9 @@
 * The top-most view that's used for proper layering or modals and popups.
 */
 
-import React = require('react');
-import RN = require('react-native');
-import RNW = require('react-native-windows');
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as RNW from 'react-native-windows';
 
 import { RootView as RootViewBase, RootViewUsingProps as RootViewUsingPropsBase,
     BaseRootViewProps, RootViewPropsWithMainViewType, RootViewState, BaseRootView } from '../native-desktop/RootView';

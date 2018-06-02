@@ -8,7 +8,8 @@
 * provided by the app.
 */
 
-import React = require('react');
+import * as React from 'react';
+
 import SubscribableEvent from 'subscribableevent';
 
 export class MainViewStore extends SubscribableEvent<() => void> {

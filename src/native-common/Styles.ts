@@ -7,14 +7,14 @@
 * RN-specific implementation of style functions.
 */
 
-import _ = require('./lodashMini');
-import RN = require('react-native');
+import * as _ from './lodashMini';
+import * as RN from 'react-native';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 import AppConfig from '../common/AppConfig';
-import RX = require('../common/Interfaces');
 import StyleLeakDetector from './StyleLeakDetector';
 import Platform from './Platform';
-import Types = require('../common/Types');
 
 const forbiddenProps: string[] = [
     'wordBreak',

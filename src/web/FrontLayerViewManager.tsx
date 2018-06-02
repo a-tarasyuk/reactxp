@@ -7,12 +7,11 @@
 * Manages the layering of the main view, modals and popups.
 */
 
-import React = require('react');
-import ReactDOM = require('react-dom');
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as Types from '../common/Types';
 
 import { PopupDescriptor, RootView } from './RootView';
-
-import Types = require('../common/Types');
 
 const MAX_CACHED_POPUPS = 4;
 

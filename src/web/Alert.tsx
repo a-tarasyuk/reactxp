@@ -7,10 +7,10 @@
 * Web Alert dialog boxes.
 */
 
-import React = require('react');
+import * as React from 'react';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
 import { AlertModalContent } from './AlertModalContent';
 import { default as Modal } from './Modal';
 

@@ -8,14 +8,15 @@
 * by the Types showModal/dismissModal/showPopup/dismissPopup methods.
 */
 
-import _ = require('./lodashMini');
-import React = require('react');
-import RN = require('react-native');
-import SubscribableEvent from 'subscribableevent';
+import * as _ from './lodashMini';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as Types from '../common/Types';
 
 import { ModalContainer } from '../native-common/ModalContainer';
+
+import SubscribableEvent from 'subscribableevent';
 import PopupContainerView from './PopupContainerView';
-import Types = require('../common/Types');
 
 class ModalStackContext {
     constructor(public modalId: string, public modal: React.ReactElement<Types.ViewProps>, public modalOptions?: Types.ModalOptions) {}

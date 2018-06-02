@@ -7,7 +7,7 @@
 * RN Desktop implementation of Input interface.
 */
 
-import Types = require('../common/Types');
+import * as Types from '../common/Types';
 
 import { Input as InputCommon } from '../native-common/Input';
 

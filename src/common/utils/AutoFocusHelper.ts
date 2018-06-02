@@ -8,9 +8,10 @@
 * to focus from the multiple candidates with autoFocus=true.
 */
 
-import React = require('react');
-import Types = require('../Types');
-import Interfaces = require('../Interfaces');
+import * as React from 'react';
+
+import * as Interfaces from '../Interfaces';
+import * as Types from '../Types';
 
 let _sortAndFilter: SortAndFilterFunc|undefined;
 let _autoFocusTimer: number|undefined;

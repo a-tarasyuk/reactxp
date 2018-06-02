@@ -7,9 +7,8 @@
 * RN-specific implementation for i18n.
 */
 
-import RN = require('react-native');
-
-import RXInterfaces = require('../common/Interfaces');
+import * as RN from 'react-native';
+import * as RXInterfaces from '../common/Interfaces';
 
 export class International implements RXInterfaces.International {
     allowRTL(allow: boolean): void {

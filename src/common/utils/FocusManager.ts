@@ -7,11 +7,11 @@
 * Manages focusable elements for better keyboard navigation.
 */
 
-import React = require('react');
-import PropTypes = require('prop-types');
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
 
 import AppConfig from '../../common/AppConfig';
-import Types = require('../../common/Types');
+import * as Types from '../../common/Types';
 
 let _lastComponentId: number = 0;
 

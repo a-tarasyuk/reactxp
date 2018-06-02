@@ -7,11 +7,10 @@
 * Common implementation for deep linking.
 */
 
-import _ = require('./lodashMini');
-
-import RX = require('../common/Interfaces');
-import Types = require('../common/Types');
-import SyncTasks = require('synctasks');
+import * as _ from './lodashMini';
+import * as SyncTasks from 'synctasks';
+import * as RX from '../common/Interfaces';
+import * as Types from '../common/Types';
 
 // Collection of Regex that help validate an email.
 // The name can be any of these characters.

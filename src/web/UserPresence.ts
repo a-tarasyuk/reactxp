@@ -8,7 +8,7 @@
 * user presence.
 */
 
-import RX = require('../common/Interfaces');
+import * as RX from '../common/Interfaces';
 
 // Hack to allow inline-require without importing node.d.ts
 declare var require: (path: string) => any;

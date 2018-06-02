@@ -7,20 +7,21 @@
 * RN-specific implementation of the cross-platform Button abstraction.
 */
 
-import assert = require('assert');
-import React = require('react');
-import RN = require('react-native');
-import PropTypes = require('prop-types');
+import * as assert from 'assert';
+import * as React from 'react';
+import * as RN from 'react-native';
+import * as PropTypes from 'prop-types';
+import * as Types from '../common/Types';
 
-import AccessibilityUtil from './AccessibilityUtil';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
-import Animated from './Animated';
-import AppConfig from '../common/AppConfig';
-import EventHelpers from './utils/EventHelpers';
-import Styles from './Styles';
-import Types = require('../common/Types');
 import { Button as ButtonBase } from '../common/Interfaces';
 import { isEqual } from '../common/lodashMini';
+
+import AccessibilityUtil from './AccessibilityUtil';
+import AppConfig from '../common/AppConfig';
+import Animated from './Animated';
+import EventHelpers from './utils/EventHelpers';
+import Styles from './Styles';
 import UserInterface from './UserInterface';
 
 const _styles = {
@@ -49,7 +50,7 @@ function noop() { /* noop */ }
 function applyMixin(thisObj: any, mixin: {[propertyName: string]: any}, propertiesToSkip: string[]) {
     Object.getOwnPropertyNames(mixin).forEach(name => {
         if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1) {
-            assert(
+            assert.ok(
                 !(name in thisObj),
                 `An object cannot have a method with the same name as one of its mixins: "${name}"`
             );

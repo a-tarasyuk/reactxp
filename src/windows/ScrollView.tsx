@@ -7,8 +7,9 @@
 * RN Windows-specific implementation of the cross-platform ScrollView abstraction.
 */
 
-import React = require('react');
-import RN = require('react-native');
+import * as React from 'react';
+import * as RN from 'react-native';
+
 import { ScrollView as ScrollViewBase } from '../native-common/ScrollView';
 
 import EventHelpers from '../native-common/utils/EventHelpers';
