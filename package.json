@@ -5,6 +5,7 @@
   "author": "ReactXP Team <reactxp@microsoft.com>",
   "license": "MIT",
   "scripts": {
+    "prepare": "npm run build",
     "clean:dist": "rimraf dist-*",
     "build:types": "tsc -p tsconfig/types.json",
     "build:es2015": "tsc -p tsconfig.json",
