@@ -30,7 +30,7 @@
     "reactxp-navigation": "^1.2.0",
     "reactxp-video": "^1.2.0",
     "reactxp-virtuallistview": "^1.2.0",
-    "resub": "^1.0.7",
+    "resub": "a-tarasyuk/ReSub#feature/es-2015",
     "simplerestclients": "^0.1.6",
     "synctasks": "^0.3.2"
   }
