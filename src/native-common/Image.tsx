@@ -11,7 +11,6 @@ import PropTypes = require('prop-types');
 import React = require('react');
 import RN = require('react-native');
 import SyncTasks = require('synctasks');
-import _ = require('./lodashMini');
 
 import Styles from './Styles';
 import Types = require('../common/Types');
@@ -52,13 +51,10 @@ export class Image extends React.Component<Types.ImageProps, Types.Stateless> im
 
         Image.prefetch(url).then(success => {
             if (!success) {
-                defer.reject('Prefetching url ' + url + ' did not succeed.');
+                defer.reject(`Prefetching url ${ url } did not succeed.`);
             } else {
                 RN.Image.getSize(url, (width, height) => {
-                    defer.resolve({
-                        width: width,
-                        height: height
-                    });
+                    defer.resolve({ width, height });
                 }, error => {
                     defer.reject(error);
                 });
@@ -70,39 +66,47 @@ export class Image extends React.Component<Types.ImageProps, Types.Stateless> im
         return defer.promise();
     }
 
-    protected _mountedComponent: RN.ReactNativeBaseComponent<any, any>|null = null;
-    private _nativeImageWidth: number|undefined;
-    private _nativeImageHeight: number|undefined;
+    protected _mountedComponent: RN.ImageBackground | RN.Image | null = null;
+    private _nativeImageWidth: number | undefined;
+    private _nativeImageHeight: number | undefined;
 
     protected _getAdditionalProps(): RN.ImageProperties | {} {
         return {};
     }
 
     render() {
-        const additionalProps = this._getAdditionalProps();
-        const resizeMode = this._buildResizeMode();
         const extendedProps: RN.ExtendedImageProps = {
             source: this._buildSource(),
             tooltip: this.props.title
         };
 
+        const props = {
+            accessibilityLabel: this.props.accessibilityLabel,
+            resizeMethod: this.props.resizeMethod,
+            resizeMode: this._buildResizeMode(),
+            style: this.getStyles() as RN.StyleProp<RN.ImageStyle>,
+            ref: this._onMount,
+            testID: this.props.testId,
+            onError: this._onError,
+            onLoad: this.props.onLoad ? this._onLoad : undefined,
+            ...this._getAdditionalProps(),
+            ...extendedProps,
+        };
+
+        if (this.props.children) {
+            return (
+                <RN.ImageBackground { ...props }>
+                    { this.props.children }
+                </RN.ImageBackground>
+            );
+        }
+
         return (
-            <RN.Image
-                ref={ this._onMount as any }
-                style={ this.getStyles() as RN.StyleProp<RN.ImageStyle> }
-                resizeMode={ resizeMode }
-                resizeMethod={ this.props.resizeMethod }
-                accessibilityLabel={ this.props.accessibilityLabel }
-                onLoad={ this.props.onLoad ? this._onLoad : undefined }
-                onError={ this._onError }
-                testID={ this.props.testId }
-                { ...additionalProps }
-                { ...extendedProps }
-            />
+            <RN.Image { ...props } />
         );
     }
 
-    protected _onMount = (component: RN.ReactNativeBaseComponent<any, any>|null) => {
+    protected _onMount = (component: RN.ImageBackground | RN.Image | null) => {
         this._mountedComponent = component;
     }
 
@@ -148,7 +152,7 @@ export class Image extends React.Component<Types.ImageProps, Types.Stateless> im
         this._nativeImageHeight = e.nativeEvent.source.height;
 
         if (this.props.onLoad) {
-            this.props.onLoad({ width: this._nativeImageWidth!, height: this._nativeImageHeight! });
+            this.props.onLoad({ width: this._nativeImageWidth, height: this._nativeImageHeight });
         }
     }
 
@@ -164,7 +168,7 @@ export class Image extends React.Component<Types.ImageProps, Types.Stateless> im
 
     private _buildSource(): RN.ImageSourcePropType {
         // Check if require'd image resource
-        if (_.isNumber(this.props.source)) {
+        if (typeof this.props.source === 'number') {
             return this.props.source;
         }
 

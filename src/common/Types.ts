@@ -348,17 +348,12 @@ export type ComponentBase = React.Component<any, any>;
  * Components
  */
 
-interface ChildrenProp {
+export interface CommonProps {
     children?: ReactNode | ReactNode[];
-}
-
-interface ComponentBaseProps {
     ref?: string | ((obj: ComponentBase | null) => void);
     key?: string | number;
     testId?: string;
 }
-
-export interface CommonProps extends ComponentBaseProps, ChildrenProp {}
 
 export interface Stateless {}
 
@@ -531,7 +526,7 @@ export interface Headers {
 // Image
 export type ImageResizeMode = 'stretch' | 'contain' | 'cover' | 'auto' | 'repeat';
 
-export interface ImagePropsShared extends ComponentBaseProps {
+export interface ImagePropsShared extends CommonProps {
     source: string;
     headers?: Headers;
     accessibilityLabel?: string;
