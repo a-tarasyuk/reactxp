@@ -12,6 +12,7 @@ import React = require('react');
 import RN = require('react-native');
 import SyncTasks = require('synctasks');
 
+import ImageBackground from './ImageBackground';
 import Styles from './Styles';
 import Types = require('../common/Types');
 import { DEFAULT_RESIZE_MODE } from '../common/Image';
@@ -66,7 +67,7 @@ export class Image extends React.Component<Types.ImageProps, Types.Stateless> im
         return defer.promise();
     }
 
-    protected _mountedComponent: RN.ImageBackground | RN.Image | null = null;
+    protected _mountedComponent: RN.View | RN.Image | null = null;
     private _nativeImageWidth: number | undefined;
     private _nativeImageHeight: number | undefined;
 
@@ -75,6 +76,7 @@ export class Image extends React.Component<Types.ImageProps, Types.Stateless> im
     }
 
     render() {
+        const styles = this.getStyles();
         const extendedProps: RN.ExtendedImageProps = {
             source: this._buildSource(),
             tooltip: this.props.title
@@ -84,8 +86,6 @@ export class Image extends React.Component<Types.ImageProps, Types.Stateless> im
             accessibilityLabel: this.props.accessibilityLabel,
             resizeMethod: this.props.resizeMethod,
             resizeMode: this._buildResizeMode(),
-            style: this.getStyles() as RN.StyleProp<RN.ImageStyle>,
-            ref: this._onMount,
             testID: this.props.testId,
             onError: this._onError,
             onLoad: this.props.onLoad ? this._onLoad : undefined,
@@ -95,22 +95,30 @@ export class Image extends React.Component<Types.ImageProps, Types.Stateless> im
 
         if (this.props.children) {
             return (
-                <RN.ImageBackground { ...props }>
+                <ImageBackground
+                    imageRef={this._onMount}
+                    style={styles as RN.StyleProp<RN.ViewStyle>}
+                    { ...props }
+                >
                     { this.props.children }
-                </RN.ImageBackground>
+                </ImageBackground>
             );
         }
 
         return (
-            <RN.Image { ...props } />
+            <RN.Image
+                style={ styles as RN.StyleProp<RN.ImageStyle> }
+                ref={ this._onMount }
+                { ...props }
+            />
         );
     }
 
-    protected _onMount = (component: RN.ImageBackground | RN.Image | null) => {
+    protected _onMount = (component: RN.Image | null) => {
         this._mountedComponent = component;
     }
 
-    public setNativeProps(nativeProps: RN.ImageProperties) {
+    public setNativeProps(nativeProps: RN.ImageProps) {
         if (this._mountedComponent) {
             this._mountedComponent.setNativeProps(nativeProps);
         }
@@ -124,7 +132,7 @@ export class Image extends React.Component<Types.ImageProps, Types.Stateless> im
     }
 
     protected getStyles() {
-        return [_styles.defaultImage, this.props.style];
+        return [_styles.defaultImage, this.props.style] as RN.StyleProp<RN.ImageStyle>;
     }
 
     private _buildResizeMode(): RN.ImageResizeMode {
