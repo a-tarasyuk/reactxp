@@ -5,7 +5,7 @@
  * Licensed under the MIT license.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
 // Be aware that we import class and extend it here, but the default export of native-common/Accessibility
 // is an instance of the class we import here. So any state in the default export from native-common will be in
 // a different instance than default export of this windows/Accessibility. For example, susbscribing to

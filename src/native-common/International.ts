@@ -7,7 +7,7 @@
  * RN-specific implementation for i18n.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
 

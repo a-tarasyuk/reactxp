@@ -7,7 +7,7 @@
  * RN-specific implementation of style functions.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
 import { omit } from './utils/lodashMini';

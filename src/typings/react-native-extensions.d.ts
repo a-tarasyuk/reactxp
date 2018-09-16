@@ -8,7 +8,7 @@
  */
 
 import * as React from 'react';
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 declare module 'react-native' {
     interface ExtendedViewProps extends RN.ViewProps {

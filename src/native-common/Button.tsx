@@ -7,10 +7,10 @@
  * RN-specific implementation of the cross-platform Button abstraction.
  */
 
+import * as assert from 'assert';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import * as RN from 'react-native';
-import * as assert from 'assert';
+import RN from 'react-native';
 
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import { Button as ButtonBase } from '../common/Interfaces';
@@ -50,7 +50,7 @@ function noop() { /* noop */ }
 function applyMixin(thisObj: any, mixin: {[propertyName: string]: any}, propertiesToSkip: string[]) {
     Object.getOwnPropertyNames(mixin).forEach(name => {
         if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1) {
-            assert(
+            assert.ok(
                 !(name in thisObj),
                 `An object cannot have a method with the same name as one of its mixins: "${name}"`
             );

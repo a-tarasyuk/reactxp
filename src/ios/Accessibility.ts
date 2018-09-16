@@ -8,7 +8,7 @@
  * React Native announcement API for iOS.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import { Accessibility as NativeAccessibility } from '../native-common/Accessibility';
 

@@ -10,7 +10,7 @@
 
 declare module 'react-native-windows' {
     import * as React from 'react';
-    import * as RN from 'react-native';
+    import RN from 'react-native';
 
     interface AccessibilityEvents {
         onAccessibilityTap?: (e: RN.NativeSyntheticEvent<any>) => void;

@@ -8,8 +8,8 @@
  */
 
 import * as React from 'react';
-import * as RN from 'react-native';
 import { SubscriptionToken } from 'subscribableevent';
+import RN from 'react-native';
 
 import { Types } from '../common/Interfaces';
 import Accessibility from './Accessibility';

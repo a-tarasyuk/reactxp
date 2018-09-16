@@ -7,7 +7,7 @@
  * Native implementation of App API namespace.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
 import { RootView, RootViewUsingProps } from './RootView';

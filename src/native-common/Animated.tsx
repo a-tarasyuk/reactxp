@@ -8,7 +8,7 @@
  */
 
 import * as React from 'react';
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
 import Easing from '../common/Easing';

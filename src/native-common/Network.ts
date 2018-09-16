@@ -7,8 +7,8 @@
  * Native implementation of network information APIs.
  */
 
-import * as RN from 'react-native';
 import * as SyncTasks from 'synctasks';
+import RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
 

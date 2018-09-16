@@ -7,8 +7,8 @@
  * Native implementation of the cross-platform database storage abstraction.
  */
 
-import * as RN from 'react-native';
 import * as SyncTasks from 'synctasks';
+import RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
 

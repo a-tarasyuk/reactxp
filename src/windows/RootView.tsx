@@ -8,8 +8,8 @@
  */
 
 import * as React from 'react';
-import * as RN from 'react-native';
-import * as RNW from 'react-native-windows';
+import RN from 'react-native';
+import RNW from 'react-native-windows';
 
 import { AccessibilityAnnouncer } from './AccessibilityAnnouncer';
 import {

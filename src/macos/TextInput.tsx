@@ -9,7 +9,7 @@
 
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import { Types } from '../common/Interfaces';

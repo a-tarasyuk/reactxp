@@ -7,10 +7,10 @@
 * RN-specific implementation of the cross-platform View abstraction.
 */
 
+import * as assert from 'assert';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import * as RN from 'react-native';
-import * as assert from 'assert';
+import RN from 'react-native';
 
 import { clone, extend } from './utils/lodashMini';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
@@ -39,7 +39,7 @@ function noop() { /* noop */ }
 function applyMixin(thisObj: any, mixin: {[propertyName: string]: any}, propertiesToSkip: string[]) {
     Object.getOwnPropertyNames(mixin).forEach(name => {
         if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1) {
-            assert(
+            assert.ok(
                 !(name in thisObj),
                 `An object cannot have a method with the same name as one of its mixins: "${name}"`
             );
@@ -51,7 +51,7 @@ function applyMixin(thisObj: any, mixin: {[propertyName: string]: any}, properti
 function removeMixin(thisObj: any, mixin: {[propertyName: string]: any}, propertiesToSkip: string[]) {
     Object.getOwnPropertyNames(mixin).forEach(name => {
         if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1) {
-            assert(
+            assert.ok(
                 (name in thisObj),
                 `An object is missing a mixin method: "${name}"`
             );
@@ -66,7 +66,7 @@ function extractChildrenKeys(children: React.ReactNode): ChildKey[] {
     React.Children.forEach(children, function (child, index) {
         if (child) {
             let childReactElement = child as React.ReactElement<any>;
-            assert(
+            assert.ok(
                 childReactElement.key !== undefined && childReactElement.key !== null,
                 'Children passed to a `View` with child animations enabled must have a `key`'
             );
@@ -200,7 +200,7 @@ export class View extends ViewBase<Types.ViewProps, Types.Stateless> {
 
         // The web implementation doesn't support string refs. For consistency, do the same assert
         // in the native implementation.
-        assert(
+        assert.ok(
             findInvalidRefs(nextProps.children).length === 0,
             'Invalid ref(s): ' + JSON.stringify(findInvalidRefs(nextProps.children)) +
             ' Only callback refs are supported when using child animations on a `View`'

@@ -9,8 +9,8 @@
 
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import * as RN from 'react-native';
-import * as RNW from 'react-native-windows';
+import RN from 'react-native';
+import RNW from 'react-native-windows';
 
 import * as _ from '../native-common/utils/lodashMini';
 import {

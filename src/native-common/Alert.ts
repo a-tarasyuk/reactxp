@@ -7,7 +7,7 @@
  * Native Alert dialog boxes for ReactXP.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
 import AppConfig from '../common/AppConfig';

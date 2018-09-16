@@ -8,7 +8,7 @@
  */
 
 import * as React from 'react';
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import { applyFocusableComponentMixin, FocusManagerFocusableComponent } from '../native-desktop/utils/FocusManager';
 import { TextInput as TextInputBase } from '../native-common/TextInput';

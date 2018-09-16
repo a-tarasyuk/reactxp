@@ -9,8 +9,8 @@
 
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import * as RN from 'react-native';
 import * as SyncTasks from 'synctasks';
+import RN from 'react-native';
 
 import { Types } from '../common/Interfaces';
 import { DEFAULT_RESIZE_MODE } from '../common/Image';

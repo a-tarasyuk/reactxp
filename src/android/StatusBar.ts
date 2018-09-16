@@ -7,7 +7,8 @@
  * Android-specific implementation of StatusBar APIs.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
+
 import * as RX from '../common/Interfaces';
 
 export class StatusBar extends RX.StatusBar {

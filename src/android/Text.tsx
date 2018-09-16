@@ -8,7 +8,7 @@
  */
 
 import * as React from 'react';
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import { Text as CommonText } from '../native-common/Text';
 import { Types } from '../common/Interfaces';

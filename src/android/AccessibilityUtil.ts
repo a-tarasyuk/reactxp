@@ -8,7 +8,7 @@
  */
 
 import * as React from 'react';
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import { AccessibilityPlatformUtil as CommonAccessibilityNativeUtil } from '../common/AccessibilityUtil';
 import Accessibility from '../native-common/Accessibility';

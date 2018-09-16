@@ -7,8 +7,8 @@
  * RN-specific implementation for deep linking.
  */
 
-import * as RN from 'react-native';
 import * as SyncTasks from 'synctasks';
+import RN from 'react-native';
 
 import { Linking as CommonLinking } from '../common/Linking';
 import { Types } from '../common/Interfaces';

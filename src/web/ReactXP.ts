@@ -153,7 +153,7 @@ AppImpl.activationStateChangedEvent.subscribe(newState => {
 
 var _rxImplementsRxInterface: typeof RXModuleInterface.ReactXP = ReactXP;
 _rxImplementsRxInterface = _rxImplementsRxInterface;
-export = ReactXP;
+export default ReactXP;
 
 /*
 

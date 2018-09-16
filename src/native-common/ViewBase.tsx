@@ -7,7 +7,7 @@
  * Base class that is used for several RX views.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
 import { isEqual } from './utils/lodashMini';

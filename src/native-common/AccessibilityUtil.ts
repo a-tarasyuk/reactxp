@@ -9,7 +9,7 @@
  */
 
 import * as React from 'react';
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import * as _ from './utils/lodashMini';
 import {

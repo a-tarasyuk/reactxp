@@ -7,7 +7,7 @@
  * Native implementation of debugging logic that detects style leaks.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import { StyleLeakDetector as CommonStyleLeakDetector } from '../common/StyleLeakDetector';
 

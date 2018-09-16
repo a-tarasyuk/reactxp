@@ -11,7 +11,7 @@
 
 import * as assert from 'assert';
 import * as React from 'react';
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import { isUndefined } from './utils/lodashMini';
 import { Types } from '../common/Interfaces';

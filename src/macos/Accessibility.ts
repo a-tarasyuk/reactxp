@@ -8,7 +8,7 @@
  * React Native announcement API.
  */
 
-import * as RN from 'react-native';
+import RN from 'react-native';
 
 import { Accessibility as NativeAccessibility } from '../native-common/Accessibility';
 
