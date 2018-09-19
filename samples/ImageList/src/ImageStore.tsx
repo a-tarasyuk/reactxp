@@ -1,22 +1,26 @@
 /**
-* Basic store based on ReSub.
-*/
+ * Basic store based on ReSub.
+ */
 
+import * as SyncTasks from 'synctasks';
 import { StoreBase, AutoSubscribeStore, autoSubscribe } from 'resub';
 
 import GiphyClient from './GiphyClient';
 
 export interface Image {
-    smallUrl: string;
     originalUrl: string;
+    smallUrl: string;
 }
 
 @AutoSubscribeStore
 export class ImageStore extends StoreBase {
-    private _lastSearchQuery = '';
     private _isSearchPending = false;
-    private _searchGenerationCount = 0;
+    private _isFirstSearch = true;
+    private _lastSearchQuery = '';
+    private _searchQuery = '';
     private _images: Image[] = [];
+
+    private _request: SyncTasks.STPromise<void> | null = null;
 
     @autoSubscribe
     getImageList() {
@@ -24,28 +28,40 @@ export class ImageStore extends StoreBase {
     }
 
     @autoSubscribe
+    getSearchQuery() {
+        return this._searchQuery;
+    }
+
+    @autoSubscribe
     isPerformingSearch() {
         return this._isSearchPending;
     }
 
+    @autoSubscribe
+    isFirstSearch() {
+        return this._isFirstSearch;
+    }
+
     updateImageList(searchQuery: string) {
-        // Capture and bump the generation count. This prevents us
-        // from overwriting results with stale information.
-        this._searchGenerationCount++;
-        const curGenerationCount = this._searchGenerationCount;
+        this._searchQuery = searchQuery;
+        this.trigger();
 
-        let trimmedQuery = searchQuery.trim();
-
-        // If this is the same as the last query, don't bother.
-        if (trimmedQuery === this._lastSearchQuery) {
+        if (!searchQuery.trim().length) {
             return;
         }
 
-        this._lastSearchQuery = trimmedQuery;
+        // If this is the same as the last query, don't bother.
+        if (this._lastSearchQuery && searchQuery.trim() === this._lastSearchQuery) {
+            return;
+        }
+
+        this._isFirstSearch = false;
+        this._lastSearchQuery = searchQuery.trim();
         this._images = [];
 
         // If the query is empty, don't bother with the API call.
-        if (trimmedQuery.length === 0) {
+        if (searchQuery.length === 0) {
+            this._cancelPreviousSearch();
             this.trigger();
             return;
         }
@@ -53,25 +69,31 @@ export class ImageStore extends StoreBase {
         this._isSearchPending = true;
         this.trigger();
 
-        // Perform an async call to the Giphy service.
-        GiphyClient.searchImages(searchQuery).then(images => {
-            // If the results are not associated with the latest search,
-            // discard them.
-            if (curGenerationCount === this._searchGenerationCount) {
-                this._images = images.map(image => {
-                    return {
-                        smallUrl: image.smallUrl,
-                        originalUrl: image.originalUrl
-                    };
-                });
 
+        this._cancelPreviousSearch();
+        this._request = this._searchImages(searchQuery);
+    }
+
+    private _searchImages(query: string): SyncTasks.STPromise<void> {
+        return GiphyClient.searchImages(query)
+            .then(images => {
+                this._images = images;
                 this._isSearchPending = false;
                 this.trigger();
-            }
-        }).catch(error => {
-            this._isSearchPending = false;
-            this.trigger();
-        });
+            })
+            .catch(({ canceled }) => {
+                if (!canceled) {
+                    this._isSearchPending = false;
+                    this.trigger();
+                }
+            });
+    };
+
+    private _cancelPreviousSearch(): void {
+        if (this._request) {
+            this._request.cancel();
+            this._request = null;
+        }
     }
 }
 

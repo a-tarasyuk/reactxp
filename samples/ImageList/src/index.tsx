@@ -1,3 +1,3 @@
-import ImageApp = require('./ImageApp');
+import ImageApp from './ImageApp';
 
 ImageApp.init();

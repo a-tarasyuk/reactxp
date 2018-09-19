@@ -1,10 +1,9 @@
-/*
-* Main entry point for sample image fetching app.
-*/
+/**
+ * Main entry point for sample image fetching app.
+ */
 
-import RX = require('reactxp');
-
-import ImageListPanel = require('./ImageListPanel');
+import * as RX from 'reactxp';
+import RootView from './RootView';
 
 class ImageApp {
     init() {
@@ -14,10 +13,10 @@ class ImageApp {
 
     private _renderRootView() {
         return (
-            <ImageListPanel />
+            <RootView />
         );
     }
 }
 
-export = new ImageApp();
+export default new ImageApp();
 
