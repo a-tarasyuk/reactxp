@@ -1,74 +1,63 @@
-/*
- * This file demonstrates a basic ReactXP app.
- */
-
+import * as RX from 'reactxp';
 import React from 'react';
-import RX from 'reactxp';
 
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
         alignSelf: 'stretch',
-        backgroundColor: '#f5fcff'
+        backgroundColor: '#f5fcff',
     }),
     container: RX.Styles.createViewStyle({
         padding: 16,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     }),
     helloWorld: RX.Styles.createTextStyle({
         fontSize: 48,
         fontWeight: 'bold',
-        marginBottom: 28
+        marginBottom: 28,
     }),
     welcome: RX.Styles.createTextStyle({
         fontSize: 32,
-        marginBottom: 12
+        marginBottom: 12,
     }),
     instructions: RX.Styles.createTextStyle({
         fontSize: 16,
         color: '#aaa',
-        marginBottom: 16
+        marginBottom: 16,
     }),
     docLink: RX.Styles.createLinkStyle({
         fontSize: 16,
         color: 'blue',
-        marginBottom: 16
+        marginBottom: 16,
     }),
     roundButton: RX.Styles.createViewStyle({
         margin: 16,
         borderRadius: 16,
-        backgroundColor: '#7d88a9'
+        backgroundColor: '#7d88a9',
     }),
     buttonText: RX.Styles.createTextStyle({
         fontSize: 16,
         marginVertical: 6,
         marginHorizontal: 12,
-        color: 'white'
-    })
+        color: 'white',
+    }),
 };
 
-export default class MainPanel extends RX.Component{
+export class MainPanel extends RX.Component{
     constructor(props) {
         super(props);
         this._translationValue = RX.Animated.createValue(-100);
         this._animatedStyle = RX.Styles.createAnimatedTextStyle({
-            transform: [
-                {
-                    translateY: this._translationValue
-                }
-            ]
+            transform: [{ translateY: this._translationValue }],
         });
     }
 
     componentDidMount() {
-        let animation = RX.Animated.timing(this._translationValue, {
-                toValue: 0,
-                easing: RX.Animated.Easing.OutBack(),
-                duration: 500
-            }
-        );
-
-        animation.start();
+        RX.Animated.timing(this._translationValue, {
+            duration: 500,
+            toValue: 0,
+            easing: RX.Animated.Easing.OutBack(),
+        }).start();
     }
 
     render() {
