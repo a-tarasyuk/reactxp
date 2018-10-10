@@ -9,6 +9,7 @@
 
 import * as React from 'react';
 import * as RN from 'react-native';
+import * as RNW from 'react-native-windows';
 
 declare module 'react-native' {
     interface ExtendedViewProps extends RN.ViewProps {
@@ -18,7 +19,7 @@ declare module 'react-native' {
         tooltip?: string;
     }
 
-    interface ExtendedTextProps extends RN.TextProps {
+    interface ExtendedTextProps extends RN.TextProps, RNW.TextWindowsProps {
         maxContentSizeMultiplier?: number;
         disableContextMenu?: boolean;
         tooltip?: string;
@@ -36,6 +37,10 @@ declare module 'react-native' {
 
     interface ExtendedWebViewProps extends RN.WebViewProps {
         useWebKit?: boolean;
+    }
+
+    interface RtlEventNativePayload {
+        isRTL:  boolean;
     }
 
     abstract class ReactNativeBaseComponent<P, S> extends React.Component<P, S> {
