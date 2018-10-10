@@ -6,29 +6,29 @@ import { SecondPanel } from './SecondPanel';
 
 enum NavigationRouteId {
     MainPanel,
-    SecondPanel,
+    SecondPanel
 }
 
 const styles = {
     // Standard navigator style should be an object. So we have to disable caching here.
     navCardStyle: RX.Styles.createViewStyle({
-        backgroundColor: '#f5fcff',
-    }, false),
+        backgroundColor: '#f5fcff'
+    }, false)
 };
 
 export class RootView extends RX.Component<RX.CommonProps, RX.Stateless> {
     private _navigator: Navigator | undefined;
 
-    public componentDidMount() {
+    componentDidMount() {
         if (this._navigator) {
             this._navigator.immediatelyResetRouteStack([{
                 routeId: NavigationRouteId.MainPanel,
-                sceneConfigType: Types.NavigatorSceneConfigType.Fade,
+                sceneConfigType: Types.NavigatorSceneConfigType.Fade
             }]);
         }
     }
 
-    public render() {
+    render() {
         return (
             <Navigator
                 delegateSelector={ DelegateSelector }
@@ -63,7 +63,7 @@ export class RootView extends RX.Component<RX.CommonProps, RX.Stateless> {
         if (this._navigator) {
             this._navigator.push({
                 sceneConfigType: Types.NavigatorSceneConfigType.FloatFromRight,
-                routeId: NavigationRouteId.SecondPanel,
+                routeId: NavigationRouteId.SecondPanel
             });
         }
     }

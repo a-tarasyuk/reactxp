@@ -16,60 +16,60 @@ interface SecondPanelState {
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
         alignSelf: 'stretch',
-        backgroundColor: '#f5fcff',
+        backgroundColor: '#f5fcff'
     }),
     container: RX.Styles.createViewStyle({
         padding: 16,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     }),
     titleText: RX.Styles.createTextStyle({
         fontSize: 16,
         textAlign: 'center',
         marginTop: 12,
-        color: 'black',
+        color: 'black'
     }),
     videoTitleText: RX.Styles.createTextStyle({
-        marginBottom: 8,
+        marginBottom: 8
     }),
     progressMargin: RX.Styles.createViewStyle({
-        margin: 8,
+        margin: 8
     }),
     video: RX.Styles.createViewStyle({
         height: 176,
-        width: 320,
+        width: 320
     }),
     roundButton: RX.Styles.createViewStyle({
         margin: 16,
         borderRadius: 16,
-        backgroundColor: '#7d88a9',
+        backgroundColor: '#7d88a9'
     }),
     buttonText: RX.Styles.createTextStyle({
         fontSize: 16,
         marginVertical: 6,
         marginHorizontal: 12,
-        color: 'white',
-    }),
+        color: 'white'
+    })
 };
 
 export class SecondPanel extends RX.Component<SecondPanelProps, SecondPanelState> {
-    public state: SecondPanelState = {
+    readonly state: SecondPanelState = {
         progressValue: 0,
-        toggleValue: true,
+        toggleValue: true
     };
 
     private _progressTimerToken: number | undefined;
     private _mountedVideo: RXVideo | undefined;
 
-    public componentDidMount() {
+    componentDidMount() {
         this._startProgressIndicator();
     }
 
-    public componentWillUnmount() {
+    componentWillUnmount() {
         this._stopProgressIndicator();
     }
 
-    public render() {
+    render() {
         return (
             <RX.View useSafeInsets={ true }>
                 <RX.ScrollView style={ styles.scroll }>

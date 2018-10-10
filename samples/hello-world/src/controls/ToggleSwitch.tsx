@@ -14,13 +14,13 @@ export interface ToggleSwitchProps extends RX.CommonProps {
 }
 
 const ANIMATION_DURATION = 250; // In milliseconds
-const KNOB_LEFT_OFF = 2; // In pixels
-const KNOB_LEFT_ON = 22; // In pixels
+const KNOB_LEFT_OFF = 2;        // In pixels
+const KNOB_LEFT_ON = 22;        // In pixels
 
 const _styles = {
     container: RX.Styles.createButtonStyle({
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center'
     }),
     toggleSwitch: RX.Styles.createViewStyle({
         flexDirection: 'row',
@@ -28,7 +28,7 @@ const _styles = {
         marginVertical: 8,
         height: 30,
         width: 50,
-        backgroundColor: '#ddd',
+        backgroundColor: '#ddd'
     }),
     toggleSwitchBackground: RX.Styles.createViewStyle({
         position: 'absolute',
@@ -36,15 +36,15 @@ const _styles = {
         bottom: 0,
         left: 0,
         right: 0,
-        borderRadius: 15,
+        borderRadius: 15
     }),
     toggleKnob: RX.Styles.createViewStyle({
         top: 2,
         height: 26,
         width: 26,
         borderRadius: 13,
-        backgroundColor: 'white',
-    }),
+        backgroundColor: 'white'
+    })
 };
 
 export class ToggleSwitch extends RX.Component<ToggleSwitchProps, RX.Stateless> {
@@ -61,18 +61,18 @@ export class ToggleSwitch extends RX.Component<ToggleSwitchProps, RX.Stateless> 
         // animate when the user toggles the control.
         this._knobLeftAnimationValue = RX.Animated.createValue(props.value ? KNOB_LEFT_ON : KNOB_LEFT_OFF);
         this._knobLeftAnimationStyle = RX.Styles.createAnimatedViewStyle({
-            left: this._knobLeftAnimationValue,
+            left: this._knobLeftAnimationValue
         });
 
         // This value controls the background color of the control. Here we make
         // use of the interpolate method to smoothly transition between two colors.
         this._toggleColorAnimationValue = RX.Animated.createValue(props.value ? 1 : 0);
         this._toggleColorAnimationStyle = RX.Styles.createAnimatedTextInputStyle({
-            backgroundColor: RX.Animated.interpolate(this._toggleColorAnimationValue, [0, 1], ['#66f', '#ddd']),
+            backgroundColor: RX.Animated.interpolate(this._toggleColorAnimationValue, [0, 1], ['#66f', '#ddd'])
         });
     }
 
-    public componentDidUpdate(prevProps: ToggleSwitchProps) {
+    componentDidUpdate(prevProps: ToggleSwitchProps) {
         // If the value of the toggle changes, animate the toggle sliding
         // from one side to the other. In parallel, animate the opacity change.
         if (prevProps.value !== this.props.value) {
@@ -80,20 +80,20 @@ export class ToggleSwitch extends RX.Component<ToggleSwitchProps, RX.Stateless> 
                 RX.Animated.timing(this._knobLeftAnimationValue, {
                     duration: ANIMATION_DURATION,
                     toValue: this.props.value ? KNOB_LEFT_ON : KNOB_LEFT_OFF,
-                    easing: RX.Animated.Easing.InOut(),
+                    easing: RX.Animated.Easing.InOut()
                 }),
 
                 RX.Animated.timing(this._toggleColorAnimationValue, {
                     duration: ANIMATION_DURATION,
                     toValue: this.props.value ? 1 : 0,
-                    easing: RX.Animated.Easing.InOut(),
-                }),
+                    easing: RX.Animated.Easing.InOut()
+                })
             ])
             .start();
         }
     }
 
-    public render() {
+    render() {
         const backgroundStyle = [_styles.toggleSwitchBackground, this._toggleColorAnimationStyle];
         const knobStyles = [_styles.toggleKnob, this._knobLeftAnimationStyle];
 

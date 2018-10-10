@@ -15,7 +15,7 @@ export interface ProgressIndicatorProps extends RX.CommonStyledProps<SvgTypes.Im
 }
 
 export class ProgressIndicator extends RX.Component<ProgressIndicatorProps, RX.Stateless> {
-    public render() {
+    render() {
         const size = this.props.size;
         const path = this._buildPath();
 
