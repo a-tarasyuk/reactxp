@@ -8,40 +8,40 @@ import { ToggleSwitch } from '../controls/ToggleSwitch';
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
         alignSelf: 'stretch',
-        backgroundColor: '#f5fcff',
+        backgroundColor: '#f5fcff'
     }),
     container: RX.Styles.createViewStyle({
         padding: 16,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     }),
     titleText: RX.Styles.createTextStyle({
         fontSize: 16,
         textAlign: 'center',
         marginTop: 12,
-        color: 'black',
+        color: 'black'
     }),
     videoTitleText: RX.Styles.createTextStyle({
-        marginBottom: 8,
+        marginBottom: 8
     }),
     progressMargin: RX.Styles.createViewStyle({
-        margin: 8,
+        margin: 8
     }),
     video: RX.Styles.createViewStyle({
         height: 176,
-        width: 320,
+        width: 320
     }),
     roundButton: RX.Styles.createViewStyle({
         margin: 16,
         borderRadius: 16,
-        backgroundColor: '#7d88a9',
+        backgroundColor: '#7d88a9'
     }),
     buttonText: RX.Styles.createTextStyle({
         fontSize: 16,
         marginVertical: 6,
         marginHorizontal: 12,
-        color: 'white',
-    }),
+        color: 'white'
+    })
 };
 
 export class SecondPanel extends RX.Component {

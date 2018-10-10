@@ -7,14 +7,14 @@ import { SecondPanel } from './SecondPanel';
 
 const NavigationRouteId = {
     MainPanel: 'MainPanel',
-    SecondPanel: 'SecondPanel',
+    SecondPanel: 'SecondPanel'
 };
 
 const styles = {
     // Standard navigator style should be an object. So we have to disable caching here.
     navCardStyle: RX.Styles.createViewStyle({
-        backgroundColor: '#f5fcff',
-    }, false),
+        backgroundColor: '#f5fcff'
+    }, false)
 };
 
 export class RootView extends RX.Component {
@@ -23,7 +23,7 @@ export class RootView extends RX.Component {
     componentDidMount() {
         this._navigator.immediatelyResetRouteStack([{
             routeId: NavigationRouteId.MainPanel,
-            sceneConfigType: 'Fade',
+            sceneConfigType: 'Fade'
         }]);
     }
 

@@ -57,14 +57,14 @@ export class ToggleSwitch extends RX.Component {
         // animate when the user toggles the control.
         this._knobLeftAnimationValue = RX.Animated.createValue(props.value ? KNOB_LEFT_ON : KNOB_LEFT_OFF);
         this._knobLeftAnimationStyle = RX.Styles.createAnimatedViewStyle({
-            left: this._knobLeftAnimationValue,
+            left: this._knobLeftAnimationValue
         });
 
         // This value controls the background color of the control. Here we make
         // use of the interpolate method to smoothly transition between two colors.
         this._toggleColorAnimationValue = RX.Animated.createValue(this.props.value ? 1 : 0);
         this._toggleColorAnimationStyle = RX.Styles.createAnimatedTextInputStyle({
-            backgroundColor: RX.Animated.interpolate(this._toggleColorAnimationValue, [0, 1], ['#66f', '#ddd']),
+            backgroundColor: RX.Animated.interpolate(this._toggleColorAnimationValue, [0, 1], ['#66f', '#ddd'])
         });
     }
 
@@ -76,14 +76,14 @@ export class ToggleSwitch extends RX.Component {
                 RX.Animated.timing(this._knobLeftAnimationValue, {
                     duration: ANIMATION_DURATION,
                     toValue: this.props.value ? KNOB_LEFT_ON : KNOB_LEFT_OFF,
-                    easing: RX.Animated.Easing.InOut(),
+                    easing: RX.Animated.Easing.InOut()
                 }),
 
                 RX.Animated.timing(this._toggleColorAnimationValue, {
                     duration: ANIMATION_DURATION,
                     toValue: this.props.value ? 1 : 0,
-                    easing: RX.Animated.Easing.InOut(),
-                }),
+                    easing: RX.Animated.Easing.InOut()
+                })
             ]) .start();
         }
     }
