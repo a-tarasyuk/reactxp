@@ -1,6 +1,6 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const ROOT_PATH = path.join(__dirname, '..', '..');
 const DIST_PATH = path.join(ROOT_PATH, 'dist-web');
@@ -12,10 +12,6 @@ const buildConfig = (env, argv) => ({
   output: {
     filename: 'bundle.js',
     path: DIST_PATH,
-  },
-
-  resolve: {
-    extensions: ['.js', '.jsx'],
   },
 
   module: {

@@ -1,17 +1,20 @@
 module.exports = function(api) {
   api.cache.forever();
 
-  if (process.env.RX_PLATFORM === 'web') {
+  const presets = [
+    ['module:metro-react-native-babel-preset'],
+  ];
+
+  const plugins = [
+    ['@babel/proposal-decorators', { legacy: true }],
+  ];
+
+  if (process.env.platform === 'web') {
     return {
-      presets: [
-        ['@babel/preset-env', { 'targets': { 'browsers': ['last 2 versions'] } }],
-        ['@babel/preset-react', {}],
-      ],
-      plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties'],
-    };
+      presets: ['@babel/env', ...presets],
+      plugins,
+    }
   }
 
-  return {
-    presets: ['module:metro-react-native-babel-preset'],
-  };
+  return { presets, plugins };
 };
