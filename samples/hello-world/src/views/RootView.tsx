@@ -1,3 +1,4 @@
+import * as React from 'react';
 import * as RX from 'reactxp';
 import Navigator, { NavigatorDelegateSelector as DelegateSelector, Types } from 'reactxp-navigation';
 

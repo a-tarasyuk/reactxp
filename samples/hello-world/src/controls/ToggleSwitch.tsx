@@ -5,7 +5,7 @@
  * A simple toggle control built in ReactXP that allows users to
  * pick between two values.
  */
-
+import * as React from 'react';
 import * as RX from 'reactxp';
 
 export interface ToggleSwitchProps extends RX.CommonProps {

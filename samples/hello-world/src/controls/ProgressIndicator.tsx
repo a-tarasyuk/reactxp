@@ -5,6 +5,7 @@
  * Circular progress indicator that shows off the use of ImageSVG ReactXP extension.
  */
 
+import * as React from 'react';
 import * as RX from 'reactxp';
 import RXImageSvg, { SvgPath as RXSvgPath, Types as SvgTypes } from 'reactxp-imagesvg';
 

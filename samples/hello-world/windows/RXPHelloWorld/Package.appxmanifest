@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="ae31c63b-59e7-4022-aaa3-2df5602cb508"
-    Publisher="CN=User"
+    Name="caf33c3b-d4e5-42ac-a820-630a22ce6720"
+    Publisher="CN=tarasyuk"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="ae31c63b-59e7-4022-aaa3-2df5602cb508" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="caf33c3b-d4e5-42ac-a820-630a22ce6720" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>RXPHelloWorld</DisplayName>

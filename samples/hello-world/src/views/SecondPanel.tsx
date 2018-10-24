@@ -1,3 +1,4 @@
+import * as React from 'react';
 import * as RX from 'reactxp';
 import RXVideo from 'reactxp-video';
 
