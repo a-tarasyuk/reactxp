@@ -8,6 +8,6 @@
  */
 
 import * as Types from '../common/Types';
-import Video from './Video';
+import Video from '../native-common/Video';
 
 export { Video as default, Types };
