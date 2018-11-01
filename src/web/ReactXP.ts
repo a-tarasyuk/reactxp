@@ -6,15 +6,16 @@
  *
  * Wrapper for all ReactXP functionality. Users of ReactXP should import just this file instead of internals.
  */
-import React, { Component, createElement, Children } from 'react';
+import React, { Children, Component, createElement } from 'react';
 
-import * as RX from '../common/Interfaces';
 import * as Animated from './Animated';
+import * as RX from '../common/Interfaces';
 
-import AppInstance from './App';
 import AccessibilityInstance from './Accessibility';
 import { ActivityIndicator as ActivityIndicatorComponent } from './ActivityIndicator';
 import AlertInstance from './Alert';
+import AppInstance from './App';
+import { setSortAndFilterFunc } from '../common/utils/AutoFocusHelper';
 import { Button as ButtonComponent } from './Button';
 import ClipboardInstance from './Clipboard';
 import FocusManager from './utils/FocusManager';
@@ -31,7 +32,6 @@ import { Picker as PickerComponent } from './Picker';
 import PlatformInstance from './Platform';
 import PopupInstance from '../web/Popup';
 import { ScrollView as ScrollViewComponent } from './ScrollView';
-import { setSortAndFilterFunc } from '../common/utils/AutoFocusHelper';
 import StatusBarInstance from './StatusBar';
 import StorageInstance from './Storage';
 import StylesInstance from './Styles';

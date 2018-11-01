@@ -7,10 +7,10 @@
  * RN-specific implementation of the cross-platform Button abstraction.
  */
 
-import assert from 'simple-assert-ok';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as RN from 'react-native';
+import assert from 'simple-assert-ok';
 
 import AccessibilityUtil from './AccessibilityUtil';
 import Animated from './Animated';

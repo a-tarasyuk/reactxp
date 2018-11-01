@@ -6,8 +6,8 @@
  *
  * Web-specific implementation of the cross-platform Clipboard abstraction.
  */
+import escape from 'lodash/escape';
 import * as SyncTasks from 'synctasks';
-import escape from'lodash/escape';
 
 import * as RX from '../common/Interfaces';
 

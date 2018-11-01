@@ -6,20 +6,20 @@
  *
  * Wrapper for all ReactXP functionality. Users of ReactXP should import just this file instead of internals.
  */
-import React, { Component, createElement, Children } from 'react';
+import React, { Children, Component, createElement } from 'react';
 import { Animated as RNAnimated } from 'react-native';
 
 import * as RX from '../common/Interfaces';
 
-import AppInstance from './App';
+import AccessibilityInstance from './Accessibility';
 import AccessibilityUtil from '../native-common/AccessibilityUtil';
 import AccessibilityPlatformUtil from './AccessibilityUtil';
-import AccessibilityInstance from './Accessibility';
 import { ActivityIndicator as ActivityIndicatorComponent } from '../native-common/ActivityIndicator';
 import AlertInstance from '../native-common/Alert';
+import { CommonAnimatedClasses, makeAnimated } from '../native-common/Animated';
+import AppInstance from './App';
 import { Button as ButtonComponent } from './Button';
 import ClipboardInstance from '../native-common/Clipboard';
-import { CommonAnimatedClasses, makeAnimated } from '../native-common/Animated';
 import { GestureView as GestureViewComponent } from './GestureView';
 import { Image as ImageComponent } from '../native-common/Image';
 import InputInstance from '../native-common/Input';
@@ -64,7 +64,7 @@ export const Animated = makeAnimated({
     ...CommonAnimatedClasses,
     View: RNAnimated.createAnimatedComponent(ViewComponent),
     TextInput: RNAnimated.createAnimatedComponent(TextInputComponent),
-    Text: RNAnimated.createAnimatedComponent(TextComponent),
+    Text: RNAnimated.createAnimatedComponent(TextComponent)
 }, true);
 
 /**

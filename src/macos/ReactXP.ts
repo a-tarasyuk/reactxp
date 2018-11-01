@@ -6,20 +6,20 @@
  *
  * Wrapper for all ReactXP functionality. Users of ReactXP should import just this file instead of internals.
  */
-import React, { Component, createElement, Children } from 'react';
+import React, { Children, Component, createElement } from 'react';
 import { Animated as RNAnimated } from 'react-native';
 
 import * as RX from '../common/Interfaces';
 
-import AppInstance from '../native-common/App';
 import AccessibilityInstance from './Accessibility';
-import AccessibilityPlatformUtil from './AccessibilityUtil';
 import AccessibilityUtil from '../native-common/AccessibilityUtil';
+import AccessibilityPlatformUtil from './AccessibilityUtil';
 import { ActivityIndicator as ActivityIndicatorComponent } from '../native-common/ActivityIndicator';
 import AlertInstance from '../native-common/Alert';
+import { CommonAnimatedClasses, makeAnimated } from '../native-common/Animated';
+import AppInstance from '../native-common/App';
 import { Button as ButtonComponent } from '../native-common/Button';
 import ClipboardInstance from '../native-common/Clipboard';
-import { CommonAnimatedClasses, makeAnimated } from '../native-common/Animated';
 import { GestureView as GestureViewComponent } from './GestureView';
 import { Image as ImageComponent } from '../native-common/Image';
 import InputInstance from './Input';

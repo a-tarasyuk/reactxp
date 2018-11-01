@@ -10,8 +10,8 @@
 
 import * as React from 'react';
 import * as RN from 'react-native';
-import * as SyncTasks from 'synctasks';
 import assert from 'simple-assert-ok';
+import * as SyncTasks from 'synctasks';
 
 import AppConfig from '../common/AppConfig';
 import * as RX from '../common/Interfaces';

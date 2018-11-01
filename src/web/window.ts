@@ -7,4 +7,5 @@
  * Window module to enable easy mocking.
  */
 
-export default typeof(window) !== 'undefined' ? window : {} as Window;
+const win: Window | {} = typeof (window) !== 'undefined' ? window : {};
+export default win;
