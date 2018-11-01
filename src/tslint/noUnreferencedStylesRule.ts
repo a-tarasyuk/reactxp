@@ -1,4 +1,4 @@
-﻿/**
+/**
 * noUnreferencedStylesRule.ts
 *
 * Copyright (c) Microsoft Corporation. All rights reserved.
@@ -44,7 +44,7 @@ class StylesWalker extends RuleWalker {
     visitVariableDeclaration(node: ts.VariableDeclaration) {
         // Is this a _styles node?
         if (node.name.getText() === '_styles' && node.initializer) {
-            let nodeFlags = ts.getCombinedNodeFlags(node);
+            const nodeFlags = ts.getCombinedNodeFlags(node);
 
             // All styles should be const.
             if ((nodeFlags & ts.NodeFlags.Const) === 0) {
@@ -64,7 +64,7 @@ class StylesWalker extends RuleWalker {
 
             if (objLiteral.properties) {
                 _.each(objLiteral.properties, property => {
-                    const nodeName = prefix + property.name!!!.getText();
+                    const nodeName = prefix + property.name!.getText();
 
                     // Recurse to pick up any nested style types.
                     const children = property.getChildren();

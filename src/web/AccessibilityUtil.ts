@@ -8,9 +8,9 @@
  * ReactXP framework.
  */
 
-import * as _ from './utils/lodashMini';
 import { AccessibilityUtil as CommonAccessibiltiyUtil } from '../common/AccessibilityUtil';
 import { Types } from '../common/Interfaces';
+import * as _ from './utils/lodashMini';
 
 // Map of accessibility trait to an aria role attribute.
 // What's a role attribute? https://www.w3.org/wiki/PF/XTech/HTML5/RoleAttribute
@@ -59,7 +59,7 @@ export class AccessibilityUtil extends CommonAccessibiltiyUtil {
     // Web equivalent value for role property.
     // NOTE: Web only supports a single aria-role on a component.
     accessibilityTraitToString(traits: Types.AccessibilityTrait | Types.AccessibilityTrait[] | undefined,
-            defaultTrait?: Types.AccessibilityTrait): string|undefined {
+            defaultTrait?: Types.AccessibilityTrait): string | undefined {
         // Combine & remove duplicate traits.
         let combinedTraits: Types.AccessibilityTrait[] = defaultTrait ? [defaultTrait] : [];
 
@@ -70,7 +70,7 @@ export class AccessibilityUtil extends CommonAccessibiltiyUtil {
         // Max enum value in this array of traits is role for web. Return corresponding
         // role string from roleMap.
         return combinedTraits.length > 0 ?
-            roleMap[_.max(_.filter(combinedTraits, t => roleMap.hasOwnProperty(t as any)))!!!]
+            roleMap[_.max(_.filter(combinedTraits, t => roleMap.hasOwnProperty(t as any)))!]
             : undefined;
     }
 

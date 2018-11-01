@@ -7,11 +7,11 @@
  * Web-specific implementation of the cross-platform TextInput abstraction.
  */
 
-import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import * as React from 'react';
 
-import { applyFocusableComponentMixin } from './utils/FocusManager';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
+import { applyFocusableComponentMixin } from './utils/FocusManager';
 import { Types } from '../common/Interfaces';
 import Styles from './Styles';
 
@@ -21,7 +21,7 @@ export interface TextInputState {
 
 const _isMac = (typeof navigator !== 'undefined') && (typeof navigator.platform === 'string') && (navigator.platform.indexOf('Mac') >= 0);
 
-let _styles = {
+const _styles = {
     defaultStyle: {
         position: 'relative',
         display: 'flex',
@@ -43,6 +43,87 @@ export interface TextInputContext {
     focusArbitrator?: FocusArbitratorProvider;
 }
 
+interface TextInputPlaceholderCacheItem {
+    refCounter: number;
+    styleElement: HTMLStyleElement;
+}
+
+class TextInputPlaceholderSupport {
+    private static _cachedStyles: { [color: string]: TextInputPlaceholderCacheItem } = {};
+
+    static getClassName(color: string): string {
+        const key = this._colorKey(color);
+
+        return `reactxp-placeholder-${key}`;
+    }
+
+    static addRef(color: string) {
+        if (typeof document === undefined) {
+            return;
+        }
+
+        const cache = this._cachedStyles;
+        const key = this._colorKey(color);
+
+        if (cache.hasOwnProperty(key)) {
+            cache[key].refCounter++;
+        } else {
+            const className = this.getClassName(color);
+            const style = document.createElement('style');
+            style.type = 'text/css';
+            style.textContent = this._getStyle(className, color);
+
+            document.head.appendChild(style);
+
+            cache[key] = {
+                refCounter: 1,
+                styleElement: style
+            };
+        }
+    }
+
+    static removeRef(color: string) {
+        const cache = this._cachedStyles;
+        const key = this._colorKey(color);
+
+        if (cache.hasOwnProperty(key)) {
+            const item = cache[key];
+
+            if (--item.refCounter < 1) {
+                const styleElement = item.styleElement;
+                if (styleElement.parentNode) {
+                    styleElement.parentNode.removeChild(styleElement);
+                }
+                delete cache[key];
+            }
+        }
+    }
+
+    private static _colorKey(color: string): string {
+        return color.toLowerCase()
+            .replace(/(,|\.|#)/g, '_')
+            .replace(/[^a-z0-9_]/g, '');
+    }
+
+    private static _getStyle(className: string, placeholderColor: string): string {
+        const selectors = [
+            '::placeholder', // Modern browsers
+            '::-webkit-input-placeholder',  // Webkit
+            '::-moz-placeholder', // Firefox 19+
+            ':-moz-placeholder', // Firefox 18-
+            ':-ms-input-placeholder' // IE 10+
+        ];
+
+        return selectors
+            .map(pseudoSelector =>
+                `.${className}${pseudoSelector} {\n` +
+                    `  opacity: 1;\n` +
+                    `  color: ${placeholderColor};\n` +
+                    `}`
+                ).join('\n');
+    }
+}
+
 export class TextInput extends React.Component<Types.TextInputProps, TextInputState> {
     static contextTypes: React.ValidationMap<any> = {
         focusArbitrator: PropTypes.object
@@ -50,9 +131,9 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
 
     context!: TextInputContext;
 
-    private _mountedComponent: HTMLInputElement|HTMLTextAreaElement|null = null;
-    private _selectionStart: number = 0;
-    private _selectionEnd: number = 0;
+    private _mountedComponent: HTMLInputElement | HTMLTextAreaElement | null = null;
+    private _selectionStart = 0;
+    private _selectionEnd = 0;
 
     private _isFocused = false;
     private _ariaLiveEnabled = false;
@@ -71,16 +152,36 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
                 inputValue: nextProps.value
             });
         }
+
+        if (nextProps.placeholderTextColor !== this.props.placeholderTextColor) {
+            if (nextProps.placeholderTextColor) {
+                TextInputPlaceholderSupport.addRef(nextProps.placeholderTextColor);
+            }
+
+            if (this.props.placeholderTextColor) {
+                TextInputPlaceholderSupport.removeRef(this.props.placeholderTextColor);
+            }
+        }
     }
 
     componentDidMount() {
+        if (this.props.placeholderTextColor) {
+            TextInputPlaceholderSupport.addRef(this.props.placeholderTextColor);
+        }
+
         if (this.props.autoFocus) {
             this.requestFocus();
         }
     }
 
+    componentWillUnmount() {
+        if (this.props.placeholderTextColor) {
+            TextInputPlaceholderSupport.removeRef(this.props.placeholderTextColor);
+        }
+    }
+
     render() {
-        let combinedStyles = Styles.combine([_styles.defaultStyle, this.props.style]) as any;
+        const combinedStyles = Styles.combine([_styles.defaultStyle, this.props.style]) as any;
 
         // Always hide the outline.
         combinedStyles.outline = 'none';
@@ -95,12 +196,15 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
         const editable = (this.props.editable !== undefined ? this.props.editable : true);
         const spellCheck = (this.props.spellCheck !== undefined ? this.props.spellCheck : this.props.autoCorrect);
 
+        const className = this.props.placeholderTextColor !== undefined ?
+            TextInputPlaceholderSupport.getClassName(this.props.placeholderTextColor) : undefined;
+
         // Use a textarea for multi-line and a regular input for single-line.
         if (this.props.multiline) {
             return (
                 <textarea
                     ref={ this._onMount }
-                    style={ combinedStyles as any }
+                    style={ combinedStyles }
                     value={ this.state.inputValue }
                     title={ this.props.title }
 
@@ -109,6 +213,8 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
                     disabled={ !editable }
                     maxLength={ this.props.maxLength }
                     placeholder={ this.props.placeholder }
+
+                    className={className}
 
                     onChange={ this._onInputChanged }
                     onKeyDown={ this._onKeyDown }
@@ -125,14 +231,16 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
                 />
             );
         } else {
-            let { keyboardTypeValue, wrapInForm, pattern } = this._getKeyboardType();
+            const { keyboardTypeValue, wrapInForm, pattern } = this._getKeyboardType();
 
             let input = (
                 <input
                     ref={ this._onMount }
-                    style={ combinedStyles as any }
+                    style={ combinedStyles }
                     value={ this.state.inputValue }
                     title={ this.props.title }
+
+                    className={className}
 
                     autoCorrect={ this.props.autoCorrect === false ? 'off' : undefined }
                     spellCheck={ spellCheck }
@@ -160,7 +268,7 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
             if (wrapInForm) {
                 // Wrap the input in a form tag if required
                 input = (
-                    <form action='' onSubmit={ (ev) => { /* prevent form submission/page reload */ ev.preventDefault(); this.blur(); } }
+                    <form action='' onSubmit={ev => { /* prevent form submission/page reload */ ev.preventDefault(); this.blur(); } }
                           style={ _styles.formStyle }>
                         { input }
                     </form>
@@ -171,7 +279,7 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
         }
     }
 
-    private _onMount = (comp: HTMLInputElement|HTMLTextAreaElement|null) => {
+    private _onMount = (comp: HTMLInputElement | HTMLTextAreaElement | null) => {
         this._mountedComponent = comp;
     }
 
@@ -210,13 +318,13 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
         }
     }
 
-    private _getKeyboardType(): { keyboardTypeValue: string, wrapInForm: boolean, pattern: string|undefined } {
+    private _getKeyboardType(): { keyboardTypeValue: string; wrapInForm: boolean; pattern: string | undefined } {
         // Determine the correct virtual keyboardType in HTML 5.
         // Some types require the <input> tag to be wrapped in a form.
         // Pattern is used on numeric keyboardType to display numbers only.
         let keyboardTypeValue = 'text';
         let wrapInForm = false;
-        let pattern = undefined;
+        let pattern;
 
         if (this.props.keyboardType === 'numeric') {
             pattern = '\\d*';
@@ -354,13 +462,13 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
 
     selectRange(start: number, end: number) {
         if (this._mountedComponent) {
-            let component = this._mountedComponent as HTMLInputElement;
+            const component = this._mountedComponent as HTMLInputElement;
             component.setSelectionRange(start, end);
         }
     }
 
-    getSelectionRange(): { start: number, end: number } {
-        let range = {
+    getSelectionRange(): { start: number; end: number } {
+        const range = {
             start: 0,
             end: 0
         };

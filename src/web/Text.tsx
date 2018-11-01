@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Text.tsx
  *
  * Copyright (c) Microsoft Corporation. All rights reserved.
@@ -9,11 +9,10 @@
 
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 
+import AccessibilityUtil from './AccessibilityUtil';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import { Text as TextBase, Types } from '../common/Interfaces';
-import AccessibilityUtil from './AccessibilityUtil';
 import Styles from './Styles';
 
 // Adding a CSS rule to display non-selectable texts. Those texts
@@ -66,7 +65,7 @@ export class Text extends TextBase {
         isRxParentAText: PropTypes.bool.isRequired
     };
 
-    private _isMounted = false;
+    private _mountedText: HTMLDivElement | null = null;
 
     getChildContext() {
         // Let descendant Types components know that their nearest Types ancestor is an Types.Text.
@@ -86,6 +85,7 @@ export class Text extends TextBase {
         if (this.props.selectable || typeof this.props.children !== 'string') {
             return (
                 <div
+                    ref={ this._onMount }
                     style={ this._getStyles() as any }
                     aria-hidden={ isAriaHidden }
                     onClick={ this.props.onPress }
@@ -102,6 +102,7 @@ export class Text extends TextBase {
             // will be displayed as pseudo element.
             return (
                 <div
+                    ref={ this._onMount }
                     style={ this._getStyles() as any }
                     aria-hidden={ isAriaHidden }
                     onClick={ this.props.onPress }
@@ -115,40 +116,38 @@ export class Text extends TextBase {
     }
 
     componentDidMount() {
-        this._isMounted = true;
-
         if (this.props.autoFocus) {
             this.requestFocus();
         }
     }
 
-    componentWillUnmount() {
-        this._isMounted = false;
+    private _onMount = (ref: HTMLDivElement | null) => {
+        this._mountedText = ref;
     }
 
-    _getStyles(): Types.TextStyleRuleSet {
+    private _getStyles(): Types.TextStyleRuleSet {
         // There's no way in HTML to properly handle numberOfLines > 1,
         // but we can correctly handle the common case where numberOfLines is 1.
-        let combinedStyles = Styles.combine([this.props.numberOfLines === 1 ?
+        const combinedStyles = Styles.combine([this.props.numberOfLines === 1 ?
             _styles.ellipsis : _styles.defaultStyle, this.props.style]) as any;
 
         if (this.props.selectable) {
-            combinedStyles['userSelect'] = 'text';
-            combinedStyles['WebkitUserSelect'] = 'text';
-            combinedStyles['MozUserSelect'] = 'text';
-            combinedStyles['msUserSelect'] = 'text';
+            combinedStyles.userSelect = 'text';
+            combinedStyles.WebkitUserSelect = 'text';
+            combinedStyles.MozUserSelect = 'text';
+            combinedStyles.msUserSelect = 'text';
         }
 
         // Handle cursor styles
         if (!combinedStyles.cursor) {
             if (this.props.selectable) {
-                combinedStyles['cursor'] = 'text';
+                combinedStyles.cursor = 'text';
             } else {
-                combinedStyles['cursor'] = 'inherit';
+                combinedStyles.cursor = 'inherit';
             }
 
             if (this.props.onPress) {
-                combinedStyles['cursor'] = 'pointer';
+                combinedStyles.cursor = 'pointer';
             }
         }
 
@@ -156,11 +155,8 @@ export class Text extends TextBase {
     }
 
     blur() {
-        if (this._isMounted) {
-            const el = ReactDOM.findDOMNode(this) as HTMLDivElement|null;
-            if (el) {
-                el.blur();
-            }
+        if (this._mountedText) {
+            this._mountedText.blur();
         }
     }
 
@@ -168,16 +164,13 @@ export class Text extends TextBase {
         FocusArbitratorProvider.requestFocus(
             this,
             () => this.focus(),
-            () => this._isMounted
+            () => this._mountedText !== null
         );
     }
 
     focus() {
-        if (this._isMounted) {
-            const el = ReactDOM.findDOMNode(this) as HTMLDivElement|null;
-            if (el) {
-                el.focus();
-            }
+        if (this._mountedText) {
+            this._mountedText.focus();
         }
     }
 

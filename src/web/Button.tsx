@@ -9,14 +9,12 @@
 
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 
-import { applyFocusableComponentMixin } from './utils/FocusManager';
-import { Button as ButtonBase } from '../common/Interfaces';
-import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
-import { Types } from '../common/Interfaces';
 import AccessibilityUtil from './AccessibilityUtil';
 import AppConfig from '../common/AppConfig';
+import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
+import { applyFocusableComponentMixin } from './utils/FocusManager';
+import { Button as ButtonBase, Types } from '../common/Interfaces';
 import Styles from './Styles';
 import Timers from '../common/utils/Timers';
 import UserInterface from './UserInterface';
@@ -59,10 +57,10 @@ export class Button extends ButtonBase {
         hasRxButtonAscendant: PropTypes.bool
     };
 
-    private _isMounted = false;
-    private _lastMouseDownEvent: Types.SyntheticEvent|undefined;
+    private _mountedButton: HTMLButtonElement | null = null;
+    private _lastMouseDownEvent: Types.SyntheticEvent | undefined;
     private _ignoreClick = false;
-    private _longPressTimer: number|undefined;
+    private _longPressTimer: number | undefined;
     private _isMouseOver = false;
     private _isFocusedWithKeyboard = false;
     private _isHoverStarted = false;
@@ -92,6 +90,7 @@ export class Button extends ButtonBase {
         // NOTE: We use tabIndex=0 to support focus.
         return (
             <button
+                ref={ this._onMount }
                 style={ this._getStyles() as any }
                 role={ ariaRole }
                 title={ this.props.title }
@@ -122,41 +121,33 @@ export class Button extends ButtonBase {
     }
 
     componentDidMount() {
-        this._isMounted = true;
-
         if (this.props.autoFocus) {
             this.requestFocus();
         }
-    }
-
-    componentWillUnmount() {
-        this._isMounted = false;
     }
 
     requestFocus() {
         FocusArbitratorProvider.requestFocus(
             this,
             () => this.focus(),
-            () => this._isMounted
+            () => this._mountedButton !== null
         );
     }
 
     focus() {
-        if (this._isMounted) {
-            const el = ReactDOM.findDOMNode(this) as HTMLButtonElement|null;
-            if (el) {
-                el.focus();
-            }
+        if (this._mountedButton) {
+            this._mountedButton.focus();
         }
     }
 
     blur() {
-        if (this._isMounted) {
-            const el = ReactDOM.findDOMNode(this) as HTMLButtonElement|null;
-            if (el) {
-                el.blur();
-            }
+        if (this._mountedButton) {
+            this._mountedButton.blur();
         }
+    }
+
+    private _onMount = (ref: HTMLButtonElement | null) => {
+        this._mountedButton = ref;
     }
 
     protected onClick = (e: Types.MouseEvent) => {
@@ -169,8 +160,8 @@ export class Button extends ButtonBase {
     }
 
     private _getStyles(): Types.ButtonStyleRuleSet {
-        let buttonStyleMutations: Types.ButtonStyle = {};
-        let buttonStyles = Styles.combine(this.props.style) as any;
+        const buttonStyleMutations: Types.ButtonStyle = {};
+        const buttonStyles = Styles.combine(this.props.style) as any;
 
         // Specify default style for padding only if padding is not already specified
         if (buttonStyles && buttonStyles.padding === undefined  &&
@@ -215,7 +206,7 @@ export class Button extends ButtonBase {
                 this._longPressTimer = undefined;
                 if (this.props.onLongPress) {
                     // lastMouseDownEvent can never be undefined at this point
-                    this.props.onLongPress(this._lastMouseDownEvent!!!);
+                    this.props.onLongPress(this._lastMouseDownEvent!);
                     this._ignoreClick = true;
                 }
             }, _longPressTime);

@@ -104,13 +104,13 @@ export abstract class InterpolatedValue {
 }
 
 export interface AnimatedFlexboxStyle {
-    height?: AnimatedValue|InterpolatedValue;
-    width?: AnimatedValue|InterpolatedValue;
+    height?: AnimatedValue | InterpolatedValue;
+    width?: AnimatedValue | InterpolatedValue;
 
-    top?: AnimatedValue|InterpolatedValue;
-    right?: AnimatedValue|InterpolatedValue;
-    bottom?: AnimatedValue|InterpolatedValue;
-    left?: AnimatedValue|InterpolatedValue;
+    top?: AnimatedValue | InterpolatedValue;
+    right?: AnimatedValue | InterpolatedValue;
+    bottom?: AnimatedValue | InterpolatedValue;
+    left?: AnimatedValue | InterpolatedValue;
 }
 
 // ------------------------------------------------------------
@@ -134,22 +134,22 @@ export interface TransformStyle {
 
 export interface AnimatedTransformStyle {
     transform?: {
-        perspective?: AnimatedValue|InterpolatedValue;
-        rotate?: AnimatedValue|InterpolatedValue;
-        rotateX?: AnimatedValue|InterpolatedValue;
-        rotateY?: AnimatedValue|InterpolatedValue;
-        rotateZ?: AnimatedValue|InterpolatedValue;
-        scale?: AnimatedValue|InterpolatedValue;
-        scaleX?: AnimatedValue|InterpolatedValue;
-        scaleY?: AnimatedValue|InterpolatedValue;
-        translateX?: AnimatedValue|InterpolatedValue;
-        translateY?: AnimatedValue|InterpolatedValue;
+        perspective?: AnimatedValue | InterpolatedValue;
+        rotate?: AnimatedValue | InterpolatedValue;
+        rotateX?: AnimatedValue | InterpolatedValue;
+        rotateY?: AnimatedValue | InterpolatedValue;
+        rotateZ?: AnimatedValue | InterpolatedValue;
+        scale?: AnimatedValue | InterpolatedValue;
+        scaleX?: AnimatedValue | InterpolatedValue;
+        scaleY?: AnimatedValue | InterpolatedValue;
+        translateX?: AnimatedValue | InterpolatedValue;
+        translateY?: AnimatedValue | InterpolatedValue;
     }[];
 }
 
 export type StyleRuleSet<T> = T | number | undefined;
-export type StyleRuleSetOrArray<T> = StyleRuleSet<T>|Array<StyleRuleSet<T>>;
-export interface StyleRuleSetRecursiveArray<T> extends Array<StyleRuleSetOrArray<T>|StyleRuleSetRecursiveArray<T>> {}
+export type StyleRuleSetOrArray<T> = StyleRuleSet<T> | Array<StyleRuleSet<T>>;
+export interface StyleRuleSetRecursiveArray<T> extends Array<StyleRuleSetOrArray<T> | StyleRuleSetRecursiveArray<T>> {}
 export type StyleRuleSetRecursive<T> = StyleRuleSet<T> | StyleRuleSetRecursiveArray<T>;
 
 // ------------------------------------------------------------
@@ -170,9 +170,9 @@ export interface ViewAndImageCommonStyle extends FlexboxStyle, TransformStyle {
 }
 
 export interface AnimatedViewAndImageCommonStyle extends AnimatedFlexboxStyle, AnimatedTransformStyle {
-    borderRadius?: AnimatedValue|InterpolatedValue;
+    borderRadius?: AnimatedValue | InterpolatedValue;
     backgroundColor?: InterpolatedValue;
-    opacity?: AnimatedValue|InterpolatedValue;
+    opacity?: AnimatedValue | InterpolatedValue;
 }
 
 // ------------------------------------------------------------
@@ -285,7 +285,7 @@ export type TextStyleRuleSet = StyleRuleSet<TextStyle>;
 
 export interface AnimatedTextStyle extends AnimatedViewAndImageCommonStyle {
     color?: InterpolatedValue;
-    fontSize?: AnimatedValue|InterpolatedValue;
+    fontSize?: AnimatedValue | InterpolatedValue;
 }
 
 export type AnimatedTextStyleRuleSet = StyleRuleSet<AnimatedTextStyle>;
@@ -301,7 +301,7 @@ export type TextInputStyleRuleSet = StyleRuleSet<TextInputStyle>;
 
 export interface AnimatedTextInputStyle extends AnimatedViewAndImageCommonStyle {
     color?: InterpolatedValue;
-    fontSize?: AnimatedValue|InterpolatedValue;
+    fontSize?: AnimatedValue | InterpolatedValue;
 }
 
 export type AnimatedTextInputStyleRuleSet = StyleRuleSet<AnimatedTextInputStyle>;
@@ -579,7 +579,7 @@ export interface TextPropsShared extends CommonProps {
     maxContentSizeMultiplier?: number;
 
     // iOS and Android only
-    ellipsizeMode?:  'head' | 'middle'| 'tail';
+    ellipsizeMode?:  'head' | 'middle' | 'tail';
 
     // Exposing this property as temporary workaround to fix a bug.
     // TODO : http://skype.vso.io/865016 : remove this exposed property
@@ -806,8 +806,7 @@ export interface ScrollIndicatorInsets {
 }
 
 // ScrollView
-export interface ScrollViewProps extends CommonProps, CommonAccessibilityProps {
-    style?: StyleRuleSetRecursive<ScrollViewStyleRuleSet>;
+export interface ScrollViewProps extends CommonStyledProps<ScrollViewStyleRuleSet>, CommonAccessibilityProps {
     children?: ReactNode;
 
     vertical?: boolean; // By default true
@@ -858,13 +857,21 @@ export interface ScrollViewProps extends CommonProps, CommonAccessibilityProps {
     scrollsToTop?: boolean;
 
     // Android only property to control overScroll mode
-    overScrollMode?: 'always' | 'always-if-content-scrolls' | 'never';
+    overScrollMode?: 'auto' | 'always' | 'never';
 
     // iOS-only property to control scroll indicator insets
     scrollIndicatorInsets?: ScrollIndicatorInsets;
 
     // Windows-only property to control tab navigation inside the view
     tabNavigation?: 'local' | 'cycle' | 'once';
+
+    // Animation helpers to allow usage of the RN.Animated.Event system through ReactXP.
+    // Animated.Values hooked up to either (or both) of these properties will be automatically
+    // hooked into the onScroll handler of the scrollview and .setValue() will be called on them
+    // with the updated values.  On supported platforms, it will use RN.Animated.event() to do
+    // a native-side/-backed coupled animation.
+    scrollXAnimatedValue?: RX.Types.AnimatedValue;
+    scrollYAnimatedValue?: RX.Types.AnimatedValue;
 }
 
 // Link
@@ -1130,7 +1137,6 @@ export type LocationFailureCallback = (error: LocationErrorType) => void;
 // Animated
 // ----------------------------------------------------------------------
 export module Animated {
-
     export type EndResult = { finished: boolean };
     export type EndCallback = (result: EndResult) => void;
     export type CompositeAnimation = {
@@ -1160,15 +1166,15 @@ export module Animated {
         outputRange: (number | string)[];
     }
 
-    export type TimingFunction = (value: RX.Types.AnimatedValue|RX.Types.InterpolatedValue,
+    export type TimingFunction = (value: RX.Types.AnimatedValue | RX.Types.InterpolatedValue,
         config: TimingAnimationConfig) => CompositeAnimation;
-    export var timing: TimingFunction;
+    export let timing: TimingFunction;
 
     export type SequenceFunction = (animations: Array<CompositeAnimation>) => CompositeAnimation;
-    export var sequence: SequenceFunction;
+    export let sequence: SequenceFunction;
 
     export type ParallelFunction = (animations: Array<CompositeAnimation>) => CompositeAnimation;
-    export var parallel: ParallelFunction;
+    export let parallel: ParallelFunction;
 
     export type EasingFunction = {
         cssName: string;
@@ -1304,7 +1310,7 @@ export interface WebViewMessageEvent extends SyntheticEvent {
 //
 // Component
 // ----------------------------------------------------------------------
-export var Children: React.ReactChildren;
+export let Children: React.ReactChildren;
 
 //
 // Dimensions

@@ -37,7 +37,7 @@ import StatusBarInstance from './StatusBar';
 import StorageInstance from '../native-common/Storage';
 import StylesInstance from '../native-common/Styles';
 import { Text as TextComponent } from '../native-common/Text';
-import { TextInput as TextInputComponent } from './TextInput';
+import { TextInput as TextInputComponent } from '../native-common/TextInput';
 import UserInterfaceInstance from '../native-common/UserInterface';
 import UserPresenceInstance from '../native-common/UserPresence';
 import { View as ViewComponent } from './View';

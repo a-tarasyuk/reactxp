@@ -22,6 +22,7 @@ import get from'lodash/get';
 import isArray from'lodash/isArray';
 import isEmpty from'lodash/isEmpty';
 import isEqual from'lodash/isEqual';
+import isNumber from 'lodash/isNumber';
 import isObject from'lodash/isObject';
 import isUndefined from'lodash/isUndefined';
 import kebabCase from'lodash/kebabCase';
@@ -52,6 +53,7 @@ export {
     isArray,
     isEmpty,
     isEqual,
+    isNumber,
     isObject,
     isUndefined,
     kebabCase,
