@@ -7,7 +7,7 @@
  * container for a single list item.
  */
 
-import * as assert from 'assert';
+import assert from 'simple-assert-ok';
 import * as RX from 'reactxp';
 
 export interface VirtualListCellInfo {
@@ -148,19 +148,19 @@ export class VirtualListCell extends RX.Component<VirtualListCellProps, null> {
 
     componentWillReceiveProps(nextProps: VirtualListCellProps) {
         // If it's inactive, it had better be invisible.
-        assert.ok(nextProps.isActive || !nextProps.isVisible);
+        assert(nextProps.isActive || !nextProps.isVisible);
 
-        assert.ok(nextProps.useNativeDriver === this.props.useNativeDriver);
+        assert(nextProps.useNativeDriver === this.props.useNativeDriver);
 
         // All callbacks should be prebound to optimize performance.
-        assert.ok(this.props.onLayout === nextProps.onLayout);
-        assert.ok(this.props.onCellFocus === nextProps.onCellFocus);
-        assert.ok(this.props.onAnimateStartStop === nextProps.onAnimateStartStop);
-        assert.ok(this.props.renderItem === nextProps.renderItem);
+        assert(this.props.onLayout === nextProps.onLayout);
+        assert(this.props.onCellFocus === nextProps.onCellFocus);
+        assert(this.props.onAnimateStartStop === nextProps.onAnimateStartStop);
+        assert(this.props.renderItem === nextProps.renderItem);
 
         // We assume this prop doesn't change for perf reasons. Callers should modify
         // the key to force an unmount/remount if these need to change.
-        assert.ok(this.props.isScreenReaderModeEnabled === nextProps.isScreenReaderModeEnabled);
+        assert(this.props.isScreenReaderModeEnabled === nextProps.isScreenReaderModeEnabled);
 
         this.setItemKey(nextProps.itemKey);
 
