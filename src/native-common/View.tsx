@@ -10,7 +10,7 @@
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as RN from 'react-native';
-import * as assert from 'assert';
+import assert from 'simple-assert-ok';
 
 import { clone, extend } from './utils/lodashMini';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';

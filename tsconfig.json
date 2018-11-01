@@ -1,25 +1,23 @@
 {
     "compilerOptions": {
-        "declaration": true,
-        "noResolve": false,
-        "jsx": "react",
-        "module": "commonjs",
-        "target": "es5",
+        "forceConsistentCasingInFileNames": true,
+        "allowSyntheticDefaultImports": true,
+        "strictPropertyInitialization": true,
         "experimentalDecorators": true,
-        "noImplicitAny": true,
         "noImplicitReturns": true,
+        "moduleResolution": "node",
+        "strictNullChecks": true,
         "noImplicitThis": true,
         "noUnusedLocals": true,
+        "noImplicitAny": true,
         "skipLibCheck": true,
-        "strictNullChecks": true,
-        "strictPropertyInitialization": true,
-        "forceConsistentCasingInFileNames": true,
-        "outDir": "dist/",
-        "lib": [
-            "es5",
-            "dom"
-        ],
-        "types" : ["lodash", "react", "react-dom", "react-native"]
+        "declaration": true,
+        "noResolve": false,
+        "module": "es2015",
+        "target": "es5",
+        "outDir": "dist",
+        "jsx": "react",
+        "lib": ["es5", "dom"],
     },
 
     "include": [
@@ -27,10 +25,10 @@
     ],
 
     "exclude": [
-        "dist",
-        "extensions",
         "node_modules",
+        "extensions",
         "samples",
-        "website"
+        "website",
+        "dist"
     ]
 }

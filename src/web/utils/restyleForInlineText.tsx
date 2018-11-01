@@ -14,12 +14,12 @@
  */
 
 import * as React from 'react';
-import * as assert from 'assert';
+import assert from 'simple-assert-ok';
 
 import { assign } from './../utils/lodashMini';
 
 function restyleForInlineText(reactElement: React.ReactElement<any>) {
-    let style = reactElement.props['style'];
+    const style = reactElement.props['style'];
     assert(
         style &&
         style['width'] !== undefined &&

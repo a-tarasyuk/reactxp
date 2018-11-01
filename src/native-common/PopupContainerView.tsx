@@ -9,9 +9,9 @@
  * through properties.
  */
 
-import * as assert from 'assert';
 import * as React from 'react';
 import * as RN from 'react-native';
+import assert from 'simple-assert-ok';
 
 import { PopupContainerViewBase, PopupContainerViewBaseProps, PopupContainerViewContext } from '../common/PopupContainerViewBase';
 import { extend, isEqual } from './utils/lodashMini';
@@ -161,7 +161,7 @@ export class PopupContainerView extends PopupContainerViewBase<PopupContainerVie
             return;
         }
 
-        assert.ok(!!this.props.anchorHandle);
+        assert(!!this.props.anchorHandle);
         RN.NativeModules.UIManager.measureInWindow(
             this.props.anchorHandle,
             (x: number, y: number, width: number, height: number) => {
@@ -169,7 +169,7 @@ export class PopupContainerView extends PopupContainerViewBase<PopupContainerVie
                     return;
                 }
 
-                assert.ok(!!this._viewHandle);
+                assert(!!this._viewHandle);
 
                 let anchorRect: ClientRect = {
                     left: x, top: y, right: x + width, bottom: y + height,

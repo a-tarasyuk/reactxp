@@ -8,10 +8,10 @@
  * UI (layout measurements, etc.).
  */
 
-import * as assert from 'assert';
 import * as React from 'react';
 import * as RN from 'react-native';
 import * as SyncTasks from 'synctasks';
+import assert from 'simple-assert-ok';
 
 import * as RX from '../common/Interfaces';
 import AppConfig from '../common/AppConfig';
@@ -38,7 +38,7 @@ export class UserInterface extends RX.UserInterface {
         let deferred = SyncTasks.Defer<RX.Types.LayoutInfo>();
         let nodeHandle = RN.findNodeHandle(component);
 
-        assert.ok(!!nodeHandle);
+        assert(!!nodeHandle);
         RN.NativeModules.UIManager.measureInWindow(
             nodeHandle, (x: number, y: number, width: number, height: number) => {
                 deferred.resolve({

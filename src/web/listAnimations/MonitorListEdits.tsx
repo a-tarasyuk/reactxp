@@ -9,9 +9,9 @@
  * to animate the edits.
  */
 
-import * as assert from 'assert';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import assert from 'simple-assert-ok';
 
 import * as _ from './../utils/lodashMini';
 import { Types } from '../../common/Interfaces';
