@@ -7,6 +7,8 @@
  * RN-specific implementation of the cross-platform Image abstraction.
  */
 
+import isEqual from 'lodash/isEqual';
+import omit from 'lodash/omit';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as RN from 'react-native';
@@ -14,7 +16,6 @@ import * as SyncTasks from 'synctasks';
 
 import { DEFAULT_RESIZE_MODE } from '../common/Image';
 import { Types } from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 import Platform from './Platform';
 import Styles from './Styles';
 
@@ -120,7 +121,8 @@ export class Image extends React.Component<Types.ImageProps, ImageState> impleme
 
     componentWillReceiveProps(nextProps: Types.ImageProps) {
         const sourceOrHeaderChanged = (nextProps.source !== this.props.source ||
-            !_.isEqual(nextProps.headers || {}, this.props.headers || {}));
+            !isEqual(nextProps.headers || {}, this.props.headers || {}));
+
         if (sourceOrHeaderChanged) {
             this.setState({ forceCache: false, lastNativeError: undefined, headers: this._buildHeaders() });
         }
@@ -202,7 +204,7 @@ export class Image extends React.Component<Types.ImageProps, ImageState> impleme
                 // Filter out Cache-Control: max-stale. It has the opposite effect on iOS: instead of having
                 // the cache return stale data it disables the cache altogether. We emulate the header by
                 // retrying with cache: 'only-if-cached'.
-                return _.omit(this.props.headers, [cacheControlHeader]);
+                return omit(this.props.headers, [cacheControlHeader]);
             }
         }
         return this.props.headers;

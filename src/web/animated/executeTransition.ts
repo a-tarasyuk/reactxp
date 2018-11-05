@@ -8,7 +8,7 @@
  * notifying when the transition is complete.
  */
 
-import * as _ from './../utils/lodashMini';
+import each from 'lodash/each';
 import Timers from '../../common/utils/Timers';
 
 export interface TransitionSpec {
@@ -26,7 +26,7 @@ export function executeTransition(element: HTMLElement, transitions: TransitionS
     let longestDurationProperty = '';
     const cssTransitions: string[] = [];
 
-    _.each(transitions, (transition: TransitionSpec) => {
+    each(transitions, (transition: TransitionSpec) => {
         const property = transition.property;
         const duration = transition.duration;
         const timing = transition.timing === undefined ? 'linear' : transition.timing;
@@ -100,7 +100,7 @@ export function executeTransition(element: HTMLElement, transitions: TransitionS
     element.dataset.transitionId = timeoutId.toString();
 
     // Set the "to" values.
-    _.each(transitions, (transition: TransitionSpec) => {
+    each(transitions, (transition: TransitionSpec) => {
         const property = transition.property;
         const to = transition.to;
         (element.style as any)[property] = to;

@@ -8,12 +8,13 @@
  * It provides support for the scroll wheel, clicks and double clicks.
  */
 
+import clone from 'lodash/clone';
+import isUndefined from 'lodash/isUndefined';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
 import AccessibilityUtil from './AccessibilityUtil';
 import { Types } from '../common/Interfaces';
-import { clone, isUndefined } from './utils/lodashMini';
 import MouseResponder, { MouseResponderSubscription } from './utils/MouseResponder';
 import Styles from './Styles';
 import Timers from '../common/utils/Timers';

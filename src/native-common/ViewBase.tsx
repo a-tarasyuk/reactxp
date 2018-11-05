@@ -7,10 +7,10 @@
  * Base class that is used for several RX views.
  */
 
+import isEqual from 'lodash/isEqual';
 import * as RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
-import { isEqual } from './utils/lodashMini';
 
 export abstract class ViewBase<P extends RX.Types.ViewProps, S> extends RX.ViewBase<P, S> {
     private static _defaultViewStyle: RX.Types.ViewStyleRuleSet | undefined;

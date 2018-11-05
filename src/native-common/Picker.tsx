@@ -7,11 +7,11 @@
  * RN-specific implementation of the cross-platform Picker abstraction.
  */
 
+import map from 'lodash/map';
 import * as React from 'react';
 import * as RN from 'react-native';
 
 import * as RX from '../common/Interfaces';
-import { map } from './utils/lodashMini';
 
 export class Picker extends RX.Picker {
     render() {

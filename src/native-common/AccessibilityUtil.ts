@@ -8,6 +8,10 @@
  * ReactXP framework.
  */
 
+import compact from 'lodash/compact';
+import filter from 'lodash/filter';
+import map from 'lodash/map';
+import max from 'lodash/max';
 import * as React from 'react';
 import * as RN from 'react-native';
 
@@ -16,7 +20,6 @@ import {
     AccessibilityUtil as CommonAccessibilityUtil
 } from '../common/AccessibilityUtil';
 import { Types } from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 
 export { ImportantForAccessibilityValue } from '../common/AccessibilityUtil';
 
@@ -86,15 +89,15 @@ export class AccessibilityUtil extends CommonAccessibilityUtil {
 
         let traits : (Types.AccessibilityTrait | undefined)[];
         if (defaultTrait && ensureDefaultTrait) {
-            if (_.isArray(overrideTraits)) {
+            if (Array.isArray(overrideTraits)) {
                 traits = overrideTraits.indexOf(defaultTrait) === -1 ? overrideTraits.concat([defaultTrait]) : overrideTraits;
             } else {
                 traits = overrideTraits === defaultTrait ? [overrideTraits] : [overrideTraits, defaultTrait];
             }
         } else {
-            traits = _.isArray(overrideTraits) ? overrideTraits : [overrideTraits || defaultTrait];
+            traits = Array.isArray(overrideTraits) ? overrideTraits : [overrideTraits || defaultTrait];
         }
-        return _.compact(_.map(traits, t  => t ? traitsMap[t] : undefined)) as RN.AccessibilityTrait[];
+        return compact(map(traits, t  => t ? traitsMap[t] : undefined)) as RN.AccessibilityTrait[];
     }
 
     // Converts an AccessibilityTrait to an accessibilityComponentType string, but the returned value is only needed for Android. Other
@@ -107,8 +110,8 @@ export class AccessibilityUtil extends CommonAccessibilityUtil {
             return undefined;
         }
 
-        const combinedTraits = _.isArray(overrideTraits) ? overrideTraits : [overrideTraits || defaultTrait];
-        const maxTrait = _.max(_.filter(combinedTraits, t => componentTypeMap.hasOwnProperty(t as any)));
+        const combinedTraits = Array.isArray(overrideTraits) ? overrideTraits : [overrideTraits || defaultTrait];
+        const maxTrait = max(filter(combinedTraits, t => componentTypeMap.hasOwnProperty(t as any)));
         return maxTrait ? componentTypeMap[maxTrait] : undefined;
     }
 

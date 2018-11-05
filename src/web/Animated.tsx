@@ -9,6 +9,11 @@
 
 // tslint:disable:function-name
 
+import each from 'lodash/each';
+import filter from 'lodash/filter';
+import findIndex from 'lodash/findIndex';
+import isNumber from 'lodash/isNumber';
+import omit from 'lodash/omit';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -17,7 +22,6 @@ import Easing from '../common/Easing';
 import { executeTransition, TransitionSpec } from './animated/executeTransition';
 import RXImage from './Image';
 import * as RX from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 import Styles from './Styles';
 import RXText from './Text';
 import RXTextInput from './TextInput';
@@ -124,7 +128,7 @@ export class Value extends RX.Types.AnimatedValue {
         this._value = value;
 
         // Notify subscribers about the new value.
-        _.each(this._listeners, listener => listener.setValue(this, value));
+        each(this._listeners, listener => listener.setValue(this, value));
     }
 
     // Add listener for when the value gets updated.
@@ -136,7 +140,7 @@ export class Value extends RX.Types.AnimatedValue {
 
     // Remove a specific listner.
     _removeListener(listenerToRemove: ValueListener): void {
-        this._listeners = _.filter(this._listeners, listener => listener !== listenerToRemove);
+        this._listeners = filter(this._listeners, listener => listener !== listenerToRemove);
     }
 
     // Remove all listeners.
@@ -172,7 +176,7 @@ export class Value extends RX.Types.AnimatedValue {
             onEnd(result);
         };
 
-        _.each(this._listeners, listener => {
+        each(this._listeners, listener => {
             listener.startTransition(this, this._getOutputValue(), this._getInterpolatedValue(toValue),
                 duration, easing, delay, onEndWrapper);
         });
@@ -180,7 +184,7 @@ export class Value extends RX.Types.AnimatedValue {
 
     // Stop animation.
     _stopTransition() {
-        _.each(this._listeners, listener => {
+        each(this._listeners, listener => {
             const updatedValue = listener.stopTransition(this);
             if (updatedValue !== undefined) {
                 this._updateFinalValue(updatedValue);
@@ -207,9 +211,8 @@ export class InterpolatedValue extends Value {
         }
 
         const newInterpolationConfig: { [key: number]: string | number } = {};
-        _.each(this._config.inputRange, (key, index) => {
-            newInterpolationConfig[key] = this._config.outputRange[index];
-        });
+        each(this._config.inputRange, (key, index) => newInterpolationConfig[key] = this._config.outputRange[index]);
+
         this._interpolationConfig = newInterpolationConfig;
 
         rootValue._addListener({
@@ -247,7 +250,7 @@ export class InterpolatedValue extends Value {
             throw new Error('There is no interpolation config but one is required');
         }
 
-        if (!_.isNumber(inputVal)) {
+        if (!isNumber(inputVal)) {
             throw new Error('Numeric inputVals required for interpolated values');
         }
 
@@ -255,7 +258,7 @@ export class InterpolatedValue extends Value {
             return this._interpolationConfig[inputVal];
         }
 
-        if (!_.isNumber(this._config.outputRange[0])) {
+        if (!isNumber(this._config.outputRange[0])) {
             throw new Error('Non-transitional interpolations on web only supported as numerics');
         }
 
@@ -614,8 +617,8 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
         // Looks for the specified value object in the specified map. Returns
         // the key for the map (i.e. the attribute name) if found.
         private _findAnimatedAttributeByValue(map: AnimatedValueMap, valueObj: Value): string | undefined {
-            const keys = _.keys(map);
-            const index = _.findIndex(keys, key => map[key].valueObject === valueObj);
+            const keys = Object.keys(map);
+            const index = findIndex(keys, key => map[key].valueObject === valueObj);
             return index >= 0 ? keys[index] : undefined;
         }
 
@@ -629,7 +632,7 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
             }
 
             const activeTransitions: TransitionSpec[] = [];
-            _.each(this._animatedAttributes, attrib => {
+            each(this._animatedAttributes, attrib => {
                 if (attrib.activeTransition) {
                     activeTransitions.push(attrib.activeTransition);
                 }
@@ -639,8 +642,8 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
             // these into a single transition. That means we can't specify
             // different durations, delays or easing functions for each. That's
             // an unfortunate limitation of CSS.
-            const keys = _.keys(this._animatedTransforms);
-            const index = _.findIndex(keys, key => !!this._animatedTransforms[key].activeTransition);
+            const keys = Object.keys(this._animatedTransforms);
+            const index = findIndex(keys, key => !!this._animatedTransforms[key].activeTransition);
             if (index >= 0) {
                 const transformTransition = this._animatedTransforms[keys[index]].activeTransition!;
                 activeTransitions.push({
@@ -660,21 +663,21 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
                         // Clear all of the active transitions and invoke the onEnd callbacks.
                         const completeTransitions: ExtendedTransition[] = [];
 
-                        _.each(this._animatedAttributes, attrib => {
+                        each(this._animatedAttributes, attrib => {
                             if (attrib.activeTransition) {
                                 completeTransitions.push(attrib.activeTransition);
                                 delete attrib.activeTransition;
                             }
                         });
 
-                        _.each(this._animatedTransforms, transform => {
+                        each(this._animatedTransforms, transform => {
                             if (transform.activeTransition) {
                                 completeTransitions.push(transform.activeTransition);
                                 delete transform.activeTransition;
                             }
                         });
 
-                        _.each(completeTransitions, transition => {
+                        each(completeTransitions, transition => {
                             if (transition.onEnd) {
                                 transition.onEnd({ finished: true });
                             }
@@ -707,10 +710,11 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
         // Regenerates the list of transforms, combining all static and animated transforms.
         private _generateCssTransformList(useActiveValues: boolean): string {
             const transformList: string[] = [];
-            _.each(this._staticTransforms, (value, transform) => {
+            each(this._staticTransforms, (value, transform) => {
                 transformList.push(transform + '(' + value + ')');
             });
-            _.each(this._animatedTransforms, (value, transform) => {
+
+            each(this._animatedTransforms, (value, transform) => {
                 const newValue = useActiveValues && value.activeTransition ?
                     value.activeTransition.to : value.valueObject._getOutputValue();
                 transformList.push(transform + '(' + this._generateCssTransformValue(transform, newValue) + ')');
@@ -719,7 +723,7 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
         }
 
         private _updateStyles(props: RX.Types.CommonStyledProps<RX.Types.StyleRuleSet<Object>>) {
-            this._propsWithoutStyle = _.omit(props, 'style');
+            this._propsWithoutStyle = omit(props, 'style');
 
             const rawStyles = Styles.combine(props.style || {}) as any;
             this._processedStyle = {};
@@ -753,7 +757,7 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
 
             // Remove any previous animated attributes that are no longer present
             // or associated with different value objects.
-            _.each(this._animatedAttributes, (value, attrib) => {
+            each(this._animatedAttributes, (value, attrib) => {
                 if (!newAnimatedAttributes[attrib] || newAnimatedAttributes[attrib] !== value.valueObject) {
                     if (value.activeTransition) {
                         if (AppConfig.isDevelopmentMode()) {
@@ -766,7 +770,7 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
             });
 
             // Add new animated attributes.
-            _.each(newAnimatedAttributes, (value, attrib) => {
+            each(newAnimatedAttributes, (value, attrib) => {
                 if (!this._animatedAttributes[attrib]) {
                     this._animatedAttributes[attrib] = { valueObject: value };
                     if (this._mountedComponent) {
@@ -777,7 +781,7 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
 
             // Remove any previous animated transforms that are no longer present
             // or associated with different value objects.
-            _.each(this._animatedTransforms, (value, transform) => {
+            each(this._animatedTransforms, (value, transform) => {
                 if (!newAnimatedTransforms[transform] || newAnimatedTransforms[transform] !== value.valueObject) {
                     if (value.activeTransition) {
                         if (AppConfig.isDevelopmentMode()) {
@@ -790,7 +794,7 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
             });
 
             // Add new animated transforms.
-            _.each(newAnimatedTransforms, (value, transform) => {
+            each(newAnimatedTransforms, (value, transform) => {
                 if (!this._animatedTransforms[transform]) {
                     this._animatedTransforms[transform] = { valueObject: value };
                     if (this._mountedComponent) {
@@ -807,24 +811,15 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps>(Compone
         }
 
         componentDidMount() {
-            _.each(this._animatedAttributes, value => {
-                value.valueObject._addListener(this);
-            });
-
-            _.each(this._animatedTransforms, value => {
-                value.valueObject._addListener(this);
-            });
+            each(this._animatedAttributes, value => value.valueObject._addListener(this));
+            each(this._animatedTransforms, value => value.valueObject._addListener(this));
         }
 
         componentWillUnmount() {
-            _.each(this._animatedAttributes, value => {
-                value.valueObject._removeListener(this);
-            });
+            each(this._animatedAttributes, value => value.valueObject._removeListener(this));
             this._animatedAttributes = {};
 
-            _.each(this._animatedTransforms, value => {
-                value.valueObject._removeListener(this);
-            });
+            each(this._animatedTransforms, value => value.valueObject._removeListener(this));
             this._animatedTransforms = {};
         }
 

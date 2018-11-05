@@ -7,6 +7,7 @@
  * The top-most view that's used for proper layering or modals and popups.
  */
 
+import isEqual from 'lodash/isEqual';
 import * as React from 'react';
 import * as RN from 'react-native';
 import { SubscriptionToken } from 'subscribableevent';
@@ -17,7 +18,6 @@ import App from './App';
 import AppConfig from '../common/AppConfig';
 import FrontLayerViewManager from './FrontLayerViewManager';
 import { Types } from '../common/Interfaces';
-import { isEqual } from './utils/lodashMini';
 import MainViewStore from './MainViewStore';
 import Styles from './Styles';
 import UserInterface from '../native-common/UserInterface';

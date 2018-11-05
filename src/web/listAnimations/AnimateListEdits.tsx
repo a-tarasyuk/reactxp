@@ -8,12 +8,12 @@
  * and moves that occurred since the previous render.
  */
 
+import clone from 'lodash/clone';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import executeTransition from '../animated/executeTransition';
 import { Types } from '../../common/Interfaces';
-import { clone } from './../utils/lodashMini';
 import { Edits, MonitorListEdits } from './MonitorListEdits';
 
 export interface AnimateListEditsProps {

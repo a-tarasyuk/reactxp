@@ -7,10 +7,12 @@
  * Web-specific implementation of accessiblity functions for cross-platform
  * ReactXP framework.
  */
+import filter from 'lodash/filter';
+import max from 'lodash/max';
+import union from 'lodash/union';
 
 import { AccessibilityUtil as CommonAccessibiltiyUtil } from '../common/AccessibilityUtil';
 import { Types } from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 
 // Map of accessibility trait to an aria role attribute.
 // What's a role attribute? https://www.w3.org/wiki/PF/XTech/HTML5/RoleAttribute
@@ -64,19 +66,19 @@ export class AccessibilityUtil extends CommonAccessibiltiyUtil {
         let combinedTraits: Types.AccessibilityTrait[] = defaultTrait ? [defaultTrait] : [];
 
         if (traits) {
-            combinedTraits = _.union(combinedTraits, _.isArray(traits) ? traits : [traits]);
+            combinedTraits = union(combinedTraits, Array.isArray(traits) ? traits : [traits]);
         }
 
         // Max enum value in this array of traits is role for web. Return corresponding
         // role string from roleMap.
         return combinedTraits.length > 0 ?
-            roleMap[_.max(_.filter(combinedTraits, t => roleMap.hasOwnProperty(t as any)))!]
+            roleMap[max(filter(combinedTraits, t => roleMap.hasOwnProperty(t as any)))!]
             : undefined;
     }
 
     accessibilityTraitToAriaSelected(traits: Types.AccessibilityTrait | Types.AccessibilityTrait[] | undefined) {
         // Walk through each trait and check if there's a selected trait. Return if one is found.
-        if (traits && _.isArray(traits) && traits.indexOf(Types.AccessibilityTrait.Tab) !== -1) {
+        if (traits && Array.isArray(traits) && traits.indexOf(Types.AccessibilityTrait.Tab) !== -1) {
             return traits.indexOf(Types.AccessibilityTrait.Selected) !== -1;
         }
 
@@ -87,7 +89,7 @@ export class AccessibilityUtil extends CommonAccessibiltiyUtil {
 
     accessibilityTraitToAriaChecked(traits: Types.AccessibilityTrait | Types.AccessibilityTrait[] | undefined) {
         // Walk through each trait and check if there's a checked trait. Return if one is found.
-        if (traits && _.isArray(traits) && traits.indexOf(Types.AccessibilityTrait.CheckBox) !== -1) {
+        if (traits && Array.isArray(traits) && traits.indexOf(Types.AccessibilityTrait.CheckBox) !== -1) {
             return traits.indexOf(Types.AccessibilityTrait.Checked) !== -1;
         }
 
@@ -98,7 +100,7 @@ export class AccessibilityUtil extends CommonAccessibiltiyUtil {
 
     accessibilityTraitToAriaHasPopup(traits: Types.AccessibilityTrait | Types.AccessibilityTrait[] | undefined) {
         // Walk through each trait and check if there's a hasPopup trait. Return if one is found.
-        if (traits && _.isArray(traits) && traits.indexOf(Types.AccessibilityTrait.HasPopup) !== -1) {
+        if (traits && Array.isArray(traits) && traits.indexOf(Types.AccessibilityTrait.HasPopup) !== -1) {
             return traits.indexOf(Types.AccessibilityTrait.HasPopup) !== -1;
         }
 

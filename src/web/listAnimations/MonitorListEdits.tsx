@@ -9,12 +9,14 @@
  * to animate the edits.
  */
 
+import clone from 'lodash/clone';
+import each from 'lodash/each';
+import isEqual from 'lodash/isEqual';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import assert from 'simple-assert-ok';
 
 import { Types } from '../../common/Interfaces';
-import * as _ from './../utils/lodashMini';
 
 function getPosition(el: HTMLElement): { left: number; top: number } {
     return {
@@ -47,7 +49,7 @@ function extractChildrenKeys(children: React.ReactNode | undefined): ChildKey[] 
 // We use this information to determine whether or not we'll need to play any list edit
 // animations.
 function childrenEdited(prevChildrenKeys: ChildKey[], nextChildrenKeys: ChildKey[]): boolean {
-    return !_.isEqual(prevChildrenKeys, nextChildrenKeys);
+    return !isEqual(prevChildrenKeys, nextChildrenKeys);
 }
 
 type ChildrenMap = { [key: string]: React.ReactElement<any> };
@@ -73,9 +75,7 @@ function createChildrenMap(children: React.ReactNode | undefined): ChildrenMap {
 
 function computePositions(refs: { [key: string]: MountedChildrenRef }) {
     const positions: {[key: string]: { left: number; top: number }} = {};
-    _.each(refs, (ref, key) => {
-        positions[key] = getPosition(ref.domElement);
-    });
+    each(refs, (ref, key) => positions[key] = getPosition(ref.domElement));
     return positions;
 }
 
@@ -222,7 +222,7 @@ export class MonitorListEdits extends React.Component<MonitorListEditsProps, Typ
         // We need to cast this to "any" because of a recent bug introduced
         // into React @types where children is redfined as ReactNode rather
         // than ReactNode[].
-        _.each(this.props.children as any, child => {
+        each(this.props.children as any, child => {
             if (child) {
                 const childElement = child;
                 let refData = this._refReplacementCache[childElement.key];
@@ -241,7 +241,7 @@ export class MonitorListEdits extends React.Component<MonitorListEditsProps, Typ
         });
 
         if (this._phase === ComponentPhaseEnum.willAnimate) {
-            _.each(this._willAnimatePhaseInfo!.removed, childElement => {
+            each(this._willAnimatePhaseInfo!.removed, childElement => {
                 if (childElement) {
                     this._childrenToRender.push(React.cloneElement(childElement, {
                         ref: (refValue: React.Component<any, any>) => {
@@ -254,7 +254,7 @@ export class MonitorListEdits extends React.Component<MonitorListEditsProps, Typ
 
         // Do a shallow clone and remove the props that don't
         // apply to div elements.
-        const props = _.clone(this.props) as MonitorListEditsProps;
+        const props = clone(this.props) as MonitorListEditsProps;
         delete props.componentWillAnimate;
         delete props.testId;
 

@@ -10,7 +10,7 @@
 import * as SyncTasks from 'synctasks';
 
 import * as RX from './Interfaces';
-import { filter } from './lodashMini';
+import filter from 'lodash/filter';
 
 // Collection of Regex that help validate an email.
 // The name can be any of these characters.

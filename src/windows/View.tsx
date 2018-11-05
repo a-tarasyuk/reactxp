@@ -22,7 +22,6 @@ import {
 } from '../native-desktop/utils/FocusManager';
 import { RestrictFocusType } from '../common/utils/FocusManager';
 import { Types } from '../common/Interfaces';
-import * as _ from '../native-common/utils/lodashMini';
 import PopupContainerView from '../native-common/PopupContainerView';
 import { PopupComponent } from '../common/PopupContainerViewBase';
 import UserInterface from '../native-common/UserInterface';
@@ -168,7 +167,7 @@ export class View extends ViewCommon implements React.ChildContextProvider<ViewC
     }
 
     private _hasTrait(trait: Types.AccessibilityTrait, traits: Types.AccessibilityTrait | Types.AccessibilityTrait[] | undefined) {
-        return traits === trait || (_.isArray(traits) && traits.indexOf(trait) !== -1);
+        return traits === trait || (Array.isArray(traits) && traits.indexOf(trait) !== -1);
     }
 
     private _showContextMenu(keyEvent: Types.KeyboardEvent) {

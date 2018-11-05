@@ -7,6 +7,8 @@
 * RN-specific implementation of the cross-platform View abstraction.
 */
 
+import clone from 'lodash/clone';
+import extend from 'lodash/extend';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as RN from 'react-native';
@@ -17,7 +19,6 @@ import Animated from './Animated';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import EventHelpers from './utils/EventHelpers';
 import { Types } from '../common/Interfaces';
-import { clone, extend } from './utils/lodashMini';
 import Styles from './Styles';
 import Timers from '../common/utils/Timers';
 import UserInterface from './UserInterface';

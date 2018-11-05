@@ -7,10 +7,11 @@
  * Web-specific implementation of the cross-platform Select abstraction.
  */
 
+import findIndex from 'lodash/findIndex';
+import map from 'lodash/map';
 import * as React from 'react';
 
 import * as RX from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 import Styles from './Styles';
 
 export class Picker extends RX.Picker {
@@ -22,7 +23,7 @@ export class Picker extends RX.Picker {
                 onChange={ this._onValueChange }
                 data-test-id={ this.props.testId }
             >
-                { _.map(this.props.items, (i, idx) => <option value={ i.value } key={ idx }>{ i.label }</option> ) }
+                { map(this.props.items, (i, idx) => <option value={ i.value } key={ idx }>{ i.label }</option> ) }
             </select>
         );
     }
@@ -34,7 +35,7 @@ export class Picker extends RX.Picker {
     private _onValueChange = (e: React.SyntheticEvent<any>) => {
         const selectEl = e.target as HTMLSelectElement;
         const selectedValue = selectEl.value;
-        const selectedItemPosition = _.findIndex(this.props.items, i => i.value === selectedValue);
+        const selectedItemPosition = findIndex(this.props.items, i => i.value === selectedValue);
 
         this.props.onValueChange(selectedValue, selectedItemPosition);
     }

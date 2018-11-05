@@ -6,7 +6,7 @@
  */
 
 import { Types } from '../../common/Interfaces';
-import { clone } from './lodashMini';
+import clone from 'lodash/clone';
 
 //
 // These helpers promote a SyntheticEvent to their higher level counterparts

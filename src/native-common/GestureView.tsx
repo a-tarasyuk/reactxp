@@ -9,6 +9,7 @@
  * pinch-and-zoom, panning, single tap and double tap gestures.
  */
 
+import isUndefined from 'lodash/isUndefined';
 import * as React from 'react';
 import * as RN from 'react-native';
 import assert from 'simple-assert-ok';
@@ -16,7 +17,6 @@ import assert from 'simple-assert-ok';
 import AccessibilityUtil from './AccessibilityUtil';
 import EventHelpers from './utils/EventHelpers';
 import { Types } from '../common/Interfaces';
-import { isUndefined } from './utils/lodashMini';
 import Timers from '../common/utils/Timers';
 import UserInterface from './UserInterface';
 import ViewBase from './ViewBase';

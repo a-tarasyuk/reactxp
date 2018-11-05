@@ -7,10 +7,10 @@
  * Common parent of all components rendered into a popup, web version.
  */
 
+import clone from 'lodash/clone';
 import * as React from 'react';
 
 import { Types } from '../common/Interfaces';
-import { clone } from './utils/lodashMini';
 import { PopupContainerViewBase, PopupContainerViewBaseProps, PopupContainerViewContext } from '../common/PopupContainerViewBase';
 
 export interface PopupContainerViewProps extends PopupContainerViewBaseProps {
@@ -29,6 +29,7 @@ export class PopupContainerView extends PopupContainerViewBase<PopupContainerVie
         if (this.props.hidden) {
             style.visibility = 'hidden';
         }
+
         return (
             <div
                 style={ style }

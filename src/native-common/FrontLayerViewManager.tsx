@@ -8,12 +8,15 @@
  * by the Types showModal/dismissModal/showPopup/dismissPopup methods.
  */
 
+import filter from 'lodash/filter';
+import findIndex from 'lodash/findIndex';
+import findLast from 'lodash/findLast';
+import isUndefined from 'lodash/isUndefined';
 import * as React from 'react';
 import * as RN from 'react-native';
 import SubscribableEvent from 'subscribableevent';
 
 import { Types } from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 import { ModalContainer } from '../native-common/ModalContainer';
 import PopupContainerView from './PopupContainerView';
 
@@ -70,7 +73,7 @@ export class FrontLayerViewManager {
 
     dismissAllmodals(): void {
         if (this._overlayStack.length > 0) {
-            this._overlayStack = _.filter(this._overlayStack, iter => !(iter instanceof ModalStackContext));
+            this._overlayStack = filter(this._overlayStack, iter => !(iter instanceof ModalStackContext));
             this.event_changed.fire();
         }
     }
@@ -115,7 +118,7 @@ export class FrontLayerViewManager {
 
     dismissAllPopups(): void {
         if (this._overlayStack.length > 0) {
-            this._overlayStack = _.filter(this._overlayStack, iter => !(iter instanceof PopupStackContext));
+            this._overlayStack = filter(this._overlayStack, iter => !(iter instanceof PopupStackContext));
             this.event_changed.fire();
         }
     }
@@ -128,7 +131,7 @@ export class FrontLayerViewManager {
         }
 
         const overlayContext =
-            _.findLast(
+            findLast(
                 this._overlayStack,
                 context => context instanceof ModalStackContext && this._modalOptionsMatchesRootViewId(context.modalOptions, rootViewId)
             ) as ModalStackContext;
@@ -175,7 +178,7 @@ export class FrontLayerViewManager {
     }
 
     private _getOverlayContext(rootViewId?: string | null): PopupStackContext | undefined {
-        return _.findLast(
+        return findLast(
             this._overlayStack,
             context => context instanceof PopupStackContext && context.popupOptions.rootViewId === rootViewId
         ) as PopupStackContext | undefined;
@@ -235,7 +238,7 @@ export class FrontLayerViewManager {
                                 bottom: y + height, width: width, height: height };
 
                         // Find out if the press event was on the anchor so we can notify the caller about it.
-                        if (!_.isUndefined(touchEvent.pageX) && !_.isUndefined(touchEvent.pageY) &&
+                        if (!isUndefined(touchEvent.pageX) && !isUndefined(touchEvent.pageY) &&
                                 touchEvent.pageX >= anchorRect.left && touchEvent.pageX < anchorRect.right
                                 && touchEvent.pageY >= anchorRect.top && touchEvent.pageY < anchorRect.bottom) {
                             // Showing another animation while dimissing the popup creates a conflict in the
@@ -267,16 +270,17 @@ export class FrontLayerViewManager {
     }
 
     private _findIndexOfModal(modalId: string): number {
-        return _.findIndex(this._overlayStack, iter => iter instanceof ModalStackContext && iter.modalId === modalId);
+        return findIndex(this._overlayStack, iter => iter instanceof ModalStackContext && iter.modalId === modalId);
     }
 
     private _findIndexOfPopup(popupId: string): number {
-        return _.findIndex(this._overlayStack, iter => iter instanceof PopupStackContext && iter.popupId === popupId);
+        return findIndex(this._overlayStack, iter => iter instanceof PopupStackContext && iter.popupId === popupId);
     }
 
     private _getActiveOverlay() {
         // Check for any Popup in queue
-        return this._overlayStack.length === 0 ? null : _.last(this._overlayStack);
+        const len = this._overlayStack.length;
+        return len === 0 ? null : this._overlayStack[len - 1];
     }
 
     isPopupDisplayed(popupId?: string): boolean {

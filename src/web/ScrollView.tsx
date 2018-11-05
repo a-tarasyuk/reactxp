@@ -7,12 +7,14 @@
  * Web-specific implementation of the cross-platform ScrollView abstraction.
  */
 
+import defer from 'lodash/defer';
+import extend from 'lodash/extend';
+import throttle from 'lodash/throttle';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import CustomScrollbar from './CustomScrollbar';
 import * as RX from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 import ScrollViewConfig from './ScrollViewConfig';
 import Styles from './Styles';
 import ViewBase from './ViewBase';
@@ -127,7 +129,7 @@ export class ScrollView extends ViewBase<RX.Types.ScrollViewProps, RX.Types.Stat
             return;
         }
 
-        _.defer(() => {
+        defer(() => {
             if (this.props.onContentSizeChange) {
                 const container = this._getContainer();
                 if (!container) {
@@ -173,7 +175,7 @@ export class ScrollView extends ViewBase<RX.Types.ScrollViewProps, RX.Types.Stat
     }
 
     // Throttled scroll handler
-    private _onScroll = _.throttle((e: React.SyntheticEvent<any>) => {
+    private _onScroll = throttle((e: React.SyntheticEvent<any>) => {
         if (!this._mounted) {
             return;
         }
@@ -289,7 +291,7 @@ export class ScrollView extends ViewBase<RX.Types.ScrollViewProps, RX.Types.Stat
         }
         if (this.props.vertical || this.props.vertical === undefined) {
             scrollComponentClassNames.push('scrollViewportV');
-            containerStyles = _.extend({}, _customStyles.customScrollVertical, containerStyles);
+            containerStyles = extend({}, _customStyles.customScrollVertical, containerStyles);
         }
 
         return (

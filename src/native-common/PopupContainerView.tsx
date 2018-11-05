@@ -9,6 +9,8 @@
  * through properties.
  */
 
+import extend from 'lodash/extend';
+import isEqual from 'lodash/isEqual';
 import * as React from 'react';
 import * as RN from 'react-native';
 import assert from 'simple-assert-ok';
@@ -16,7 +18,6 @@ import assert from 'simple-assert-ok';
 import AccessibilityUtil from './AccessibilityUtil';
 import { Types } from '../common/Interfaces';
 import International from './International';
-import { extend, isEqual } from './utils/lodashMini';
 import { PopupContainerViewBase, PopupContainerViewBaseProps, PopupContainerViewContext } from '../common/PopupContainerViewBase';
 import Timers from '../common/utils/Timers';
 import UserInterface from './UserInterface';

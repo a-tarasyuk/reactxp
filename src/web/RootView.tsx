@@ -9,6 +9,10 @@
  * cross-platform library.
  */
 
+import defer from 'lodash/defer';
+import extend from 'lodash/extend';
+import isEqual from 'lodash/isEqual';
+import isUndefined from 'lodash/isUndefined';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -17,7 +21,6 @@ import AccessibilityAnnouncer from './AccessibilityAnnouncer';
 import FocusManager from './utils/FocusManager';
 import Input from './Input';
 import { Types } from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 import ModalContainer from './ModalContainer';
 import PopupContainerView from './PopupContainerView';
 import Timers from '../common/utils/Timers';
@@ -343,7 +346,7 @@ export class RootView extends React.Component<RootViewProps, RootViewState> {
         }
 
         if (!clickInPopup && e.button !== _rightClickButtonCode) {
-            _.defer(() => {
+            defer(() => {
                 if (this.props.activePopup) {
                     const anchorReference = this.props.activePopup.popupOptions.getAnchor();
                     const isClickOnAnchor = this._determineIfClickOnElement(anchorReference, e.srcElement);
@@ -541,7 +544,7 @@ export class RootView extends React.Component<RootViewProps, RootViewState> {
     private _startHidePopupTimer() {
         if (this.props.autoDismiss) {
             // Should we immediately hide it, or did the caller request a delay?
-            if (!_.isUndefined(this.props.autoDismissDelay) && this.props.autoDismissDelay > 0) {
+            if (!isUndefined(this.props.autoDismissDelay) && this.props.autoDismissDelay > 0) {
                 this._hidePopupTimer = window.setTimeout(() => {
                     this._hidePopupTimer = undefined;
                     this._dismissPopup();
@@ -582,7 +585,7 @@ export class RootView extends React.Component<RootViewProps, RootViewState> {
     // window size. If necessary, it also measures the unconstrained size of the popup.
     private _recalcPosition() {
         // Make a copy of the old state.
-        const newState: RootViewState = _.extend({}, this.state);
+        const newState: RootViewState = extend({}, this.state);
 
         if (this.state.isMeasuringPopup) {
             // Get the width/height of the popup.
@@ -761,7 +764,7 @@ export class RootView extends React.Component<RootViewProps, RootViewState> {
             }
         });
 
-        if (!_.isEqual(newState, this.state)) {
+        if (!isEqual(newState, this.state)) {
             this.setState(newState);
         }
     }
@@ -798,7 +801,7 @@ export class RootView extends React.Component<RootViewProps, RootViewState> {
 
         newState.anchorPosition = pos;
 
-        if (!_.isEqual(newState, this.state)) {
+        if (!isEqual(newState, this.state)) {
             this.setState(newState);
         }
     }

@@ -16,8 +16,6 @@
 import * as React from 'react';
 import assert from 'simple-assert-ok';
 
-import { assign } from './../utils/lodashMini';
-
 function restyleForInlineText(reactElement: React.ReactElement<any>) {
     const style = reactElement.props.style;
     assert(
@@ -48,13 +46,14 @@ function restyleForInlineText(reactElement: React.ReactElement<any>) {
     */
 
     return React.cloneElement(reactElement, {
-        style: assign({}, style, {
+        style: {
+            ...style,
             display: 'inline-block',
 
             // Reset the line height so the value from outside
             // the inlined item doesn't cascade into this element.
             lineHeight: 'normal'
-        })
+        }
     });
 }
 

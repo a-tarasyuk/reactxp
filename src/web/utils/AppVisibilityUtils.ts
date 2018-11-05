@@ -7,9 +7,9 @@
  * Web-specific helpers for firing focus/activity related events
  */
 
+import isUndefined from 'lodash/isUndefined';
 import SubscribableEvent from 'subscribableevent';
 
-import { isUndefined } from './lodashMini';
 import Timers from '../../common/utils/Timers';
 
 const idleTimeInMs = 60 * 1000;

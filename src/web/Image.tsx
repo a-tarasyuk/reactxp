@@ -7,13 +7,13 @@
  * Web-specific implementation of the cross-platform Image abstraction.
  */
 
+import isEqual from 'lodash/isEqual';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as SyncTasks from 'synctasks';
 
 import { DEFAULT_RESIZE_MODE } from '../common/Image';
 import { Types } from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 import restyleForInlineText from './utils/restyleForInlineText';
 import Styles from './Styles';
 
@@ -195,7 +195,7 @@ export class Image extends React.Component<Types.ImageProps, ImageState> {
 
     componentWillReceiveProps(nextProps: Types.ImageProps) {
         const sourceOrHeaderChanged = (nextProps.source !== this.props.source ||
-            !_.isEqual(nextProps.headers || {}, this.props.headers || {}));
+            !isEqual(nextProps.headers || {}, this.props.headers || {}));
 
         if (!nextProps.onLoad !== !this.props.onLoad || !nextProps.onError !== !this.props.onError || sourceOrHeaderChanged) {
             const performXhrRequest = this._initializeAndSetState(nextProps, false);

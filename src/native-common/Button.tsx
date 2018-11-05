@@ -7,6 +7,7 @@
  * RN-specific implementation of the cross-platform Button abstraction.
  */
 
+import isEqual from 'lodash/isEqual';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as RN from 'react-native';
@@ -18,7 +19,6 @@ import AppConfig from '../common/AppConfig';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import EventHelpers from './utils/EventHelpers';
 import { Button as ButtonBase, Types } from '../common/Interfaces';
-import { isEqual } from './utils/lodashMini';
 import Styles from './Styles';
 import Timers from '../common/utils/Timers';
 import UserInterface from './UserInterface';

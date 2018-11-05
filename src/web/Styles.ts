@@ -7,9 +7,12 @@
  * Web-specific implementation of style functions.
  */
 
+import each from 'lodash/each';
+import extend from 'lodash/extend';
+import memo from 'lodash/memoize';
+
 import AppConfig from '../common/AppConfig';
 import * as RX from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
 import StyleLeakDetector from '../common/StyleLeakDetector';
 
 type CssAliasMap = { [prop: string]: string };
@@ -29,7 +32,7 @@ export class Styles extends RX.Styles {
 
             for (let i = 0; i < ruleSet.length; i++) {
                 const subRuleSet = this.combine(ruleSet[i]);
-                combinedStyles = _.extend(combinedStyles, subRuleSet);
+                combinedStyles = extend(combinedStyles, subRuleSet);
             }
 
             if (AppConfig.isDevelopmentMode()) {
@@ -159,11 +162,11 @@ export class Styles extends RX.Styles {
     }
 
     // Use memoize to cache the result after the first call.
-    private _createDummyElement = _.memoize((): HTMLElement => {
+    private _createDummyElement = memoize((): HTMLElement => {
         return document.createElement('testCss');
     });
 
-    private _getCssPropertyAliasesJsStyle = _.memoize(() => {
+    private _getCssPropertyAliasesJsStyle = memoize(() => {
         const props = [
             'flex',
             'flexDirection',
@@ -216,10 +219,9 @@ export class Styles extends RX.Styles {
 
     _cssPropertyAliasesCssStyle = memoize(() => {
         const jsStyleAliases = this._getCssPropertyAliasesJsStyle();
-
         const aliases: CssAliasMap = {};
 
-        _.each(_.keys(jsStyleAliases), prop => {
+        each(Object.keys(jsStyleAliases), prop => {
             aliases[prop] = this.convertJsToCssStyle(jsStyleAliases[prop]);
         });
 
@@ -297,8 +299,8 @@ export class Styles extends RX.Styles {
             const animatedTransforms: { [key: string]: Object } = {};
             const staticTransforms: { [key: string]: string } = {};
 
-            _.each(def.transform, (t: { [key: string]: string }) => {
-                _.each(_.keys(t), key => {
+            each(def.transform, (t: { [key: string]: string }) => {
+                each(Object.keys(t), key => {
                     // Animated transforms use Animated.Value objects rather
                     // than strings. We need to store these separately.
                     if (typeof t[key] === 'object') {
@@ -323,7 +325,7 @@ export class Styles extends RX.Styles {
                 def.transform = transformStrings.join(' ');
             }
 
-            if (_.keys(animatedTransforms).length > 0) {
+            if (Object.keys(animatedTransforms).length > 0) {
                 def.animatedTransforms = animatedTransforms;
                 def.staticTransforms = staticTransforms;
             }
@@ -449,7 +451,7 @@ export class Styles extends RX.Styles {
 }
 
 export function memoize<T extends (...args: any[]) => any>(func: T, resolver?: (...args: any[]) => any): T {
-    return _.memoize(func, resolver);
+    return memo(func, resolver);
 }
 
 export default new Styles();

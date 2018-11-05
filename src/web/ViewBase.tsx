@@ -12,7 +12,8 @@ import * as SyncTasks from 'synctasks';
 import AppConfig from '../common/AppConfig';
 import FrontLayerViewManager from './FrontLayerViewManager';
 import * as RX from '../common/Interfaces';
-import * as _ from './utils/lodashMini';
+import each from 'lodash/each';
+import filter from 'lodash/filter';
 import Timers from '../common/utils/Timers';
 
 // We create a periodic timer to detect layout changes that are performed behind
@@ -70,9 +71,7 @@ export abstract class ViewBase<P extends RX.Types.ViewProps, S> extends RX.ViewB
     }
 
     protected static _checkViews() {
-        _.each(ViewBase._viewCheckingList, view => {
-            view._checkAndReportLayout();
-        });
+        each(ViewBase._viewCheckingList, view => view._checkAndReportLayout());
     }
 
     private static _layoutReportList: Function[] = [];
@@ -92,7 +91,7 @@ export abstract class ViewBase<P extends RX.Types.ViewProps, S> extends RX.ViewB
         const reportList = this._layoutReportList;
         this._layoutReportList = [];
 
-        _.each(reportList, func => {
+        each(reportList, func => {
             try {
                 func();
             } catch (e) {
@@ -173,7 +172,7 @@ export abstract class ViewBase<P extends RX.Types.ViewProps, S> extends RX.ViewB
     }
 
     private _checkViewCheckerUnbuild() {
-        ViewBase._viewCheckingList = _.filter(ViewBase._viewCheckingList, v => v !== this);
+        ViewBase._viewCheckingList = filter(ViewBase._viewCheckingList, v => v !== this);
 
         if (ViewBase._viewCheckingList.length === 0) {
             if (ViewBase._viewCheckingTimer) {

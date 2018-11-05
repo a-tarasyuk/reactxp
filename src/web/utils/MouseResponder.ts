@@ -8,7 +8,9 @@
  */
 
 import { Types } from '../../common/Interfaces';
-import * as _ from './../utils/lodashMini';
+import findLast from 'lodash/findLast';
+import merge from 'lodash/merge';
+import remove from 'lodash/remove';
 
 const _compareDOMOrder = (a: Responder, b: Responder) => {
     if (a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_PRECEDING) {
@@ -92,7 +94,7 @@ export default class MouseResponder {
 
         return {
             dispose() {
-                _.remove(MouseResponder._responders, r => r.id === responder.id);
+                remove(MouseResponder._responders, r => r.id === responder.id);
 
                 if (MouseResponder._responders.length === 0) {
                     MouseResponder._removeEventHandlers();
@@ -156,7 +158,7 @@ export default class MouseResponder {
         MouseResponder._responders.sort(_compareDOMOrder);
 
         // We need to pick a responder that will handle this GestureView
-        const firstResponder = _.findLast(MouseResponder._responders, (responder: Responder) => {
+        const firstResponder = findLast(MouseResponder._responders, (responder: Responder) => {
             return responder.shouldBecomeFirstResponder(event, MouseResponder._pendingGestureState!);
         });
 
@@ -169,7 +171,7 @@ export default class MouseResponder {
         if (MouseResponder._currentResponder && MouseResponder._pendingGestureState) {
             const { velocityX, velocityY } = MouseResponder._calcVelocity(event, MouseResponder._pendingGestureState);
 
-            MouseResponder._pendingGestureState = _.merge({}, MouseResponder._pendingGestureState, {
+            MouseResponder._pendingGestureState = merge({}, MouseResponder._pendingGestureState, {
                 clientX: event.clientX,
                 clientY: event.clientY,
                 pageX: event.pageX,
@@ -201,7 +203,7 @@ export default class MouseResponder {
         if (MouseResponder._currentResponder && MouseResponder._pendingGestureState) {
             const { velocityX, velocityY } = MouseResponder._calcVelocity(event, MouseResponder._pendingGestureState);
 
-            MouseResponder._pendingGestureState = _.merge({}, MouseResponder._pendingGestureState, {
+            MouseResponder._pendingGestureState = merge({}, MouseResponder._pendingGestureState, {
                 clientX: event.clientX,
                 clientY: event.clientY,
                 pageX: event.pageX,
