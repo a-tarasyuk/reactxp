@@ -80,7 +80,7 @@ const KEY_CODE_TAB = 9;
 const KEY_CODE_ESC = 27;
 
 // Setting the expected default box-sizing for everything.
-if (typeof document !== 'undefined') {
+if (document && document.head) {
     const defaultBoxSizing = '*, *:before, *:after { box-sizing: border-box; }';
     const style = document.createElement('style');
     style.type = 'text/css';

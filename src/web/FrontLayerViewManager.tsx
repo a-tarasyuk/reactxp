@@ -31,8 +31,7 @@ export class FrontLayerViewManager {
 
     // We need to be careful accessing document because it may not be defined
     // in some environments like Electron.
-    private _isRtlDefault = typeof document !== 'undefined' &&
-        typeof document.documentElement !== 'undefined' && document.documentElement.dir === 'rtl';
+    private _isRtlDefault = !!(document && document.documentElement && document.documentElement.dir === 'rtl');
     private _isRtlAllowed = true;
     private _isRtlForced = false;
 
@@ -44,9 +43,9 @@ export class FrontLayerViewManager {
     isModalDisplayed(modalId?: string): boolean {
         if (modalId) {
             return this._modalStack.some(d => d.id === modalId);
-        } else {
-            return this._modalStack.length > 0;
         }
+
+        return this._modalStack.length > 0;
     }
 
     showModal(modal: React.ReactElement<Types.ViewProps>, modalId: string, options?: Types.ModalOptions) {

@@ -52,13 +52,11 @@ class TextInputPlaceholderSupport {
     private static _cachedStyles: { [color: string]: TextInputPlaceholderCacheItem } = {};
 
     static getClassName(color: string): string {
-        const key = this._colorKey(color);
-
-        return `reactxp-placeholder-${key}`;
+        return `reactxp-placeholder-${ this._colorKey(color) }`;
     }
 
     static addRef(color: string) {
-        if (typeof document === undefined) {
+        if (!document || !document.head) {
             return;
         }
 
@@ -72,7 +70,6 @@ class TextInputPlaceholderSupport {
             const style = document.createElement('style');
             style.type = 'text/css';
             style.textContent = this._getStyle(className, color);
-
             document.head.appendChild(style);
 
             cache[key] = {

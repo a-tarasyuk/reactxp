@@ -62,13 +62,12 @@ const _styles = {
     }
 };
 
-if (typeof document !== 'undefined') {
+if (document && document.head) {
     const ignorePointerEvents = '.reactxp-ignore-pointer-events  * { pointer-events: auto; }';
-    const head = document.head;
     const style = document.createElement('style');
     style.type = 'text/css';
     style.appendChild(document.createTextNode(ignorePointerEvents));
-    head.appendChild(style);
+    document.head.appendChild(style);
 }
 
 export interface ViewContext {
