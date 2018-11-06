@@ -62,7 +62,7 @@ const _styles = {
     }
 };
 
-if (document && document.head) {
+if (typeof document !== 'undefined' && document.head) {
     const ignorePointerEvents = '.reactxp-ignore-pointer-events  * { pointer-events: auto; }';
     const style = document.createElement('style');
     style.type = 'text/css';

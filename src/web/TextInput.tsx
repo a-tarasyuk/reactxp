@@ -56,7 +56,7 @@ class TextInputPlaceholderSupport {
     }
 
     static addRef(color: string) {
-        if (!document || !document.head) {
+        if (typeof document === 'undefined' || !document.head) {
             return;
         }
 

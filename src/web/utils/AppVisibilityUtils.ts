@@ -27,7 +27,7 @@ export class AppVisibilityUtils {
 
     constructor() {
         // Handle test environment where document is not defined.
-        if (typeof (document) !== 'undefined') {
+        if (typeof document !== 'undefined') {
             window.addEventListener('focus', this._onFocus);
             window.addEventListener('blur', this._onBlur);
             document.addEventListener('visibilitychange', this._onAppVisibilityChanged);
@@ -38,7 +38,7 @@ export class AppVisibilityUtils {
 
     hasFocusAndActive() {
         // Handle test environment where document is not defined.
-        if (typeof (document) !== 'undefined') {
+        if (typeof document !== 'undefined') {
             return document.hasFocus() && !this._isIdle;
         }
 
@@ -47,7 +47,7 @@ export class AppVisibilityUtils {
 
     hasFocus() {
         // Handle test environment where document is not defined.
-        if (typeof (document) !== 'undefined') {
+        if (typeof document !== 'undefined') {
             return document.hasFocus();
         }
 

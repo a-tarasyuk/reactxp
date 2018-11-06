@@ -31,7 +31,7 @@ import ModalInstance from '../native-common/Modal';
 import NetworkInstance from '../native-common/Network';
 import { Picker as PickerComponent } from '../native-common/Picker';
 import PlatformInstance from '../native-common/Platform';
-import PopupInstance from '../web/Popup';
+import PopupInstance from '../native-common/Popup';
 import { ScrollView as ScrollViewComponent } from './ScrollView';
 import StatusBarInstance from './StatusBar';
 import StorageInstance from '../native-common/Storage';

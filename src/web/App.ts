@@ -17,7 +17,7 @@ export class App extends RX.App {
         super();
 
         // Handle test environment where document is not defined.
-        if (typeof(document) !== 'undefined') {
+        if (typeof document !== 'undefined') {
             this._activationState = AppVisibilityUtils.isAppInForeground() ?
             RX.Types.AppActivationState.Active : RX.Types.AppActivationState.Background;
 
