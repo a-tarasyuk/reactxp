@@ -11,7 +11,6 @@
 import filter from 'lodash/filter';
 import findIndex from 'lodash/findIndex';
 import findLast from 'lodash/findLast';
-import isUndefined from 'lodash/isUndefined';
 import * as React from 'react';
 import * as RN from 'react-native';
 import SubscribableEvent from 'subscribableevent';
@@ -238,7 +237,7 @@ export class FrontLayerViewManager {
                                 bottom: y + height, width: width, height: height };
 
                         // Find out if the press event was on the anchor so we can notify the caller about it.
-                        if (!isUndefined(touchEvent.pageX) && !isUndefined(touchEvent.pageY) &&
+                        if (typeof touchEvent.pageX !== 'undefined' && typeof touchEvent.pageY !== 'undefined' &&
                                 touchEvent.pageX >= anchorRect.left && touchEvent.pageX < anchorRect.right
                                 && touchEvent.pageY >= anchorRect.top && touchEvent.pageY < anchorRect.bottom) {
                             // Showing another animation while dimissing the popup creates a conflict in the

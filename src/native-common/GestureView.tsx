@@ -9,7 +9,6 @@
  * pinch-and-zoom, panning, single tap and double tap gestures.
  */
 
-import isUndefined from 'lodash/isUndefined';
 import * as React from 'react';
 import * as RN from 'react-native';
 import assert from 'simple-assert-ok';
@@ -344,8 +343,10 @@ export abstract class GestureView extends React.Component<Types.GestureViewProps
         }
 
         // Has the user started to pan?
-        const panThreshold = (!isUndefined(this.props.panPixelThreshold) && this.props.panPixelThreshold > 0) ?
-            this.props.panPixelThreshold : _panPixelThreshold;
+        const panThreshold = (typeof this.props.panPixelThreshold !== 'undefined' && this.props.panPixelThreshold > 0)
+            ? this.props.panPixelThreshold
+            : _panPixelThreshold;
+
         return (this._calcDistance(gestureState.dx, gestureState.dy) >= panThreshold);
     }
 
@@ -355,8 +356,10 @@ export abstract class GestureView extends React.Component<Types.GestureViewProps
         }
 
         // Has the user started to pan?
-        const panThreshold = (!isUndefined(this.props.panPixelThreshold) && this.props.panPixelThreshold > 0) ?
-            this.props.panPixelThreshold : _panPixelThreshold;
+        const panThreshold = (typeof this.props.panPixelThreshold !== 'undefined' && this.props.panPixelThreshold > 0)
+            ? this.props.panPixelThreshold
+            : _panPixelThreshold;
+
         const isPan = Math.abs(gestureState.dy) >= panThreshold;
 
         if (isPan && this.props.preferredPan === Types.PreferredPanGesture.Horizontal) {
@@ -371,8 +374,10 @@ export abstract class GestureView extends React.Component<Types.GestureViewProps
         }
 
         // Has the user started to pan?
-        const panThreshold = (!isUndefined(this.props.panPixelThreshold) && this.props.panPixelThreshold > 0) ?
-            this.props.panPixelThreshold : _panPixelThreshold;
+        const panThreshold = (typeof this.props.panPixelThreshold !== 'undefined' && this.props.panPixelThreshold > 0)
+            ? this.props.panPixelThreshold
+            : _panPixelThreshold;
+
         const isPan = Math.abs(gestureState.dx) >= panThreshold;
 
         if (isPan && this.props.preferredPan === Types.PreferredPanGesture.Vertical) {

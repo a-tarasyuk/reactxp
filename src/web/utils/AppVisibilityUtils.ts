@@ -7,7 +7,6 @@
  * Web-specific helpers for firing focus/activity related events
  */
 
-import isUndefined from 'lodash/isUndefined';
 import SubscribableEvent from 'subscribableevent';
 
 import Timers from '../../common/utils/Timers';
@@ -73,7 +72,7 @@ export class AppVisibilityUtils {
     }
 
     private _wakeUpAndSetTimerForIdle = () => {
-        if (!isUndefined(this._timer)) {
+        if (typeof this._timer !== 'undefined') {
             clearTimeout(this._timer);
         }
 

@@ -9,7 +9,6 @@
  */
 
 import clone from 'lodash/clone';
-import isUndefined from 'lodash/isUndefined';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
@@ -259,8 +258,9 @@ export class GestureView extends React.Component<Types.GestureViewProps, Types.S
     }
 
     private _getPanPixelThreshold = () => {
-        return (!isUndefined(this.props.panPixelThreshold) && this.props.panPixelThreshold > 0) ?
-            this.props.panPixelThreshold : _panPixelThreshold;
+        return (typeof this.props.panPixelThreshold !== 'undefined' && this.props.panPixelThreshold > 0)
+            ? this.props.panPixelThreshold
+            : _panPixelThreshold;
     }
 
     private _shouldRespondToPan(gestureState: Types.PanGestureState): boolean {

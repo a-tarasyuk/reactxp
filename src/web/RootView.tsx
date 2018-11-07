@@ -12,7 +12,6 @@
 import defer from 'lodash/defer';
 import extend from 'lodash/extend';
 import isEqual from 'lodash/isEqual';
-import isUndefined from 'lodash/isUndefined';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -544,7 +543,7 @@ export class RootView extends React.Component<RootViewProps, RootViewState> {
     private _startHidePopupTimer() {
         if (this.props.autoDismiss) {
             // Should we immediately hide it, or did the caller request a delay?
-            if (!isUndefined(this.props.autoDismissDelay) && this.props.autoDismissDelay > 0) {
+            if (typeof this.props.autoDismissDelay !== 'undefined' && this.props.autoDismissDelay > 0) {
                 this._hidePopupTimer = window.setTimeout(() => {
                     this._hidePopupTimer = undefined;
                     this._dismissPopup();
