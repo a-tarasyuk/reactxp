@@ -7,22 +7,27 @@
 * RN-specific implementation of the cross-platform View abstraction.
 */
 
-import clone from 'lodash/clone';
-import extend from 'lodash/extend';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as RN from 'react-native';
 import assert from 'simple-assert-ok';
+import clone from 'lodash/clone';
+import extend from 'lodash/extend';
 
+import { MacComponentAccessibilityProps } from './Accessibility';
 import AccessibilityUtil from './AccessibilityUtil';
 import Animated from './Animated';
+import App from './App';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import EventHelpers from './utils/EventHelpers';
 import { Types } from '../common/Interfaces';
+import Platform from './Platform';
 import Styles from './Styles';
 import Timers from '../common/utils/Timers';
 import UserInterface from './UserInterface';
 import ViewBase from './ViewBase';
+
+const _isNativeMacOs = Platform.getType() === 'macos';
 
 const LayoutAnimation = RN.LayoutAnimation;
 
@@ -339,6 +344,12 @@ export class View extends ViewBase<Types.ViewProps, Types.Stateless> {
             accessibilityComponentType: AccessibilityUtil.accessibilityComponentTypeToString(props.accessibilityTraits),
             accessibilityLiveRegion: AccessibilityUtil.accessibilityLiveRegionToString(props.accessibilityLiveRegion)
         };
+        if (_isNativeMacOs && App.supportsExperimentalKeyboardNavigation && this.props.onPress) {
+            const macAccessibilityProps: MacComponentAccessibilityProps = accessibilityProps as any;
+            macAccessibilityProps.acceptsKeyboardFocus = true;
+            macAccessibilityProps.enableFocusRing = true;
+            macAccessibilityProps.onClick = this.props.onPress;
+        }
         this._internalProps = extend(this._internalProps, accessibilityProps);
 
         if (props.onLayout) {
