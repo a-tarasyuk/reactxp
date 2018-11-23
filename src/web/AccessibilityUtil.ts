@@ -66,7 +66,7 @@ export class AccessibilityUtil extends CommonAccessibiltiyUtil {
         let combinedTraits: Types.AccessibilityTrait[] = defaultTrait ? [defaultTrait] : [];
 
         if (traits) {
-            combinedTraits = union(combinedTraits, Array.isArray(traits) ? traits : [traits]);
+            combinedTraits = _.union(combinedTraits, Array.isArray(traits) ? traits : [traits]);
         }
 
         // Max enum value in this array of traits is role for web. Return corresponding

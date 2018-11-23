@@ -140,6 +140,7 @@ const _styles = {
 const _isNativeAndroid = RX.Platform.getType() === 'android';
 const _isNativeIOS = RX.Platform.getType() === 'ios';
 const _isNativeMacOs = RX.Platform.getType() === 'macos';
+const _isWeb = RX.Platform.getType() === 'web';
 
 // How many items with unknown heights will we allow? A larger value will fill the view more
 // quickly but will result in a bunch of long-running work that can cause frame skips during
@@ -158,9 +159,10 @@ const _scrollViewRef = 'scrollview';
 const _virtualKeyPrefix = 'vc_';
 const _accessibilityVirtualKeyPrefix = 'ac_';
 
-// Key codes used on web
-const _keyCodeUpArrow = 38;
-const _keyCodeDownArrow = 40;
+// Key codes used on web/RN (keycodes for arrows are different between web and native, unfortunately)
+// (a resolution for https://github.com/Microsoft/reactxp/issues/419 will make this look better, hopefuly)
+const _keyCodeUpArrow = _isWeb ? 38 : 19;
+const _keyCodeDownArrow = _isWeb ? 40 : 20;
 
 // tslint:disable:override-calls-super
 export class VirtualListView<ItemInfo extends VirtualListViewItemInfo> 
@@ -1090,12 +1092,26 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
         // change, and perf suffers.
         cellList = cellList.sort((a, b) => a.cellInfo.virtualKey < b.cellInfo.virtualKey ? 1 : -1);
 
+        let focusIndex: number | undefined;
+        if (this.state.lastFocusedItemKey === undefined) {
+            const itemToFocus = _.minBy(cellList, cell => {
+                if (!cell.item || !cell.item.isNavigable) {
+                    return Number.MAX_VALUE;
+                }
+                return cell.itemIndex;
+            });
+
+            if (itemToFocus) {
+                focusIndex = itemToFocus.itemIndex;
+            }
+        }
+
         _.each(cellList, cell => {
             let tabIndexValue: number|undefined;
             let isFocused = false;
             if (cell.item) {
                 if (cell.item && cell.item.isNavigable) {
-                    if (this.state.lastFocusedItemKey === undefined && cell.itemIndex === 0) {
+                    if (cell.itemIndex === focusIndex) {
                         tabIndexValue = 0;
                     } else {
                         tabIndexValue = cell.item.key === this.state.lastFocusedItemKey ? 0 : -1;

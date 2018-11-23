@@ -6,7 +6,7 @@
  *
  * Wrapper for all ReactXP functionality. Users of ReactXP should import just this file instead of internals.
  */
-import React, { Children, Component, createElement } from 'react';
+import React, { Children, Fragment, Component, createElement } from 'react';
 
 import * as RX from '../common/Interfaces';
 
@@ -221,7 +221,7 @@ export const WebView: RX.WebViewConstructor = WebViewComponent;
  * React
  */
 export const __spread = (React as any).__spread;
-export { Component, createElement, Children };
+export { Component, Fragment, createElement, Children };
 
 /**
  * Types

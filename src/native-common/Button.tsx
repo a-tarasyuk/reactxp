@@ -24,6 +24,7 @@ import { Button as ButtonBase, Types } from '../common/Interfaces';
 import Platform from './Platform';
 import Styles from './Styles';
 import Timers from '../common/utils/Timers';
+import { ButtonStyleRuleSet, StyleRuleSetRecursive } from '../common/Types';
 import UserInterface from './UserInterface';
 
 const _styles = {
@@ -95,7 +96,7 @@ export class Button extends ButtonBase {
     protected _isMounted = false;
     protected _isMouseOver = false;
     protected _isHoverStarted = false;
-    protected _buttonElement: any = null;
+    protected _buttonElement: RN.View | undefined;
 
     private _hideTimeout: number | undefined;
     private _defaultOpacityValue: number | undefined;
@@ -120,7 +121,7 @@ export class Button extends ButtonBase {
         }
     }
 
-    protected _render(internalProps: RN.ViewProps, onMount: (btn: any) => void): JSX.Element {
+    protected _render(internalProps: RN.ViewProps, onMount: (btn: RN.View | null) => void): JSX.Element {
         return (
             <RN.Animated.View { ...internalProps } ref={ onMount }>
                 { this.props.children }
@@ -138,7 +139,7 @@ export class Button extends ButtonBase {
             _defaultAccessibilityTrait);
 
         const opacityStyle = !this.props.disableTouchOpacityAnimation && this._opacityAnimatedStyle;
-        let disabledStyle = this.props.disabled && _styles.disabled;
+        let disabledStyle = this.props.disabled ? _styles.disabled : undefined;
 
         if (this.props.disabled && this.props.disabledOpacity !== undefined) {
             disabledStyle = Styles.createButtonStyle({
@@ -194,10 +195,8 @@ export class Button extends ButtonBase {
     }
 
     componentWillReceiveProps(nextProps: Types.ButtonProps) {
-        if (!isEqual(this.props, nextProps)) {
-            // If opacity got updated as a part of props update, we need to reflect that in the opacity animation value
-           this._setOpacityStyles(nextProps, this.props);
-        }
+        // If opacity styles were updated as a part of props update, we need to reflect that in the opacity animation value
+        this._setOpacityStyles(nextProps, this.props);
     }
 
     getChildContext(): ButtonContext {
@@ -298,7 +297,7 @@ export class Button extends ButtonBase {
     }
 
     private _setOpacityStyles(props: Types.ButtonProps, prevProps?: Types.ButtonProps) {
-        const opacityValueFromProps = this._getDefaultOpacityValue(props);
+        const opacityValueFromProps = this._getDefaultOpacityValue(props.style);
         if (this._defaultOpacityValue !== opacityValueFromProps || (prevProps && props.disabled !== prevProps.disabled)) {
             this._defaultOpacityValue = opacityValueFromProps;
             this._opacityAnimatedValue = new Animated.Value(this._defaultOpacityValue);
@@ -308,8 +307,8 @@ export class Button extends ButtonBase {
         }
     }
 
-    private _onMount = (btn: any): void => {
-        this._buttonElement = btn;
+    private _onMount = (btn: RN.View | null): void => {
+        this._buttonElement = btn || undefined;
     }
 
     private _isTouchFeedbackApplicable() {
@@ -324,10 +323,10 @@ export class Button extends ButtonBase {
         this.setOpacityTo(this._defaultOpacityValue!, duration);
     }
 
-    private _getDefaultOpacityValue(props: Types.ButtonProps): number {
+    private _getDefaultOpacityValue(style?: StyleRuleSetRecursive<ButtonStyleRuleSet>): number {
         let flattenedStyles: { [key: string]: any } | undefined;
-        if (props && props.style) {
-            flattenedStyles = RN.StyleSheet.flatten(props.style as RN.StyleProp<RN.ViewProps>);
+        if (style) {
+            flattenedStyles = RN.StyleSheet.flatten(style as RN.StyleProp<RN.ViewProps>);
         }
 
         return flattenedStyles && (flattenedStyles as Types.ButtonStyle).opacity || 1;

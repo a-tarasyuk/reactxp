@@ -59,7 +59,7 @@ export interface PopupContainerViewState {
 }
 
 export class PopupContainerView extends PopupContainerViewBase<PopupContainerViewProps, PopupContainerViewState> {
-    private _mountedComponent: any;
+    private _mountedComponent: RN.View | undefined;
     private _viewHandle: number | null = null;
     private _respositionPopupTimer: number | undefined;
 
@@ -104,7 +104,9 @@ export class PopupContainerView extends PopupContainerViewBase<PopupContainerVie
     }
 
     componentDidMount() {
-        this._viewHandle = RN.findNodeHandle(this._mountedComponent);
+        if (this._mountedComponent) {
+            this._viewHandle = RN.findNodeHandle(this._mountedComponent);
+        }
 
         if (this.props.popupOptions && !this.props.hidden) {
             this._recalcPosition();
@@ -145,7 +147,7 @@ export class PopupContainerView extends PopupContainerViewBase<PopupContainerVie
         return (
             <RN.View
                 style={ style as RN.StyleProp<RN.ViewStyle> }
-                ref={ this._onMount as any }
+                ref={ this._onMount }
                 importantForAccessibility={ importantForAccessibility }
             >
                 { popupView }
@@ -153,8 +155,8 @@ export class PopupContainerView extends PopupContainerViewBase<PopupContainerVie
         );
     }
 
-    protected _onMount = (component: RN.ReactNativeBaseComponent<any, any> | null) => {
-        this._mountedComponent = component;
+    protected _onMount = (component: RN.View | null) => {
+        this._mountedComponent = component || undefined;
     }
 
     private _recalcPosition() {

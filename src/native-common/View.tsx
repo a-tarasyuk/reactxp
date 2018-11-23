@@ -129,7 +129,7 @@ export interface ViewContext {
     focusArbitrator?: FocusArbitratorProvider;
 }
 
-export class View extends ViewBase<Types.ViewProps, Types.Stateless> {
+export class View extends ViewBase<Types.ViewProps, Types.Stateless, RN.View> {
     static contextTypes: React.ValidationMap<any> = {
         focusArbitrator: PropTypes.object
     };
@@ -326,7 +326,7 @@ export class View extends ViewBase<Types.ViewProps, Types.Stateless> {
      */
     protected _buildInternalProps(props: Types.ViewProps) {
         this._internalProps = clone(props) as any;
-        this._internalProps.ref = this._setNativeView;
+        this._internalProps.ref = this._setNativeComponent;
 
         if (props.testId) {
             // Convert from testId to testID.
@@ -344,11 +344,16 @@ export class View extends ViewBase<Types.ViewProps, Types.Stateless> {
             accessibilityComponentType: AccessibilityUtil.accessibilityComponentTypeToString(props.accessibilityTraits),
             accessibilityLiveRegion: AccessibilityUtil.accessibilityLiveRegionToString(props.accessibilityLiveRegion)
         };
-        if (_isNativeMacOs && App.supportsExperimentalKeyboardNavigation && this.props.onPress) {
+        if (_isNativeMacOs && App.supportsExperimentalKeyboardNavigation && (props.onPress ||
+                (props.tabIndex !== undefined && props.tabIndex >= 0))) {
             const macAccessibilityProps: MacComponentAccessibilityProps = accessibilityProps as any;
-            macAccessibilityProps.acceptsKeyboardFocus = true;
-            macAccessibilityProps.enableFocusRing = true;
-            macAccessibilityProps.onClick = this.props.onPress;
+            if (props.tabIndex !== -1) {
+                macAccessibilityProps.acceptsKeyboardFocus = true;
+                macAccessibilityProps.enableFocusRing = true;
+            }
+            if (props.onPress) {
+                macAccessibilityProps.onClick = props.onPress;
+            }
         }
         this._internalProps = extend(this._internalProps, accessibilityProps);
 
@@ -397,7 +402,7 @@ export class View extends ViewBase<Types.ViewProps, Types.Stateless> {
         }
     }
     private _isTouchFeedbackApplicable() {
-        return this._isMounted && this._mixinIsApplied && this._nativeView;
+        return this._isMounted && this._mixinIsApplied && !!this._nativeComponent;
     }
 
     private _opacityActive(duration: number) {
@@ -429,11 +434,11 @@ export class View extends ViewBase<Types.ViewProps, Types.Stateless> {
     }
 
     private _showUnderlay() {
-        if (!this._nativeView) {
+        if (!this._nativeComponent) {
             return;
         }
 
-        this._nativeView.setNativeProps({
+        this._nativeComponent.setNativeProps({
             style: {
                 backgroundColor: this.props.underlayColor
             }
@@ -441,11 +446,11 @@ export class View extends ViewBase<Types.ViewProps, Types.Stateless> {
     }
 
     private _hideUnderlay = () => {
-        if (!this._isMounted || !this._nativeView) {
+        if (!this._isMounted || !this._nativeComponent) {
             return;
         }
 
-        this._nativeView.setNativeProps({
+        this._nativeComponent.setNativeProps({
             style: [{
                 backgroundColor: _underlayInactive
             }, this.props.style]
