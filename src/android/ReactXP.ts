@@ -6,7 +6,7 @@
  *
  * Wrapper for all ReactXP functionality. Users of ReactXP should import just this file instead of internals.
  */
-import React, { Children, Component, Fragment, createElement } from 'react';
+import React, { Children, Component, createElement, Fragment } from 'react';
 import { Animated as RNAnimated } from 'react-native';
 
 import * as RX from '../common/Interfaces';

@@ -7,12 +7,12 @@
 * RN-specific implementation of the cross-platform View abstraction.
 */
 
+import clone from 'lodash/clone';
+import extend from 'lodash/extend';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as RN from 'react-native';
 import assert from 'simple-assert-ok';
-import clone from 'lodash/clone';
-import extend from 'lodash/extend';
 
 import { MacComponentAccessibilityProps } from './Accessibility';
 import AccessibilityUtil from './AccessibilityUtil';
