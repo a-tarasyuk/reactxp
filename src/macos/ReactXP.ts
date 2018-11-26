@@ -51,7 +51,7 @@ export type Accessibility = RX.Accessibility;
 export const Accessibility: RX.Accessibility = AccessibilityInstance;
 
 /**
- * ActivityIndicator
+ * ActivityIndicator Component
  */
 export type ActivityIndicator = RX.ActivityIndicator;
 export const ActivityIndicator: typeof RX.ActivityIndicator = ActivityIndicatorComponent;
@@ -79,7 +79,7 @@ export type App = RX.App;
 export const App: RX.App = AppInstance;
 
 /**
- * Button
+ * Button Component
  */
 export type Button = RX.Button;
 export const Button: typeof RX.Button = ButtonComponent;
@@ -91,13 +91,13 @@ export type Clipboard = RX.Clipboard;
 export const Clipboard: RX.Clipboard = ClipboardInstance;
 
 /**
- * GestureView
+ * GestureView Component
  */
 export type GestureView = RX.GestureView;
 export let GestureView: typeof RX.GestureView = GestureViewComponent;
 
 /**
- * Image
+ * Image Component
  */
 export type Image = RX.Image;
 export let Image: RX.ImageConstructor = ImageComponent;
@@ -115,7 +115,7 @@ export type International = RX.International;
 export let International: RX.International = InternationalInstance;
 
 /**
- * Link
+ * Link Component
  */
 export type Link = RX.Link;
 export let Link: typeof RX.Link = LinkComponent;
@@ -145,7 +145,7 @@ export type Network = RX.Network;
 export const Network: RX.Network = NetworkInstance;
 
 /**
- * Picker
+ * Picker Component
  */
 export type Picker = RX.Picker;
 export const Picker: typeof RX.Picker = PickerComponent;
@@ -163,7 +163,7 @@ export type Popup = RX.Popup;
 export const Popup: RX.Popup = PopupInstance;
 
 /**
- * ScrollView
+ * ScrollView Component
  */
 export type ScrollView = RX.ScrollView;
 export const ScrollView: RX.ScrollViewConstructor = ScrollViewComponent;
@@ -187,13 +187,13 @@ export type Styles = RX.Styles;
 export const Styles: RX.Styles = StylesInstance;
 
 /**
- * Text
+ * Text Component
  */
 export type Text = RX.Text;
 export const Text: typeof RX.Text = TextComponent;
 
 /**
- * TextInput
+ * TextInput Component
  */
 export type TextInput = RX.TextInput;
 export const TextInput: typeof RX.TextInput = TextInputComponent;
@@ -205,19 +205,19 @@ export type UserInterface = RX.UserInterface;
 export const UserInterface: RX.UserInterface = UserInterfaceInstance;
 
 /**
- * UserPresence
+ * UserPresence Component
  */
 export type UserPresence = RX.UserPresence;
 export const UserPresence: RX.UserPresence = UserPresenceInstance;
 
 /**
- * View
+ * View Component
  */
 export type View = RX.View;
 export const View: typeof RX.View = ViewComponent;
 
 /**
- * WebView
+ * WebView Component
  */
 export type WebView = RX.WebView;
 export const WebView: RX.WebViewConstructor = WebViewComponent;
