@@ -1,23 +1,19 @@
 {
     "compilerOptions": {
+        "downlevelIteration": false,
+        "reactNamespace": "RX",
+        "noUnusedLocals": true,
+        "importHelpers": true,
+        "skipLibCheck": true,
         "declaration": true,
         "noResolve": false,
-        "importHelpers": true,
-        "downlevelIteration": false,
-        "jsx": "react",
-        "reactNamespace": "RX",
         "module": "commonjs",
         "target": "es5",
-        "outDir": "dist/",
-        "skipLibCheck": true,
+        "outDir": "dist",
         "strict": true,
-        "lib": [
-            "es5",
-            "dom",
-            "es2015.collection",
-            "es2015.iterable"
-        ],
-        "types" : ["lodash", "react", "react-dom"]
+        "types" : ["lodash", "react", "react-dom"],
+        "jsx": "react",
+        "lib": ["es5", "dom", "es2015.collection", "es2015.iterable"]
     },
 
     "include": [
@@ -25,7 +21,7 @@
     ],
 
     "exclude": [
-        "dist",
-        "node_modules"
+        "node_modules",
+        "dist"
     ]
 }

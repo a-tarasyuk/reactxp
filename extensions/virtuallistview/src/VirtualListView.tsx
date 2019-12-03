@@ -69,7 +69,7 @@ export interface VirtualListViewCellRenderDetails<T extends VirtualListViewItemI
 }
 
 export interface VirtualListViewProps<ItemInfo extends VirtualListViewItemInfo> extends
-        RX.CommonStyledProps<RX.Types.ViewStyleRuleSet, VirtualListView<ItemInfo>> {
+    RX.CommonStyledProps<RX.Types.ViewStyleRuleSet, VirtualListView<ItemInfo>> {
     testId?: string;
 
     // Ordered list of descriptors for items to display in the list.
@@ -151,17 +151,16 @@ const _styles = {
     scrollContainer: RX.Styles.createScrollViewStyle({
         flex: 1,
         position: 'relative',
-        flexDirection: 'column'
+        flexDirection: 'column',
     }),
     staticContainer: RX.Styles.createViewStyle({
         flex: 1,
-        flexDirection: 'column'
-    })
+        flexDirection: 'column',
+    }),
 };
 
 const _isNativeAndroid = RX.Platform.getType() === 'android';
 const _isNativeIOS = RX.Platform.getType() === 'ios';
-const _isNativeMacOs = RX.Platform.getType() === 'macos';
 const _isWeb = RX.Platform.getType() === 'web';
 
 // How many items with unknown heights will we allow? A larger value will fill the view more
@@ -200,7 +199,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
     private _containerHeight = 0;
     private _containerHeightValue = RX.Animated.createValue(this._containerHeight);
     private _containerAnimatedStyle = RX.Styles.createAnimatedViewStyle({
-        height: this._containerHeightValue
+        height: this._containerHeightValue,
     });
 
     // A dictionary of items that maps item keys to item indexes.
@@ -280,7 +279,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
                 undefined,
             selectedItemKey: _.some(props.itemList, item => item.key === props.initialSelectedKey) ?
                 props.initialSelectedKey :
-                undefined
+                undefined,
         };
     }
 
@@ -540,7 +539,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
         if (this.props.onLayout) {
             this.props.onLayout(e);
         }
-    }
+    };
 
     private _onLayoutItem = (itemKey: string, newHeight: number) => {
         if (!this._isMounted) {
@@ -622,7 +621,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
 
         // See if we have accumulated enough error to require an adjustment.
         this._reconcileCorrections(this.props);
-    }
+    };
 
     private _onAnimateStartStopItem = (itemKey: string, animateStart: boolean) => {
         if (this._isMounted) {
@@ -648,7 +647,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
                 });
             }
         }
-    }
+    };
 
     private _onScroll = (scrollTop: number, scrollLeft: number) => {
         if (this._lastScrollTop === scrollTop) {
@@ -672,7 +671,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
         if (this.props.onScroll) {
             this.props.onScroll(scrollTop, scrollLeft);
         }
-    }
+    };
 
     // Some things to keep in mind during this function:
     // * Item heights are all in a fixed state from the beginning to the end of the function. The total
@@ -982,7 +981,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
     // Cell Management Methods
 
     private _allocateCell(itemKey: string, itemTemplate: string | undefined, itemIndex: number, isHeightConstant: boolean,
-        height: number, top: number, isVisible: boolean): VirtualCellInfo<ItemInfo> {
+            height: number, top: number, isVisible: boolean): VirtualCellInfo<ItemInfo> {
         let newCell = this._activeCells.get(itemKey);
 
         if (!newCell) {
@@ -1032,7 +1031,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
                 cachedItemKey: itemKey,
                 top: top,
                 isVisible: isVisible,
-                shouldUpdate: true
+                shouldUpdate: true,
             };
             VirtualListView._nextCellKey += 1;
         }
@@ -1070,7 +1069,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
     }
 
     private _setCellTopAndVisibility(itemKey: string, isVisibile: boolean, top: number,
-        animateIfPreviouslyVisible: boolean) {
+            animateIfPreviouslyVisible: boolean) {
 
         const cellInfo = this._activeCells.get(itemKey);
         if (!cellInfo) {
@@ -1103,7 +1102,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
         if (scrollView) {
             scrollView.setScrollTop(top, animated);
         }
-    }
+    };
 
     render() {
         const itemsRendered: JSX.Element[] = [];
@@ -1131,7 +1130,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
             cellList.push({
                 cellInfo: virtualCellInfo,
                 item: item,
-                itemIndex: itemIndex
+                itemIndex: itemIndex,
             });
 
             if (item.isNavigable) {
@@ -1144,7 +1143,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
             cellList.push({
                 cellInfo: virtualCellInfo,
                 item: undefined,
-                itemIndex: undefined
+                itemIndex: undefined,
             });
         }
 
@@ -1216,7 +1215,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
                     isScreenReaderModeEnabled={ this._isAndroidScreenReaderEnabled() }
                     renderItem={ this.props.renderItem }
                     onKeyPress={ this._onKeyDown }
-                />
+                />,
             );
 
             cell.cellInfo.shouldUpdate = false;
@@ -1274,7 +1273,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
         if (itemInfo) {
             this.setState({
                 lastFocusedItemKey: itemInfo.key,
-                isFocused: true
+                isFocused: true,
             });
         } else {
             this.setState({ isFocused: false });
@@ -1283,14 +1282,14 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
         if (this.props.onItemFocused) {
             this.props.onItemFocused(itemInfo);
         }
-    }
+    };
 
     // Sets selection & focus to specified key
     selectItemKey(key: string, scrollToItem = true) {
         // Set focus and selection
         this.setState({
             lastFocusedItemKey: key,
-            selectedItemKey: key
+            selectedItemKey: key,
         });
         if (scrollToItem) {
             this._scrollToItemKey(key);
@@ -1304,7 +1303,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
                 this.props.onItemSelected(itemInfo);
             }
         }
-    }
+    };
 
     private _onKeyDown = (e: RX.Types.KeyboardEvent) => {
         if (!this._scrollViewRef.current ||
@@ -1321,7 +1320,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
             this._focusSubsequentItem(FocusDirection.Down, true);
             e.preventDefault();
         }
-    }
+    };
 
     private _scrollToItemKey(key: string): void {
         let indexToSelect: number | undefined;
@@ -1387,7 +1386,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
         } else {
             this._tearDownForAccessibility();
         }
-    }
+    };
 
     componentDidMount() {
         RX.Accessibility.screenReaderChangedEvent.subscribe(this._screenReaderStateChanged);
