@@ -23,7 +23,7 @@ class Video extends RX.Component<Types.VideoProps, VideoState> {
     // TODO(uwp): #694149 Not implemented
     render() {
         let combinedStyles = extend(RX.Styles.combine(this.props.style), {
-            backgroundColor: 'red'
+            backgroundColor: 'red',
         });
 
         return (

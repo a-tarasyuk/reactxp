@@ -14,10 +14,8 @@ import * as macOSPlugin from '../macos/PluginBase';
 import * as WebPlugin from '../web/PluginBase';
 import * as WindowsPlugin from '../windows/PluginBase';
 
-/* tslint:disable:no-unused-variable */
 const _typeCheckerAndroid: Interfaces.PluginInterface = AndroidPlugin;
 const _typeCheckeriOS: Interfaces.PluginInterface = iOSPlugin;
 const _typeCheckermacOS: Interfaces.PluginInterface = macOSPlugin;
 const _typeCheckerWeb: Interfaces.PluginInterface = WebPlugin;
 const _typeCheckerWindows: Interfaces.PluginInterface = WindowsPlugin;
-/* tslint:enable:no-unused-variable */

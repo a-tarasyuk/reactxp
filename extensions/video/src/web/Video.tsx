@@ -37,7 +37,7 @@ class Video extends RX.Component<Types.VideoProps, {}> {
 
     render() {
         let combinedStyles = extend(RX.Styles.combine(this.props.style), {
-            display: 'flex'
+            display: 'flex',
         });
 
         if (this.props.resizeMode === 'cover') {
@@ -52,19 +52,19 @@ class Video extends RX.Component<Types.VideoProps, {}> {
                 WebkitTransform: 'translate(-50%,-50%)',
                 MozTransform: 'translate(-50%,-50%)',
                 msTransform: 'translate(-50%,-50%)',
-                transform: 'translate(-50%,-50%)'
+                transform: 'translate(-50%,-50%)',
             });
         } else if (this.props.resizeMode === 'contain') {
             combinedStyles = extend(combinedStyles, {
                 width: '100%',
-                height: '100%'
+                height: '100%',
             });
         } else {
             combinedStyles = extend(combinedStyles, {
                 width: 'auto',
                 height: 'auto',
                 maxWidth: '100%',
-                maxHeight: '100%'
+                maxHeight: '100%',
             });
         }
 
@@ -82,7 +82,7 @@ class Video extends RX.Component<Types.VideoProps, {}> {
                 onLoadedData={ this._onLoadedData }
                 onError={ this.props.onError }
                 onEnded={ this.props.onEnded }
-                onLoadStart={ this.props.onLoadStart}
+                onLoadStart={ this.props.onLoadStart }
                 onCanPlay={ this.props.onCanPlay }
                 onCanPlayThrough={ this.props.onCanPlayThrough }
                 onTimeUpdate={ this.props.onProgress ? this._onTimeUpdate : null }
@@ -142,13 +142,13 @@ class Video extends RX.Component<Types.VideoProps, {}> {
                     duration: videoDOM.duration,
                     naturalSize: {
                         width: videoDOM.videoWidth,
-                        height: videoDOM.videoHeight
-                    }
+                        height: videoDOM.videoHeight,
+                    },
                 };
                 this.props.onLoadedData(loadInfo);
             }
         }
-    }
+    };
 
     private _onTimeUpdate = () => {
         if (this.props.onProgress) {
@@ -156,11 +156,11 @@ class Video extends RX.Component<Types.VideoProps, {}> {
             if (videoDOM) {
                 this.props.onProgress({
                     currentTime: videoDOM.currentTime,
-                    playableDuration: videoDOM.duration
+                    playableDuration: videoDOM.duration,
                 });
             }
         }
-    }
+    };
 }
 
 export default Video;

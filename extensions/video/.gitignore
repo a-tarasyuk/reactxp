@@ -11,7 +11,7 @@ package-lock.json
 .npm
 
 # Build artifacts
-**/dist
+dist
 
 # Miscellaneous user files
 *.user
