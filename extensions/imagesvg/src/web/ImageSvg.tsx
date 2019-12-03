@@ -20,7 +20,7 @@ export class ImageSvg extends React.Component<ImageSvgProps, {}> {
         if (this.props.width > 0 && this.props.height > 0) {
             let combinedStyles = RXStyles.combine([{
                 display: 'flex',
-                position: 'relative'
+                position: 'relative',
             } as any, this.props.style]) as any;
 
             if (this.props.fillColor !== undefined) {
