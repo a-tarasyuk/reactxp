@@ -14,12 +14,12 @@ export class NetInfo extends Interfaces.NetInfo {
     constructor() {
         super();
 
-        const onEventOccuredHandler = () => {
+        const onEventOccuredHandler = (): void => {
             this.connectivityChangedEvent.fire(navigator.onLine);
         };
 
         // Avoid accessing window if it's not defined (for test environment).
-        if (typeof(window) !== 'undefined') {
+        if (typeof window !== 'undefined') {
             window.addEventListener('online', onEventOccuredHandler);
             window.addEventListener('offline', onEventOccuredHandler);
         }

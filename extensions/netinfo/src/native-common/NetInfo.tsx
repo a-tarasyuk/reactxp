@@ -16,7 +16,7 @@ export class NetInfo extends Interfaces.NetInfo {
     constructor() {
         super();
 
-        const onEventOccurredHandler =  (state: RNNetInfo.NetInfoState) => {
+        const onEventOccurredHandler =  (state: RNNetInfo.NetInfoState): void => {
             this.connectivityChangedEvent.fire(state.isConnected);
         };
 

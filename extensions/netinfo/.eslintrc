@@ -1,0 +1,20 @@
+{
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "skype",
+    "skype/react"
+  ],
+  "rules": {},
+  "overrides": [
+    {
+      "files": [
+        "PluginBaseChecker.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    }
+  ]
+}
