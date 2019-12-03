@@ -21,7 +21,7 @@ declare module 'react-native-deprecated-custom-components' {
             FloatFromBottom: any;
             FloatFromBottomAndroid: any;
             FadeAndroid: any;
-            HorizontalSwipeJump:any;
+            HorizontalSwipeJump: any;
         };
         getCurrentRoutes(): any[];
         jumpBack(): void;

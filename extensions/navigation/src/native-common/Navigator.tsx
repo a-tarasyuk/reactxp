@@ -23,7 +23,7 @@ import NavigatorExperimentalDelegate from './NavigatorExperimentalDelegate';
 
 export class DefaultDelegateSelector implements DelegateSelector {
     getNavigatorDelegate(navigator: BaseNavigator<NavigatorState>) {
-            return new NavigatorExperimentalDelegate(navigator);
+        return new NavigatorExperimentalDelegate(navigator);
     }
 }
 
@@ -54,47 +54,47 @@ export class NavigatorImpl extends BaseNavigator<NavigatorState> {
     }
 
     protected getRoutes(): NavigatorRoute[] {
-       return this._delegate.getRoutes();
+        return this._delegate.getRoutes();
     }
 
     // Push a new route if initial route doesn't exist
-    public push(route: NavigatorRoute): void {
+    push(route: NavigatorRoute): void {
         this._enqueueCommand({
             type: CommandType.Push,
             param: {
-                route: route
-            }
+                route: route,
+            },
         });
     }
 
-    public pop(): void {
+    pop(): void {
         this._enqueueCommand({
             type: CommandType.Pop,
-            param: {}
+            param: {},
         });
     }
 
-    public replace(route: NavigatorRoute): void {
-        this._enqueueCommand({
-            type: CommandType.Replace,
-            param: {
-                route: route
-            }
-        });
-    }
-
-    public replacePrevious(route: NavigatorRoute): void {
+    replace(route: NavigatorRoute): void {
         this._enqueueCommand({
             type: CommandType.Replace,
             param: {
                 route: route,
-                value: -1
-            }
+            },
+        });
+    }
+
+    replacePrevious(route: NavigatorRoute): void {
+        this._enqueueCommand({
+            type: CommandType.Replace,
+            param: {
+                route: route,
+                value: -1,
+            },
         });
     }
 
     // This method replaces the route at the given index of the stack and pops to that index.
-    public replaceAtIndex(route: NavigatorRoute, index: number): void {
+    replaceAtIndex(route: NavigatorRoute, index: number): void {
         let routes = this.getRoutes();
 
         // Pop to index route and then replace if not last one
@@ -108,34 +108,34 @@ export class NavigatorImpl extends BaseNavigator<NavigatorState> {
     }
 
     // Reset route stack with default route stack
-    public immediatelyResetRouteStack(nextRouteStack: NavigatorRoute[]): void {
-       this._delegate.immediatelyResetRouteStack(nextRouteStack);
+    immediatelyResetRouteStack(nextRouteStack: NavigatorRoute[]): void {
+        this._delegate.immediatelyResetRouteStack(nextRouteStack);
     }
 
-    public popToRoute(route: NavigatorRoute): void {
+    popToRoute(route: NavigatorRoute): void {
         this._enqueueCommand({
             type: CommandType.Pop,
             param: {
-                route: route
-            }
+                route: route,
+            },
         });
     }
 
-    public popToTop(): void {
+    popToTop(): void {
         this._enqueueCommand({
             type: CommandType.Pop,
             param: {
-                value: -1
-            }
+                value: -1,
+            },
         });
     }
 
-    public getCurrentRoutes(): NavigatorRoute[] {
+    getCurrentRoutes(): NavigatorRoute[] {
         return this.getRoutes();
     }
 
     // Render without initial route to get a reference for Navigator object
-    public render(): JSX.Element {
+    render(): JSX.Element {
         return this._delegate.render();
     }
 

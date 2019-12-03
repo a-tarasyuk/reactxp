@@ -48,14 +48,14 @@ const _styles = {
         flex: 1,
         flexDirection: 'column',
         alignSelf: 'stretch',
-        overflow: 'hidden'
+        overflow: 'hidden',
     }),
     defaultSceneStyle: Styles.createViewStyle({
         position: 'absolute',
         left: 0,
         right: 0,
         bottom: 0,
-        top: 0
+        top: 0,
     }),
     baseScene: Styles.createViewStyle({
         position: 'absolute',
@@ -63,26 +63,26 @@ const _styles = {
         left: 0,
         right: 0,
         bottom: 0,
-        top: 0
+        top: 0,
     }),
     disabledScene: Styles.createViewStyle({
         top: 0,
         bottom: 0,
-        flex: 1
+        flex: 1,
     }),
     transitioner: Styles.createViewStyle( {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: 'transparent',
         overflow: 'hidden',
-        alignItems: 'stretch'
+        alignItems: 'stretch',
     }),
     sceneStyle: Styles.createViewStyle({
         flex: 1,
         shadowOffset: { height: 0, width: 0 },
         shadowRadius: 40,
-        shadowColor: 'rgba(0, 0, 0, 0.2)'
-    })
+        shadowColor: 'rgba(0, 0, 0, 0.2)',
+    }),
 };
 
 // Transition types
@@ -151,7 +151,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
             routeStack: [],
             presentedIndex: 0,
             transitionFromIndex: undefined,
-            transitionQueue: []
+            transitionQueue: [],
         };
     }
 
@@ -166,7 +166,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
             },
             onSpringAtRest: () => {
                 this._completeTransition();
-            }
+            },
         });
     }
 
@@ -242,12 +242,12 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
         const nextStack = activeStack.concat([route]);
         const destIndex = nextStack.length - 1;
         const nextAnimationConfigStack: NavigatorSceneConfig [] = activeAnimationConfigStack.concat([
-            this._getSceneConfigFromRoute(route)
+            this._getSceneConfigFromRoute(route),
         ]);
 
         this.setState({
             routeStack: nextStack,
-            sceneConfigStack: nextAnimationConfigStack
+            sceneConfigStack: nextAnimationConfigStack,
         }, () => {
             this._enableScene(destIndex);
             this._transitionTo(destIndex);
@@ -263,7 +263,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
             routeStack: nextRouteStack,
             presentedIndex: destIndex,
             transitionFromIndex: undefined,
-            transitionQueue: []
+            transitionQueue: [],
         }, () => {
             this._handleSpringUpdate();
             if (destIndex >= 0) {
@@ -305,7 +305,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
 
         this.setState({
             routeStack: nextRouteStack,
-            sceneConfigStack: nextAnimationModeStack
+            sceneConfigStack: nextAnimationModeStack,
         });
     }
 
@@ -345,7 +345,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
 
     private _onMountContainer = (comp: RX.View | null) => {
         this._containerRef = comp;
-    }
+    };
 
     private _updateDimensionsCache() {
         if (this._containerRef) {
@@ -353,7 +353,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
             if (transitioner) {
                 this._dimensions = {
                     width: transitioner.offsetWidth,
-                    height: transitioner.offsetHeight
+                    height: transitioner.offsetHeight,
                 };
             }
         }
@@ -371,7 +371,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
     // Render a scene for the navigator
     private _renderNavigatorScene(route: Types.NavigatorRoute, index: number): JSX.Element {
         let styles: RX.Types.ViewStyleRuleSet[] = [_styles.baseScene, _styles.sceneStyle,
-             _styles.defaultSceneStyle];
+            _styles.defaultSceneStyle];
 
         if (index !== this.state.presentedIndex) {
             // update styles
@@ -407,7 +407,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
         if (this._sceneRefs[sceneId]) {
             this._setNativeStyles(this._sceneRefs[sceneId], {
                 opacity: 0,
-                zIndex: -10
+                zIndex: -10,
             });
         }
     }
@@ -424,8 +424,8 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
                 bottom: sceneStyle['bottom'],
                 opacity: 1,
                 zIndex: 0,
-                transform: ''
-            }
+                transform: '',
+            },
         };
 
         if (!force && sceneIndex !== this.state.transitionFromIndex &&
@@ -453,7 +453,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
             newTransitionQueue.push({
                 destIndex: destIndex,
                 velocity: velocity,
-                transitionFinished: cb
+                transitionFinished: cb,
             });
             // set new transition queue
             this.setState ({ transitionQueue: newTransitionQueue });
@@ -464,7 +464,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
         this.setState({
             transitionFromIndex: this.state.presentedIndex,
             presentedIndex: destIndex,
-            transitionFinished: cb
+            transitionFinished: cb,
         });
 
         // Grab the scene config from the route we're leaving.
@@ -491,7 +491,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
         let newState: NavigatorState = {};
 
         this.setState({
-            transitionFromIndex: undefined
+            transitionFromIndex: undefined,
         });
         this.spring.setCurrentValue(0).setAtRest();
         this._hideScenes();
@@ -508,7 +508,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
                 queuedTransition.destIndex,
                 queuedTransition.velocity,
                 undefined,
-                queuedTransition.transitionFinished
+                queuedTransition.transitionFinished,
             );
 
             if (this.state.transitionFinished) {
@@ -550,7 +550,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
             this._transitionBetween(
                 this.state.transitionFromIndex,
                 this.state.presentedIndex,
-                this.spring.getCurrentValue()
+                this.spring.getCurrentValue(),
             );
         }
     }
@@ -622,7 +622,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
             undefined, // no spring jumping
             () => {
                 this._cleanScenesPastIndex(popIndex);
-            }
+            },
         );
     }
 
@@ -633,7 +633,7 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
         if (newStackLength < this.state.routeStack.length) {
             this.setState({
                 sceneConfigStack: this.state.sceneConfigStack.slice(0, newStackLength),
-                routeStack: this.state.routeStack.slice(0, newStackLength)
+                routeStack: this.state.routeStack.slice(0, newStackLength),
             });
         }
     }

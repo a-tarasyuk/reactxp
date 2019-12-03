@@ -1,5 +1,5 @@
 declare module 'rebound' {
-    class SpringSystem {
+    export class SpringSystem {
         createSpring(): any;
     }
 }
